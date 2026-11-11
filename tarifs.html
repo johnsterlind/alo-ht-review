@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111u"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111v"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Nos solutions de recrutement — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111u" />
+  <link rel="stylesheet" href="styles.css?v=20261111v" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -87,9 +87,9 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111u"></script>
+  <script src="config.js?v=20261111v"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111u"></script>
+  <script src="app.js?v=20261111v"></script>
   <script>
     // « Nos solutions de recrutement »: packages, configurator (live total) and quotation request.
     // Prices come from the database (pricing_catalog), edited by ALO administrators.
@@ -107,7 +107,7 @@
         <article class="tf-card ${p.id === "professional" ? "hl" : ""}">
           <h3>${x(p.name)}</h3>
           <p class="tf-for">${t(PACKAGE_PURPOSE[p.id] || "")}</p>
-          <div class="tf-price">${p.price_usd == null ? `<b>${t("Sur devis")}</b>` : `<span>${t("À partir de")}</span><b>${p.price_usd} <span class="cur">$</span> US</b>`}</div>
+          <div class="tf-price">${p.price_usd == null ? `<b>${t("Sur devis")}</b>` : `<span>${t("À partir de")}</span><b>${p.price_usd}<span class="cur">$ US</span></b>`}</div>
           <div class="tf-limits">${p.price_usd == null ? `<span>${t("Offres, postes et durée sur mesure")}</span>` : `<span>${p.postings} ${t("offre")}</span><span>${p.days} ${t("jours")}</span>`}</div>
           <div class="tf-inc"><span class="tf-inc-h">${prevName ? `${t("Tout ce qu’inclut")} ${x(prevName)}, ${t("plus :")}` : t("Inclus :")}</span>
             <div class="tf-tags">${L.items.map((f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`).join("")}</div></div>

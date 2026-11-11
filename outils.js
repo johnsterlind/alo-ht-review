@@ -66,6 +66,7 @@ function netSalary(grossMonthHTG, rules = SALARY, opts = {}) {
 
 // ---------- Helpers ----------
 const otHtg = (n) => `${Math.round(+n || 0).toLocaleString(LANG === "en" ? "en-US" : "fr-FR")} HTG`;
+const otBig = (n) => `${Math.round(+n || 0).toLocaleString(LANG === "en" ? "en-US" : "fr-FR")}<small class="unit">HTG</small>`;   // big figure, small unit after it
 const otPct = (r) => `${(r * 100).toLocaleString(LANG === "en" ? "en-US" : "fr-FR", { maximumFractionDigits: 1 })} %`;
 const TOOLS_KEY = "alo-outils";
 function toolState() { try { return JSON.parse(localStorage.getItem(TOOLS_KEY) || "{}"); } catch { return {}; } }
@@ -103,7 +104,7 @@ function dedLine(id, name, amount, note, on) {
 }
 function netPanel(r, contract) {
   return `<div class="ot-panel">
-    <div class="ot-hero"><span>${t("Salaire net par mois")} ${estTag()}</span><b>${otHtg(r.net)}</b><small>${otHtg(r.netYear)} ${t("par an")} · ${t("retenues")} ${otPct(r.rate)}</small></div>
+    <div class="ot-hero"><span>${t("Salaire net par mois")} ${estTag()}</span><b>${otBig(r.net)}</b><small>${otHtg(r.netYear)} ${t("par an")} · ${t("retenues")} ${otPct(r.rate)}</small></div>
     <div class="ot-rows">
       <div class="ot-row plain"><div class="ot-row-l"><b>${t(contract ? "Montant brut" : "Salaire brut")}</b></div><span>${otHtg(r.gross)}</span></div>
       ${r.allow ? `<div class="ot-row plain"><div class="ot-row-l"><b>${t("Allocations")}</b></div><span>+ ${otHtg(r.allow)}</span></div>` : ""}
@@ -163,7 +164,7 @@ function compareView(st) {
       <label class="ot-field"><span>${t("Avantages par mois")} <em>${t("repas, transport payé…")}</em></span>${numIn(k + "adv", st[k + "adv"], "")}</label>
     </fieldset>`;
   const card = (label, S, win) => `<div class="ot-cmp ${win ? "win" : ""}"><span class="ot-cmp-h">${t(label)}${win ? ` <em>${t("Meilleure offre")}</em>` : ""}</span>
-      <b>${S.g > 0 ? otHtg(S.left) : "— HTG"}</b><small>${t("vous reste par mois")}</small>
+      <b>${S.g > 0 ? otBig(S.left) : "—"}</b><small>${t("vous reste par mois")}</small>
       ${S.g > 0 ? `<div class="ot-cmp-d"><span>${t("Net")} ${otHtg(S.r.net)}</span><span>${t("Transport")} − ${otHtg(S.transport)}</span>${S.extra ? `<span>${t("Avantages")} + ${otHtg(S.extra)}</span>` : ""}</div>` : ""}</div>`;
   const both = A.g > 0 && B.g > 0, diff = B.left - A.left;
   const form = `<form class="ot-form" data-tool="compare"><div class="ot-cols">${col("a", "Offre A")}${col("b", "Offre B")}</div>${rateRow(st, needRate)}</form>`;
@@ -176,8 +177,50 @@ function compareView(st) {
   return [form, result];
 }
 
+// ---------- Tool 3: what to check in a contract (general points, not legal advice) ----------
+const CONTRACT_CHECKS = [
+  ["Le poste", [
+    ["Intitulé et missions", "Le poste et les tâches correspondent à ce qui a été annoncé."],
+    ["Type de contrat", "Durée déterminée, indéterminée ou consultance : c’est écrit clairement, avec les dates."],
+    ["Lieu et horaires", "Le lieu de travail, les jours et les heures sont précisés, ainsi que le télétravail s’il y en a."],
+  ]],
+  ["L’argent", [
+    ["Salaire brut mensuel", "Le montant, la devise et la date de paiement sont écrits."],
+    ["Retenues", "Vous savez ce qui sera retenu (impôt, cotisations) et ce qu’il vous restera."],
+    ["Allocations et avantages", "Transport, repas, assurance, 13e mois : ce qui est promis figure dans le contrat."],
+  ]],
+  ["Le temps", [
+    ["Date de début", "La date de début est la même que celle convenue."],
+    ["Période d’essai", "Sa durée et ses conditions sont indiquées."],
+    ["Congés", "Le nombre de jours de congé et la façon de les prendre sont précisés."],
+  ]],
+  ["La fin du contrat", [
+    ["Préavis et rupture", "Le délai de préavis et les conditions de fin du contrat sont écrits."],
+    ["Clauses particulières", "Confidentialité, exclusivité ou non-concurrence : lisez-les et demandez des précisions si besoin."],
+    ["Signatures et copie", "Le contrat est signé par les deux parties et vous gardez un exemplaire."],
+  ]],
+];
+function contractView(st) {
+  const done = st.done || {}, all = CONTRACT_CHECKS.flatMap(([, items]) => items), n = all.filter(([k]) => done[k]).length;
+  const form = `<form class="ot-form ot-checks" data-tool="contract">
+    ${CONTRACT_CHECKS.map(([group, items]) => `<fieldset class="ot-group"><legend>${t(group)}</legend>
+      ${items.map(([k, why]) => `<label class="ot-check ${done[k] ? "on" : ""}"><input type="checkbox" data-check="${esc(k)}" ${done[k] ? "checked" : ""} /><span><b>${t(k)}</b><small>${t(why)}</small></span></label>`).join("")}
+    </fieldset>`).join("")}
+  </form>`;
+  const result = `<div class="ot-panel">
+      <div class="ot-hero"><span>${t("Points vérifiés")}</span><b>${n} / ${all.length}</b><small>${n === all.length ? t("Tout est vérifié.") : t("Cochez chaque point en lisant le contrat.")}</small></div>
+      <div class="ot-rows ot-next">
+        <button type="button" class="ot-link" data-tool-open="net">${t("Calculer mon salaire net")}</button>
+        <p class="ot-hint">${t("Un doute ? Demandez des précisions par écrit avant de signer. Ce guide ne remplace pas l’avis d’un juriste.")}</p>
+        ${n ? `<button type="button" class="linkbtn" data-check-reset>${t("Tout décocher")}</button>` : ""}
+      </div>
+    </div>`;
+  return [form, result];
+}
+
 // ---------- Pop-up ----------
-const TOOLS = { net: ["Salaire net", "Combien vous recevez vraiment, après l’impôt et les cotisations.", netView], compare: ["Comparer deux offres", "Ce qu’il vous reste chaque mois avec chaque offre, transport compris.", compareView] };
+const TOOLS = { net: ["Salaire net", "Combien vous recevez vraiment, après l’impôt et les cotisations.", netView], compare: ["Comparer deux offres", "Ce qu’il vous reste chaque mois avec chaque offre, transport compris.", compareView],
+  contract: ["Vérifier un contrat", "Les points à lire avant de signer.", contractView] };
 let OPEN_TOOL = null;
 function drawTool(onlyResult) {
   const d = document.getElementById("ot-dialog"); if (!d || !OPEN_TOOL) return;
@@ -194,12 +237,15 @@ async function openTool(id) {
     d = document.createElement("dialog"); d.id = "ot-dialog"; d.className = "ot-dialog"; d.setAttribute("aria-labelledby", "ot-title");
     d.innerHTML = `<div class="ot-bar"><button type="button" class="linkbtn" data-ot-close>← ${t("Retour")}</button><button type="button" class="ot-x" data-ot-close aria-label="${t("Fermer")}">${t("Fermer")}</button></div><div class="ot-body"></div>`;
     document.body.appendChild(d);
-    d.addEventListener("click", (e) => { if (e.target === d || e.target.closest("[data-ot-close]")) d.close(); });
+    d.addEventListener("click", (e) => { if (e.target === d || e.target.closest("[data-ot-close]")) d.close();
+      if (e.target.closest("[data-check-reset]")) { const all = toolState(); all.contract = { done: {} }; saveToolState(all); drawTool(); } });
     d.addEventListener("close", () => { if (d.open) return; OPEN_TOOL = null; document.body.classList.remove("ot-lock"); const card = document.querySelector(".ot-card"); if (card) card.outerHTML = toolsCard(); });
     // Typing refreshes only the result (the field stays, so the phone keyboard stays open); a choice that changes the fields redraws all.
     d.addEventListener("input", (e) => {
       const el = e.target;
       if (el.dataset.ded) { setDed(el.dataset.ded, el.checked); return drawTool(true); }
+      if (el.dataset.check) { const all = toolState(), c = all.contract || {}; c.done = { ...(c.done || {}), [el.dataset.check]: el.checked }; all.contract = c; saveToolState(all);
+        el.closest(".ot-check").classList.toggle("on", el.checked); return drawTool(true); }
       const f = el.form; if (!f || !f.dataset.tool) return;
       const all = toolState(), cur = all[f.dataset.tool] || {}; [...f.elements].forEach((x) => { if (x.name && (x.type !== "radio" || x.checked)) cur[x.name] = x.value; }); all[f.dataset.tool] = cur; saveToolState(all);
       drawTool(!(el.tagName === "SELECT" || el.type === "radio"));
@@ -215,7 +261,7 @@ async function openTool(id) {
 function quickNetOut(st) {
   const g = amt(st.gross); if (!g) return `<b class="ot-q-empty">— HTG</b><span>${t("net par mois")}</span>`;
   const cur = st.cur || "HTG", r = netSalary(toHTG(st.gross, cur, st), SALARY, { allow: toHTG(st.allow, cur, st), contract: st.status === "contrat", other: amt(st.other) });
-  return `<b>${otHtg(r.net)}</b><span>${t("net par mois")} ${estTag()}</span>`;
+  return `<b>${otBig(r.net)}</b><span>${t("net par mois")} ${estTag()}</span>`;
 }
 function quickCmpOut(st) {
   if (!amt(st.agross) || !amt(st.bgross)) return `<b class="ot-q-empty">A · B</b><span>${t("Entrez deux salaires bruts.")}</span>`;
@@ -238,6 +284,12 @@ function toolsCard() {
           <label class="ot-q"><span>${t("Offre B")}</span><input data-quick="compare" name="bgross" type="text" inputmode="numeric" autocomplete="off" value="${esc(c.bgross ?? "")}" placeholder="52 500" /></label></div>
         <div class="ot-q-out" id="q-cmp" aria-live="polite">${quickCmpOut(c)}</div>
         <button type="button" class="btn btn-plain" data-tool-open="compare">${t("Ajouter le transport et comparer")}</button>
+      </div>
+      <div class="ot-tile">
+        <b class="ot-tile-h">${t("Vérifier un contrat")}</b>
+        <span class="ot-tile-s">${t("Les points à lire avant de signer : poste, salaire, période d’essai, préavis…")}</span>
+        <div class="ot-q-out">${(() => { const d = (all.contract || {}).done || {}, n = Object.values(d).filter(Boolean).length, tot = CONTRACT_CHECKS.flatMap(([, i]) => i).length; return `<b class="${n ? "" : "ot-q-empty"}">${n} / ${tot}</b><span>${t("points vérifiés")}</span>`; })()}</div>
+        <button type="button" class="btn btn-plain" data-tool-open="contract">${t("Ouvrir la liste")}</button>
       </div>
     </div></section>`;
 }
