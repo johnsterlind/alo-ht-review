@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111n"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111p"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }

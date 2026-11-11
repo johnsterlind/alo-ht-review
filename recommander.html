@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111p"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Prime d'embauche — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111n" />
+  <link rel="stylesheet" href="styles.css?v=20261111p" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -89,15 +89,15 @@
         <div class="ref-box" id="ref-box"></div>
         <p class="fine" data-t>Programme en préparation. Les primes sont soumises aux conditions d’admissibilité, de vérification et aux plafonds applicables. Les montants et modalités définitifs seront communiqués avant le lancement.</p>
         <div class="cond-box" id="conditions">
-          <h2 class="left" data-t>Conditions de la Prime d’embauche</h2>
-          <p><span class="hm-status" data-t>Programme en préparation</span> <span data-t>Aucune prime n’est versée pour le moment.</span></p>
-          <ul>
-            <li data-t>La prime concerne les offres d’emploi salarié éligibles publiées sur ALO. Les consultances, stages et missions de projet n’en bénéficient pas, sauf règles publiées plus tard.</li>
-            <li data-t>Elle n’est versée qu’après vérification de l’embauche par l’employeur et du premier salaire reçu.</li>
-            <li data-t>Le montant peut atteindre 5 % du premier salaire mensuel et peut être plafonné.</li>
-            <li data-t>La personne qui vous a recommandé(e) peut aussi recevoir une récompense. Son montant ne dépend pas de votre salaire et votre salaire ne lui est jamais communiqué.</li>
-          </ul>
-          <p class="hint-l" data-t>Les règles détaillées (emplois éligibles, mode de calcul, plafonds, délais et moyens de versement, recommandations, cas particuliers) seront publiées ici avec un exemple chiffré avant le lancement du programme.</p>
+          <div class="cond-top"><h2 class="left" data-t>Conditions de la Prime d’embauche</h2><span class="hm-status" data-t>Programme en préparation</span></div>
+          <p class="cond-lead" data-t>Aucune prime n’est versée pour le moment.</p>
+          <div class="cond-grid">
+            <div class="cond-item"><b class="cond-k">5 %</b><b data-t>Jusqu’à 5 % du premier salaire</b><span data-t>Le montant peut atteindre 5 % du premier salaire mensuel et peut être plafonné.</span></div>
+            <div class="cond-item"><b class="cond-k" data-t>Emploi</b><b data-t>Emplois salariés seulement</b><span data-t>La prime concerne les offres d’emploi salarié éligibles publiées sur ALO. Les consultances, stages et missions de projet n’en bénéficient pas, sauf règles publiées plus tard.</span></div>
+            <div class="cond-item"><b class="cond-k" data-t>Contrôle</b><b data-t>Après vérification</b><span data-t>Elle n’est versée qu’après vérification de l’embauche par l’employeur et du premier salaire reçu.</span></div>
+            <div class="cond-item"><b class="cond-k" data-t>Privé</b><b data-t>Votre salaire reste privé</b><span data-t>La personne qui vous a recommandé(e) peut aussi recevoir une récompense. Son montant ne dépend pas de votre salaire et votre salaire ne lui est jamais communiqué.</span></div>
+          </div>
+          <p class="cond-foot" data-t>Les règles détaillées (emplois éligibles, mode de calcul, plafonds, délais et moyens de versement, recommandations, cas particuliers) seront publiées ici avec un exemple chiffré avant le lancement du programme.</p>
         </div>
       </div>
     </section>
@@ -117,9 +117,9 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111n"></script>
+  <script src="config.js?v=20261111p"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111n"></script>
+  <script src="app.js?v=20261111p"></script>
   <script>
     async function drawRef() {
       const user = await currentUser();

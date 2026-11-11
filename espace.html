@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111p"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Mon espace — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111n" />
+  <link rel="stylesheet" href="styles.css?v=20261111p" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -43,11 +43,11 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111n"></script>
+  <script src="config.js?v=20261111p"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111n"></script>
-  <script src="outils.js?v=20261111n"></script>
-  <script src="jobs-lib.js?v=20261111n"></script>
+  <script src="app.js?v=20261111p"></script>
+  <script src="outils.js?v=20261111p"></script>
+  <script src="jobs-lib.js?v=20261111p"></script>
   <script>
     const STATUS_CLASS = { "Envoyée": "s-sent", "Consultée": "s-seen", "Entretien": "s-int", "Retenue": "s-ok", "Non retenue": "s-no" };
     const x = (s) => esc(s || "");
@@ -119,11 +119,11 @@
     }
     function personal() {
       const p = DATA.profile || {};
-      if (!hasPrefs(p)) return `
+      if (!hasPrefs(p)) return { top: `
         <section class="ap-card sp-perso">
           <div><h2>${t("Personnalisons votre expérience ALO.")}</h2><p class="hint-l">${t("Quelques questions pour vous proposer des opportunités qui correspondent à votre parcours et à vos ambitions.")}</p></div>
           <a class="btn btn-lg" href="preferences.html?debut=1">${t("Répondre (2 minutes)")}</a>
-        </section>`;
+        </section>`, main: [], side: [] };
       const applied = new Set(DATA.apps.map((a) => a.job_id));
       const savedCats = new Set(JOBS.filter((j) => SAVED.has(j.id)).map((j) => j.category));
       const ranked = recommend(p, JOBS, { exclude: applied, savedCats });
@@ -135,26 +135,24 @@
       const junior = ["Étudiant(e)", "Jeune diplômé(e)"].includes(stage), senior = stage === "Cadre supérieur(e) / dirigeant(e)";
       const cats = new Set((c.fields || []).flatMap((f) => (FIELDS.find((z) => z[0] === f) || [, []])[1]));
       const si = salaryInsight(JOBS, cats);
-      const soon = (title, text) => `<div class="ev-item"><b>${t(title)} <span class="soon">${t("Bientôt")}</span></b><span>${t(text)}</span></div>`;
       const link = (title, text, href) => `<a class="ev-item" href="${href}"><b>${t(title)}</b><span>${t(text)}</span></a>`;
       const evo = [
         si ? `<div class="ev-item"><b>${t("Salaires annoncés dans vos domaines")}</b><span>${htg(si.low)} – ${htg(si.high)} / ${t("mois")} · ${si.n} ${t("offres")}</span><small>${t("Basé uniquement sur les offres publiées sur ALO, pas sur l’ensemble du marché.")}</small></div>` : "",
         junior ? link("Stages et premiers emplois", "Les offres ouvertes aux débutants.", "jobs.html?experience=D%C3%A9butant") : "",
-        junior || !DATA.cvs.length ? link("Créer mon CV avec l’IA", "À partir de votre Profil ALO, sans rien inventer.", "cv.html") : link("Adapter mon CV à une offre", "Mettez en avant ce qui compte pour le poste visé.", "cv.html"),
+        DATA.cvs.length ? link("Adapter mon CV à une offre", "Mettez en avant ce qui compte pour le poste visé.", "cv.html") : "",
         senior ? link("Postes de direction", "Offres pour profils expérimentés.", "jobs.html?experience=5%20ans%20et%20plus") : "",
         senior ? link("Exploration confidentielle", "Réglez la visibilité de votre profil sur Privé ou Recruteurs.", "mon-profil.html?edit=1") : "",
-        soon(junior ? "Formations" : "Certifications professionnelles", junior ? "Programmes pour bien démarrer votre carrière." : "Faites reconnaître vos compétences."),
-        soon(senior ? "Missions de consultance" : "Conseils de carrière", senior ? "Missions courtes pour experts." : "Des repères pour la prochaine étape."),
       ].filter(Boolean).join("");
-      // Only sections with something in them; when nothing matches yet, one short line and one button.
-      const cols = [
-        `<section class="ap-card rc-col"><h2>${t("Pour vous")}</h2>
-          ${forYou.map((r) => jobRow(r.j, whyText(r.why))).join("") || `<p class="hint-l">${t("Pas encore d’offre proche de vos préférences.")}</p>`}
-          <a class="btn btn-plain" href="jobs.html">${t("Voir toutes les offres")}</a></section>`,
-        discover.length ? `<section class="ap-card rc-col"><h2>${t("À découvrir")}</h2>${discover.map((r) => jobRow(r.j, `${t("Un autre domaine à explorer :")} ${t(r.j.category)}`)).join("")}</section>` : "",
-        `<section class="ap-card rc-col"><h2>${t("Votre évolution")}</h2>${evo}</section>`,
-      ].filter(Boolean);
-      return `<div class="rc-grid n${cols.length}">${cols.join("")}</div>`;
+      const head = (title, href, label) => `<div class="sp-head"><h2>${t(title)}</h2>${href ? `<a class="link" href="${href}">${t(label)}</a>` : ""}</div>`;
+      return {
+        top: "",
+        main: [
+          `<section class="ap-card">${head("Pour vous", "jobs.html", "Toutes les offres")}
+            ${forYou.map((r) => jobRow(r.j, whyText(r.why))).join("") || `<p class="hint-l">${t("Pas encore d’offre proche de vos préférences.")}</p>`}</section>`,
+          discover.length ? `<section class="ap-card">${head("À découvrir")}${discover.map((r) => jobRow(r.j, `${t("Un autre domaine à explorer :")} ${t(r.j.category)}`)).join("")}</section>` : "",
+        ].filter(Boolean),
+        side: evo ? [`<section class="ap-card">${head("Votre évolution")}${evo}</section>`] : [],
+      };
     }
 
     function bonusCard() {
@@ -197,10 +195,9 @@
       const list = (a) => (a || []).map((v) => x(t(v))).join(", ");
       const places = [...(c.departments || []).map((d) => x(d)), c.cities ? x(c.cities) : "", c.remote ? t("Télétravail") : "", c.hybrid ? t("Hybride") : "", c.anywhere ? t("Partout en Haïti") : ""].filter(Boolean).join(", ");
       return `
-        <section class="ap-card"><h2>${t("Mes préférences")}</h2>
-          ${hasPrefs(DATA.profile) ? line("Étape de carrière", x(t(c.stage))) + line("Domaines", list(c.fields)) + line("Opportunités", list(c.opportunities)) + line("Lieux", places) + line("Invitations ciblées", c.outreach ? t("Acceptées") : t("Refusées"))
+        <section class="ap-card"><div class="sp-head"><h2>${t("Mes préférences")}</h2><a class="link" href="preferences.html">${t("Modifier")}</a></div>
+          ${hasPrefs(DATA.profile) ? `<dl class="sp-prefs">${[["Étape de carrière", x(t(c.stage))], ["Domaines", list(c.fields)], ["Opportunités", list(c.opportunities)], ["Lieux", places]].filter(([, v]) => v).map(([k, v]) => `<dt>${t(k)}</dt><dd>${v}</dd>`).join("")}</dl>`
             : `<p class="hint-l">${t("Indiquez vos intérêts pour recevoir des recommandations adaptées.")}</p>`}
-          <a class="btn btn-plain" href="preferences.html">${t("Modifier mes préférences")}</a>
         </section>`;
     }
 
@@ -221,26 +218,26 @@
       const saved = JOBS.filter((j) => SAVED.has(j.id)).map((j) => `
         <div class="sp-row"><div><b>${x(j.title)}</b><span>${x(j.company)} · ${x(j.city)}</span></div><a class="btn btn-plain" href="${jobUrl(j)}">${t("Voir l’offre")}</a></div>`).join("");
       const cvs = DATA.cvs.map((v) => `<div class="sp-row"><div><b>${x(v.name)}</b><span>${t("Modifié le")} ${fmt(v.updated_at)}</span></div><a class="btn btn-plain" href="cv.html">${t("Ouvrir")}</a></div>`).join("");
-      // Full cards only when they have something in them; everything still empty goes into one « Pour commencer » card.
-      const cards = [], start = [];
-      const todo = (title, text, href, btn) => start.push(`<div class="sp-todo"><div><b>${t(title)}</b><span>${t(text)}</span></div><a class="btn btn-plain" href="${href}">${t(btn)}</a></div>`);
-      if (DATA.apps.length || drafts) cards.push(`<section class="ap-card"><h2>${t("Mes candidatures")} <span class="cnt">${DATA.apps.length}</span></h2>${apps}${drafts ? `<h3 class="sp-h3">${t("Brouillons en cours")}</h3>${drafts}` : ""}</section>`);
+      // One layout: a main column (offers, applications, next steps) and a side column (preferences, evolution, CVs, saved offers).
+      const P = personal(), main = [...P.main], side = [prefsCard(), ...P.side], start = [];
+      const head = (title, n) => `<div class="sp-head"><h2>${t(title)}${n != null ? ` <span class="cnt">${n}</span>` : ""}</h2></div>`;
+      const todo = (title, text, href, btn) => start.push(`<a class="sp-todo" href="${href}"><div><b>${t(title)}</b><span>${t(text)}</span></div><span class="sp-act">${t(btn)}</span></a>`);
+      if (DATA.apps.length || drafts) main.push(`<section class="ap-card">${head("Mes candidatures", DATA.apps.length)}${apps}${drafts ? `<h3 class="sp-h3">${t("Brouillons en cours")}</h3>${drafts}` : ""}</section>`);
       else todo("Postuler à une offre", "Avec votre Profil ALO, en quelques minutes.", "jobs.html", "Voir les offres");
-      if (DATA.claims.length || DATA.bonuses.some((b) => b.kind === "embauche")) cards.push(bonusCard());
-      if (DATA.cvs.length) cards.push(`<section class="ap-card"><h2>${t("Mes CV")} <span class="cnt">${DATA.cvs.length}</span></h2>${cvs}<a class="btn btn-plain" href="cv.html">${t("Créer mon CV avec l’IA")}</a></section>`);
+      if (DATA.claims.length || DATA.bonuses.some((b) => b.kind === "embauche")) main.push(bonusCard());
+      else todo("J’ai été embauché(e)", "Déclarez votre embauche pour la Prime d’embauche.", "embauche.html", "Déclarer");
+      if (DATA.cvs.length) side.push(`<section class="ap-card">${head("Mes CV", DATA.cvs.length)}${cvs}</section>`);
       else todo("Créer mon CV", "À partir de votre Profil ALO.", "cv.html", "Créer");
-      if (SAVED.size) cards.push(`<section class="ap-card"><h2>${t("Offres enregistrées")} <span class="cnt">${SAVED.size}</span></h2>${saved}</section>`);
-      if (DATA.referrals.length || DATA.bonuses.some((b) => b.kind === "recommandation")) cards.push(referralCard());
+      if (SAVED.size) side.push(`<section class="ap-card">${head("Offres enregistrées", SAVED.size)}${saved}</section>`);
+      if (DATA.referrals.length || DATA.bonuses.some((b) => b.kind === "recommandation")) side.push(referralCard());
       else todo("Recommander un talent", "Partagez votre lien avec une personne qui cherche un emploi.", "recommander.html#lien", "Mon lien");
-      if (!DATA.claims.length) todo("J’ai été embauché(e)", "Déclarez votre embauche pour la Prime d’embauche.", "embauche.html", "Déclarer");
-      cards.push(prefsCard());
-      if (start.length) cards.unshift(`<section class="ap-card sp-start"><h2>${t("Pour commencer")}</h2>${start.join("")}</section>`);
+      if (start.length) main.push(`<section class="ap-card sp-start">${head("Pour commencer")}${start.join("")}</section>`);
       document.getElementById("sp").innerHTML = `
         <div class="em-head"><h1>${t("Mon espace ALO")}</h1>${DATA.employer ? `<a class="btn btn-plain" href="employeur.html">${t("Espace employeur")} — ${x(DATA.employer.company)}</a>` : ""}</div>
         ${profileCard()}
         ${toolsCard()}
-        ${personal()}
-        <div class="sp-grid2 sp-flow">${cards.join("")}</div>`;
+        ${P.top}
+        <div class="sp-layout"><div class="sp-main">${main.join("")}</div><aside class="sp-side">${side.join("")}</aside></div>`;
     }
     window.onLang = () => { if (DATA) draw(); drawTool(); };
     load();
