@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
+  <meta name="theme-color" content="#121A3A" />
+  <title>Publier une offre — alo.ht</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261111d" />
+</head>
+<body>
+  <a class="skip" href="#main" data-t>Aller au contenu</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="index.html">alo<span>.</span>ht</a>
+      <nav class="nav" aria-label="Navigation principale"><a href="jobs.html" data-t>Trouver une opportunité</a><div class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true" data-t>Recruter</button><div class="nav-dd-menu" hidden><a href="pme.html" data-t>PME</a><a href="entreprises.html" data-t>Grandes entreprises</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="employeur.html" data-t>Espace employeur</a></div></div><a href="tarifs.html" data-t>Tarifs</a></nav>
+      <div class="spacer"></div>
+      
+      <a class="btn" href="post.html" data-t>Publier une offre</a>
+      <a class="btn btn-outline signin" href="signin.html" data-t>Connexion</a>
+      <div class="langs" role="group" aria-label="Langue / Lang / Language"><button class="lang-flag" type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg></button><button class="lang-flag" type="button" data-lang="kr" lang="ht" title="Kreyòl ayisyen" aria-label="Kreyòl ayisyen"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11" y="6.5" width="8" height="7" fill="#fff"/><path d="M15 7.6v4.6M13 12.2h4" stroke="#00843D" stroke-width="1"/></svg></button><button class="lang-flag" type="button" data-lang="en" lang="en" title="English" aria-label="English"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="0.00" width="30" height="1.54" fill="#B22234"/><rect y="3.08" width="30" height="1.54" fill="#B22234"/><rect y="6.15" width="30" height="1.54" fill="#B22234"/><rect y="9.23" width="30" height="1.54" fill="#B22234"/><rect y="12.31" width="30" height="1.54" fill="#B22234"/><rect y="15.38" width="30" height="1.54" fill="#B22234"/><rect y="18.46" width="30" height="1.54" fill="#B22234"/><rect width="13" height="10.77" fill="#3C3B6E"/></svg></button></div>
+    </div>
+  </header>
+
+
+  <main id="main" class="form-page">
+    <aside class="form-intro pw-aside">
+      <h1 data-t>Publier une offre</h1>
+      <p data-t>Trois minutes. Votre offre est vérifiée par l'équipe ALO avant publication.</p>
+      <div class="pw-mobile" aria-hidden="true"><div class="mp-bar"><i id="pw-bar"></i></div><span id="pw-count"></span></div>
+      <div class="pw-pack" id="pw-pack"></div>
+      <ol class="pw-steps" id="pw-steps"></ol>
+      <ul class="pw-perks">
+        <li data-t>Candidats avec un Profil ALO détaillé</li>
+        <li data-t>Les candidats vous écrivent sur WhatsApp</li>
+        <li data-t>Assistant IA pour vos offres (bientôt)</li>
+      </ul>
+    </aside>
+    <form id="post" class="form-card pw-form" novalidate>
+      <p class="post-account" id="post-account" hidden><span data-t>Un compte employeur gratuit est nécessaire pour publier, suivre vos candidatures et confirmer vos embauches.</span> <a class="link" href="signin.html?pour=publier" data-t>Connexion</a></p>
+
+      <section class="pw-step" data-step="1" data-title="Votre entreprise">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Votre entreprise</span></h2>
+        <p class="pw-sub" data-t>Qui recrute ? Ces informations sont reprises automatiquement pour vos prochaines offres.</p>
+        <label class="field"><span data-t>Entreprise ou organisation</span><input name="company" required maxlength="120" autocomplete="organization" enterkeyhint="next" /></label>
+        <div class="field"><span data-t>Type d’employeur</span>
+          <div class="sk-row" id="plan">
+            <label class="sk on"><input type="radio" name="plan" value="pme" checked /><span data-t>PME</span></label>
+            <label class="sk"><input type="radio" name="plan" value="entreprise" /><span data-t>Grande entreprise</span></label>
+            <label class="sk"><input type="radio" name="plan" value="organisation" /><span data-t>Organisation ou institution</span></label>
+          </div>
+        </div>
+        <label class="field"><span data-t>Taille de l’organisation</span><select name="employer_size" id="employer_size" required></select></label>
+      </section>
+
+      <section class="pw-step" data-step="2" data-title="Le poste">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Le poste</span></h2>
+        <p class="pw-sub" data-t>Un intitulé clair attire les bons candidats.</p>
+        <label class="field"><span data-t>Intitulé du poste</span><input name="title" required maxlength="120" placeholder="Ex. Caissier / Caissière" data-tp autocapitalize="sentences" enterkeyhint="next" /></label>
+        <div class="two">
+          <label class="field"><span data-t>Type de contrat</span>
+            <select name="type">
+              <option value="Temps plein" data-t>Temps plein</option>
+              <option value="Temps partiel" data-t>Temps partiel</option>
+              <option value="Contrat" data-t>Contrat</option>
+              <option value="Stage" data-t>Stage</option>
+              <option value="Consultance" data-t>Consultance</option>
+            </select>
+          </label>
+          <label class="field"><span data-t>Nombre de postes à pourvoir</span><input name="positions" type="number" min="1" max="50" value="1" required inputmode="numeric" /></label>
+        </div>
+        <label class="field"><span data-t>Expérience demandée</span>
+          <select name="experience">
+            <option value="Tous niveaux" data-t>Tous niveaux</option>
+            <option value="Débutant" data-t>Débutant</option>
+            <option value="1 à 3 ans" data-t>1 à 3 ans</option>
+            <option value="3 à 5 ans" data-t>3 à 5 ans</option>
+            <option value="5 ans et plus" data-t>5 ans et plus</option>
+          </select>
+        </label>
+        <div class="two">
+          <label class="field"><span data-t>Secteur</span><select name="category" id="category"></select></label>
+          <label class="field"><span data-t>Domaine professionnel</span><select name="occupation" id="occupation"></select></label>
+        </div>
+      </section>
+
+      <section class="pw-step" data-step="3" data-title="Lieu et dates">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Lieu et dates</span></h2>
+        <p class="pw-sub" data-t>Où se trouve le poste, et jusqu’à quand recevez-vous des candidatures ?</p>
+        <label class="field"><span data-t>Ville</span><input name="city" required list="cities" maxlength="80" autocomplete="address-level2" enterkeyhint="next" /></label>
+        <div class="pw-chips" id="city-chips"></div>
+        <datalist id="cities">
+          <option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option>
+          <option>Cap-Haïtien</option><option>Les Cayes</option><option>Jacmel</option>
+          <option>Gonaïves</option><option>Télétravail</option>
+        </datalist>
+        <div class="two">
+          <label class="field"><span data-t>Département</span><select name="department" id="department"></select></label>
+          <label class="field"><span data-t>Mode de travail</span><select name="work_mode" id="work_mode"></select></label>
+        </div>
+        <label class="field"><span data-t>Date limite de candidature (facultatif)</span><input name="deadline" type="date" /></label>
+      </section>
+
+      <section class="pw-step" data-step="4" data-title="Description">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Description</span></h2>
+        <p class="pw-sub" data-t>Écrivez une idée par ligne : les listes sont plus faciles à lire pour les candidats.</p>
+        <label class="field"><span data-t>Description du poste</span><textarea name="about" rows="5" required minlength="10" maxlength="4000" placeholder="Présentez l’entreprise, l’équipe et la mission du poste." data-tp></textarea><small class="pw-count" data-for="about"></small></label>
+        <label class="field"><span data-t>Compétences demandées (une par ligne)</span><textarea name="skills" rows="3" placeholder="Excel&#10;Service client"></textarea></label>
+        <details class="pw-more" id="more-desc"><summary data-t>Ajouter les responsabilités et les qualifications (facultatif)</summary>
+          <label class="field"><span data-t>Responsabilités (une ligne par point)</span><textarea name="responsibilities" rows="3" placeholder="Accueillir les clients&#10;Tenir la caisse"></textarea></label>
+          <label class="field"><span data-t>Qualifications (une ligne par point)</span><textarea name="needs" rows="3" placeholder="Permis de conduire&#10;2 ans d'expérience"></textarea></label>
+        </details>
+      </section>
+
+      <section class="pw-step" data-step="5" data-title="Salaire">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Salaire</span></h2>
+        <p class="pw-sub" data-t>Confidentiel par défaut. Il sert au calcul des primes d’embauche et à des statistiques anonymes sur l’emploi.</p>
+        <div class="three-f">
+          <label class="field"><span data-t>Minimum par mois</span><input name="salary_from" type="number" min="0" step="500" inputmode="numeric" /></label>
+          <label class="field"><span data-t>Maximum par mois</span><input name="salary_to" type="number" min="0" step="500" inputmode="numeric" /></label>
+          <label class="field"><span data-t>Devise</span><select name="salary_currency"><option>HTG</option><option>USD</option></select></label>
+        </div>
+        <label class="pq-consent"><input type="checkbox" name="show_salary" /><span data-t>Afficher ce salaire sur l’offre (les offres avec salaire reçoivent souvent plus de candidatures)</span></label>
+        <p class="pw-preview" id="pw-pay"></p>
+        <input type="hidden" name="pay" /><input type="hidden" name="salary_min" />
+      </section>
+
+      <section class="pw-step" data-step="6" data-title="Candidatures">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Candidatures</span></h2>
+        <p class="pw-sub" data-t>Comment les candidats vous joignent, et ce que vous voulez recevoir.</p>
+        <label class="field"><span data-t>WhatsApp ou e-mail de contact</span><input name="contact" required maxlength="120" autocomplete="tel" enterkeyhint="next" placeholder="+509 3700 0000" />
+          <small class="hint-l" data-t>Un numéro WhatsApp (8 chiffres ou plus) ou une adresse e-mail.</small></label>
+        <details class="pw-more" id="more-apply"><summary data-t>Questions, documents et avantages (facultatif)</summary>
+          <label class="field"><span data-t>Questions aux candidats (une par ligne, facultatif)</span><textarea name="questions" rows="2" placeholder="Pourquoi ce poste vous intéresse-t-il ?"></textarea></label>
+          <label class="field"><span data-t>Documents demandés (un par ligne, facultatif)</span><textarea name="documents" rows="2" placeholder="Copie du diplôme&#10;Lettre de recommandation"></textarea></label>
+          <label class="field"><span data-t>Avantages (une ligne par point, facultatif)</span><textarea name="benefits" rows="2" placeholder="Assurance santé&#10;Transport remboursé"></textarea></label>
+        </details>
+      </section>
+
+      <section class="pw-step" data-step="7" data-title="Formule et publication">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Formule et publication</span></h2>
+        <fieldset class="pj-pack">
+          <legend data-t>Votre formule</legend>
+          <div id="pj-orders"></div>
+          <div class="pj-cards" id="pj-cards"></div>
+          <div class="tf-addons" id="pj-addons"></div>
+          <p class="hint-l"><span data-t>Plusieurs offres, une consultance ou un besoin institutionnel ?</span> <a class="link" href="tarifs.html#config" data-t>Personnaliser ma formule</a> · <a class="link" href="tarifs.html#devis" data-t>Demander un devis</a></p>
+        </fieldset>
+        <div class="pw-review" id="pw-review"></div>
+        <div class="pj-sum" id="pj-sum" aria-live="polite"></div>
+      </section>
+
+      <p class="ap-err" id="pw-err" hidden></p>
+      <div class="pw-nav">
+        <button class="btn btn-plain" type="button" id="pw-back" data-t>Précédent</button>
+        <span class="pw-saved" id="pw-saved" aria-live="polite"></span>
+        <button class="btn" type="button" id="pw-next" data-t>Suivant</button>
+        <button class="btn btn-main" type="submit" id="pw-publish" data-t>Publier l'offre</button>
+      </div>
+      <div class="done" id="done" data-t>Merci ! Votre offre sera en ligne après vérification.</div>
+    </form>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div><h4 data-t>Trouver une opportunité</h4><a href="jobs.html" data-t>Toutes les opportunités</a><a href="signin.html" data-t>Créer mon profil</a><a href="cv.html" data-t>Créer mon CV avec l’IA</a><a href="profil.html" data-t>Profil ALO</a><a href="recommander.html" data-t>Prime d'embauche</a></div>
+        <div><h4 data-t>PME</h4><a href="post.html" data-t>Publier une offre</a><a href="employeur.html" data-t>Espace employeur</a><a href="pme.html" data-t>Assistant IA de recrutement</a><a href="pme.html" data-t>Tarifs PME</a><a href="tarifs.html" data-t>Nos solutions de recrutement</a></div>
+        <div><h4 data-t>Grandes entreprises</h4><a href="entreprises.html" data-t>Solutions entreprise</a><a href="entreprises.html" data-t>Recrutement géré par ALO</a><a href="entreprises.html" data-t>Gestion du personnel</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="mailto:contact@alo.ht" data-t>Contacter l'équipe</a></div>
+        <div><h4><span class="brand">alo<span>.</span>ht</span></h4><a href="apropos.html" data-t>À propos</a><a href="aide.html" data-t>Aide</a><a href="confidentialite.html" data-t>Confidentialité</a><a href="conditions.html" data-t>Conditions d'utilisation</a></div>
+      </div>
+      <div class="foot-bottom">
+        <a class="logo" href="index.html">alo<span>.</span>ht</a>
+        <div>© 2026 <span class="brand">alo<span>.</span>ht</span> · <span data-t>Tous droits réservés.</span></div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="config.js?v=20261111d"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js?v=20261111d"></script>
+  <script>
+    document.getElementById("category").innerHTML =
+      [...Object.keys(CATS), "Autre"].map((c) => `<option>${esc(c)}</option>`).join("");
+    const optList = (id, list, blank) => { document.getElementById(id).innerHTML = (blank ? `<option value="">—</option>` : "") + list.map((c) => `<option value="${esc(c)}">${esc(t(c))}</option>`).join(""); };
+    function fillLists() { optList("occupation", FIELDS.map((f) => f[0]), true); optList("department", DEPARTMENTS, true); optList("work_mode", WORK_MODES); optList("employer_size", ORG_SIZES, true); document.querySelector('#employer_size option[value=""]').textContent = t("Nombre d’employés"); }
+    fillLists();
+    // Phone-friendly: tap a common city instead of typing it; the department follows the city.
+    const CITY_CHIPS = ["Port-au-Prince", "Pétion-Ville", "Delmas", "Cap-Haïtien", "Les Cayes", "Télétravail"];
+    function drawCityChips() { document.getElementById("city-chips").innerHTML = CITY_CHIPS.map((c) => `<button type="button" class="pw-chip" data-city="${esc(c)}">${esc(t(c))}</button>`).join(""); }
+    drawCityChips();
+    let DEPT_AUTO = true;
+    function autoDept() { const f = document.getElementById("post"), d = deptOf(f.elements.city.value); if (d && (DEPT_AUTO || !f.elements.department.value)) { f.elements.department.value = d; DEPT_AUTO = true; } }
+    document.addEventListener("click", (e) => { const c = e.target.closest("[data-city]"); if (!c) return; const f = document.getElementById("post"); f.elements.city.value = c.dataset.city; autoDept(); f.elements.city.dispatchEvent(new Event("input", { bubbles: true })); });
+    document.getElementById("post").elements.deadline.min = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+    // Package (what the employer buys) is separate from the employer category (who they are).
+    const SEL = { pkg: new URLSearchParams(location.search).get("formule") === "professional" ? "professional" : "essential", addons: [], order: "" };
+    let ORDERS = [];   // the employer's orders with postings left
+    const QUICK_ADDONS = ["featured", "ai_screening", "assessments", "interviews"];
+    function drawPack() {
+      const pk = catItem(SEL.pkg);
+      document.getElementById("pj-orders").innerHTML = ORDERS.length ? `
+        <label class="tf-addon ${SEL.order ? "inc" : ""}"><input type="checkbox" id="use-order" ${SEL.order ? "checked" : ""} />
+          <span>${t("Utiliser mon forfait")}</span>
+          <select id="order-pick">${ORDERS.map((o) => `<option value="${o.id}" ${SEL.order === o.id ? "selected" : ""}>${x(catItem(o.package) ? catItem(o.package).name : o.package)} — ${o.postings - o.used_postings} ${t("offre(s) restante(s)")} · ${o.positions - o.used_positions} ${t("poste(s)")}</option>`).join("")}</select></label>` : "";
+      document.getElementById("pj-cards").innerHTML = SEL.order ? "" : `<div class="co-packs pw-packs">${PACKAGES().filter((p) => p.price_usd != null).map((p) => `
+        <label class="co-pack ${SEL.pkg === p.id ? "on" : ""}"><input type="radio" name="pkg" value="${p.id}" ${SEL.pkg === p.id ? "checked" : ""} />
+          ${SEL.pkg === p.id ? `<em class="co-on">${t("Choisi")}</em>` : ""}<b>${x(p.name)}</b><span>${usd(p.price_usd)}</span><small>${p.postings} ${t("offre")} · ${p.days} ${t("jours")}</small>
+          <div class="tf-tags">${packageHighlights(p.id).map((f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`).join("")}</div></label>`).join("")}</div>`;
+      document.getElementById("pj-addons").innerHTML = SEL.order ? "" : QUICK_ADDONS.map(catItem).filter(Boolean).map((a) => {
+        const inc = (pk.includes || []).includes(a.id), live = addonLive(a);
+        return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"}"><input type="checkbox" name="addon" value="${a.id}" ${inc || (live && SEL.addons.includes(a.id)) ? "checked" : ""} ${inc || !live ? "disabled" : ""} /><span>${x(t(a.name))}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : a.price_usd == null ? t("Sur devis") : usd(a.price_usd)}</em></label>`; }).join("");
+    }
+    function x(s) { return esc(s || ""); }
+    function summary() {
+      const f = document.getElementById("post"), positions = Math.max(1, Math.min(RULES.maxPositions, Math.round(+f.elements.positions.value || 1)));
+      document.querySelectorAll("#plan .sk").forEach((l) => l.classList.toggle("on", l.querySelector("input").checked));
+      if (SEL.order) {
+        const o = ORDERS.find((z) => z.id === SEL.order);
+        document.getElementById("pj-sum").innerHTML = `<div class="pj-sum-h">${t("Récapitulatif avant publication")}</div>
+          <div class="pj-line"><span>${t("Inclus dans votre forfait")} · ${positions} ${positions > 1 ? t("postes") : t("poste")} · ${o.days} ${t("jours")}</span><b>${usd(0)}</b></div>`;
+        return { n: positions, total: 0 };
+      }
+      const q = quote({ pkg: SEL.pkg, postings: 1, positions, addons: SEL.addons });
+      document.getElementById("pj-sum").innerHTML = `
+        <div class="pj-sum-h">${t("Récapitulatif avant publication")}</div>
+        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Déjà inclus") : l.amount == null ? t("Sur devis") : usd(l.amount)}</span></div>`).join("")}
+        <div class="pj-line"><span>${q.v} ${q.v > 1 ? t("postes") : t("poste")} · ${q.days} ${t("jours")}</span><b>${usd(q.total)}${q.needsQuote ? " + " + t("options sur devis") : ""}</b></div>
+        <p class="hint-l">${t("Paiement unique, sans frais en cas d’embauche. Après l’envoi, réglez la commande par virement avec sa référence, dans « Achats et factures ».")}</p>`;
+      return { n: q.v, total: q.total };
+    }
+    function refresh() { drawPack(); summary(); packChip(); }
+    // The chosen package and its price stay visible at every step, with a way to change it.
+    function packChip() {
+      const box = document.getElementById("pw-pack"); if (!box) return;
+      const f = document.getElementById("post"), positions = Math.max(1, +f.elements.positions.value || 1);
+      let label, price, showChange = true; try { showChange = STEP !== STEPS.length; } catch {}
+      if (SEL.order) { const o = ORDERS.find((z) => z.id === SEL.order); label = `${(catItem(o.package) || {}).name || ""} · ${t("Inclus dans votre forfait")}`; price = usd(0); }
+      else { const q = quote({ pkg: SEL.pkg, postings: 1, positions, addons: SEL.addons }); label = `${(catItem(SEL.pkg) || {}).name} · ${q.days} ${t("jours")}`; price = usd(q.total) + (q.needsQuote ? ` + ${t("options sur devis")}` : ""); }
+      box.innerHTML = `<span class="pw-pack-l">${t("Votre formule")}</span><b>${esc(label)}</b><span class="pw-pack-p">${price}</span>${showChange ? `<button type="button" class="linkbtn" data-goto="7">${t("Changer")}</button>` : ""}`;
+    }
+    document.getElementById("post").addEventListener("input", summary);
+    document.getElementById("post").addEventListener("change", (e) => {
+      const el = e.target;
+      if (el.name === "pkg") { SEL.pkg = el.value; SEL.addons = SEL.addons.filter((a) => !(catItem(SEL.pkg).includes || []).includes(a)); return refresh(); }
+      if (el.name === "addon") { SEL.addons = [...document.querySelectorAll("#pj-addons input[name=addon]:checked:not(:disabled)")].map((i) => i.value); return refresh(); }
+      if (el.id === "use-order") { SEL.order = el.checked ? document.getElementById("order-pick").value : ""; return refresh(); }
+      if (el.id === "order-pick") { SEL.order = el.value; return refresh(); }
+      summary();
+    });
+    refresh();
+    loadCatalog().then(refresh);
+    // Keep what was typed while the employer signs in, then bring it back.
+    const POST_FIELDS = ["title", "company", "employer_size", "city", "type", "positions", "department", "work_mode", "category", "occupation", "experience", "deadline", "pay", "salary_min", "salary_from", "salary_to", "salary_currency", "about", "responsibilities", "needs", "skills", "questions", "documents", "benefits", "contact"];
+    function saveDraft() { const f = document.getElementById("post"); const d = { plan: f.elements.plan.value, pkg: SEL.pkg, addons: SEL.addons, show_salary: f.elements.show_salary.checked, step: STEP }; POST_FIELDS.forEach((k) => d[k] = f.elements[k].value); try { localStorage.setItem("alo-post-draft", JSON.stringify(d)); } catch {} }
+    async function ensureEmployer(f) {
+      if (!db() || DEMO) return;
+      const { data } = await db().from("employers").select("user_id").maybeSingle();
+      if (!data) await db().from("employers").insert({ company: f.elements.company.value.trim(), plan: f.elements.plan.value, size: f.elements.employer_size.value, city: f.elements.city.value.trim() });
+    }
+    (async () => {
+      const f = document.getElementById("post");
+      let d = null; try { d = JSON.parse(localStorage.getItem("alo-post-draft") || "null"); } catch {}
+      if (d) { POST_FIELDS.forEach((k) => { if (d[k] != null && f.elements[k]) f.elements[k].value = d[k]; }); const r = f.querySelector(`[name=plan][value="${d.plan}"]`); if (r) r.checked = true; if (d.pkg) SEL.pkg = d.pkg; if (d.addons) SEL.addons = d.addons;
+        f.elements.show_salary.checked = !!d.show_salary;
+        ["responsibilities", "needs"].some((k) => d[k]) && (document.getElementById("more-desc").open = true); ["questions", "documents", "benefits"].some((k) => d[k]) && (document.getElementById("more-apply").open = true);
+        setTimeout(() => { refresh(); MAX_SEEN = d.step || 1; showStep(d.step || 1, true); payPreview(); updateCount(); }); }
+      if (!db() || DEMO) return;
+      const user = await currentUser();
+      const note = document.getElementById("post-account");
+      if (!user) { note.hidden = false; return; }
+      const { data: orders } = await db().rpc("my_orders");
+      ORDERS = (orders || []).filter((o) => !["annulee", "refusee"].includes(o.approval_status || (o.status === "annulee" ? "annulee" : "")) && o.price_usd != null
+        && !["terminee", "suspendue"].includes(o.activation_status) && o.used_postings < o.postings && o.used_positions < o.positions);
+      if (ORDERS.length) { SEL.order = ORDERS[0].id; refresh(); }
+      const { data: emp } = await db().from("employers").select("company,plan,size,city,phone").maybeSingle();
+      if (emp && !d) { f.elements.company.value = emp.company; if (emp.size) f.elements.employer_size.value = emp.size; const r = f.querySelector(`[name=plan][value="${emp.plan}"]`); if (r) r.checked = true; if (!f.elements.contact.value) f.elements.contact.value = emp.phone || user.email || ""; summary(); if (f.elements.company.value && f.elements.employer_size.value) showStep(2, true); }
+    })();
+    window.onLang = () => { const f = document.getElementById("post"), keep = [f.elements.occupation.value, f.elements.department.value, f.elements.work_mode.value, f.elements.employer_size.value]; fillLists(); [f.elements.occupation.value, f.elements.department.value, f.elements.work_mode.value, f.elements.employer_size.value] = keep; refresh(); drawCityChips(); };
+    { const base = window.onLang; window.onLang = () => { base(); drawSteps(); payPreview(); updateCount(); if (STEP === STEPS.length) review(); }; }
+
+    // ---------- Step-by-step form ----------
+    const STEPS = [...document.querySelectorAll(".pw-step")];
+    let STEP = 1, MAX_SEEN = 1, saveT = null;
+    function drawSteps() {
+      document.getElementById("pw-steps").innerHTML = STEPS.map((sec, i) => { const n = i + 1, cls = n === STEP ? "now" : n < STEP || n <= MAX_SEEN ? "done" : "";
+        return `<li class="${cls}"><button type="button" data-goto="${n}" ${n > MAX_SEEN ? "disabled" : ""}><span>${n}</span>${esc(t(sec.dataset.title))}</button></li>`; }).join("");
+      document.getElementById("pw-count").textContent = `${t("Étape")} ${STEP} ${t("sur")} ${STEPS.length} · ${t(STEPS[STEP - 1].dataset.title)}`;
+      document.getElementById("pw-bar").style.width = Math.round((STEP / STEPS.length) * 100) + "%";
+      STEPS.forEach((sec, i) => { sec.querySelector(".pw-n").textContent = `${t("Étape")} ${i + 1} / ${STEPS.length}`; });
+    }
+    function showStep(n, quiet) {
+      STEP = Math.max(1, Math.min(STEPS.length, n)); MAX_SEEN = Math.max(MAX_SEEN, STEP);
+      STEPS.forEach((sec, i) => { sec.hidden = i + 1 !== STEP; });
+      const last = STEP === STEPS.length;
+      document.getElementById("pw-back").hidden = STEP === 1;
+      document.getElementById("pw-next").hidden = last;
+      document.getElementById("pw-publish").hidden = !last;
+      document.getElementById("pw-err").hidden = true;
+      if (last) { review(); refresh(); }
+      drawSteps(); packChip();
+      if (!quiet) {
+        const top = document.getElementById("post").getBoundingClientRect().top + scrollY - 90;
+        if (scrollY > top) window.scrollTo({ top, behavior: "smooth" });
+        const first = STEPS[STEP - 1].querySelector("input:not([type=hidden]):not([type=radio]):not([type=checkbox]), select, textarea");
+        if (first && !matchMedia("(max-width: 760px)").matches) first.focus({ preventScroll: true });
+      }
+    }
+    // Check only the fields of the current step, and say clearly what is missing.
+    function stepValid(n) {
+      const sec = STEPS[n - 1], f = document.getElementById("post");
+      // Checks the browser cannot do alone: contact format, salary range, a deadline that is not already past.
+      const c = f.elements.contact.value.trim();
+      f.elements.contact.setCustomValidity(!c || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c) || c.replace(/\D/g, "").length >= 8 ? "" : t("Indiquez un numéro WhatsApp (8 chiffres ou plus) ou une adresse e-mail."));
+      const lo = +f.elements.salary_from.value || 0, hi = +f.elements.salary_to.value || 0;
+      f.elements.salary_to.setCustomValidity(lo && hi && hi < lo ? t("Le maximum doit être supérieur ou égal au minimum.") : "");
+      f.elements.deadline.setCustomValidity(f.elements.deadline.value && f.elements.deadline.value < f.elements.deadline.min ? t("Choisissez une date à venir.") : "");
+      const short = (el) => el.minLength > 0 && el.value.trim().length > 0 && el.value.trim().length < el.minLength;
+      const bad = [...sec.querySelectorAll("input, select, textarea")].find((el) => !el.checkValidity() || short(el));
+      if (!bad) return true;
+      const label = (bad.closest(".field") || {}).querySelector ? bad.closest(".field").querySelector("span").textContent : "";
+      const err = document.getElementById("pw-err");
+      err.textContent = bad.validity.valueMissing ? `${t("Champ obligatoire")} : ${label}` : bad.validity.tooShort || short(bad) ? `${label} : ${t("ajoutez quelques mots de plus.")}`
+        : bad.validity.customError ? `${label} : ${bad.validationMessage}` : `${label} : ${t("vérifiez cette valeur.")}`;
+      const det = bad.closest("details"); if (det) det.open = true;
+      err.hidden = false; bad.focus(); bad.classList.add("pw-bad"); setTimeout(() => bad.classList.remove("pw-bad"), 1600);
+      return false;
+    }
+    // Salary: one range; shown on the offer only if the employer agrees.
+    function payPreview() {
+      const f = document.getElementById("post"), lo = +f.elements.salary_from.value || 0, hi = +f.elements.salary_to.value || 0, cur = f.elements.salary_currency.value;
+      const n = (v) => v.toLocaleString("fr-FR");
+      // Stored on the offer in French (the site language); shown here in the reader's language.
+      const fr = lo && hi ? `${n(lo)} – ${n(hi)} ${cur} / mois` : lo ? `À partir de ${n(lo)} ${cur} / mois` : hi ? `Jusqu’à ${n(hi)} ${cur} / mois` : "";
+      const txt = lo && hi ? `${n(lo)} – ${n(hi)} ${cur} ${t("/ mois")}` : lo ? `${t("À partir de")} ${n(lo)} ${cur} ${t("/ mois")}` : hi ? `${t("Jusqu’à")} ${n(hi)} ${cur} ${t("/ mois")}` : "";
+      const show = f.elements.show_salary.checked && txt;
+      f.elements.pay.value = show ? fr : "";
+      f.elements.salary_min.value = show && cur === "HTG" && lo ? lo : "";
+      document.getElementById("pw-pay").textContent = !txt ? "" : show ? `${t("Affiché sur l’offre")} : ${txt}` : `${t("Non affiché sur l’offre")} (${txt})`;
+    }
+    function review() {
+      const f = document.getElementById("post"), v = (k) => esc(f.elements[k].value.trim()), lines = (k) => f.elements[k].value.split("\n").map((z) => z.trim()).filter(Boolean);
+      const sel = (k) => { const el = f.elements[k]; return el.selectedIndex >= 0 && el.value ? esc(el.options[el.selectedIndex].text) : "—"; };
+      const row = (label, val) => `<div class="pf-line"><span>${t(label)}</span><b>${val || "—"}</b></div>`;
+      const box = (n, body) => `<div class="pw-rv"><div class="pw-rv-h"><b>${t(STEPS[n - 1].dataset.title)}</b><button type="button" class="linkbtn" data-goto="${n}">${t("Modifier")}</button></div>${body}</div>`;
+      payPreview();
+      document.getElementById("pw-review").innerHTML = `<h3>${t("Vérifiez votre offre")}</h3>
+        ${box(1, row("Entreprise ou organisation", v("company")) + row("Type d’employeur", esc(t(employerTypeLabel(f.elements.plan.value)))) + row("Taille de l’organisation", sel("employer_size")))}
+        ${box(2, row("Intitulé du poste", v("title")) + row("Type de contrat", sel("type")) + row("Nombre de postes à pourvoir", v("positions")) + row("Expérience demandée", sel("experience")))}
+        ${box(3, row("Ville", v("city")) + row("Département", sel("department")) + row("Mode de travail", sel("work_mode")) + row("Date limite", f.elements.deadline.value ? esc(fmtDay(f.elements.deadline.value)) : ""))}
+        ${box(4, `<p class="pw-rv-txt">${v("about").slice(0, 220)}${f.elements.about.value.length > 220 ? "…" : ""}</p>` + row("Compétences demandées", lines("skills").map(esc).join(", ")))}
+        ${box(5, row("Salaire", esc(document.getElementById("pw-pay").textContent)))}
+        ${box(6, row("WhatsApp ou e-mail de contact", v("contact")) + row("Questions aux candidats", String(lines("questions").length)) + row("Documents demandés", String(lines("documents").length)))}`;
+    }
+    function autosave() { clearTimeout(saveT); saveT = setTimeout(() => { saveDraft(); const el = document.getElementById("pw-saved"); el.textContent = t("Brouillon enregistré"); setTimeout(() => (el.textContent = ""), 1800); }, 700); }
+    function updateCount() { const ta = document.querySelector('[name="about"]'), c = document.querySelector('.pw-count[data-for="about"]'); const n = ta.value.trim().length; c.textContent = n < 10 ? t("Au moins 10 caractères") : `${n} / 4000`; }
+    document.getElementById("pw-next").onclick = () => { if (stepValid(STEP)) { saveDraft(); showStep(STEP + 1); } };
+    document.getElementById("pw-back").onclick = () => showStep(STEP - 1);
+    document.addEventListener("click", (e) => { const g = e.target.closest("[data-goto]"); if (!g || g.disabled) return; const n = +g.dataset.goto;
+      if (n > STEP) { for (let k = STEP; k < n; k++) { if (!stepValid(k)) { showStep(k); stepValid(k); return; } } } showStep(n); });
+    document.getElementById("post").addEventListener("input", (e) => { if (e.target.name === "city") autoDept(); if (e.target.name === "positions") packChip(); if (["salary_from", "salary_to"].includes(e.target.name)) payPreview(); if (e.target.name === "about") updateCount(); autosave(); });
+    document.getElementById("post").addEventListener("change", (e) => { if (e.target.name === "department") DEPT_AUTO = false; if (e.target.name === "city") autoDept(); if (["show_salary", "salary_currency"].includes(e.target.name)) payPreview(); autosave(); });
+    // Enter in a field goes to the next step instead of publishing.
+    document.getElementById("post").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT" && STEP < STEPS.length) { e.preventDefault(); document.getElementById("pw-next").click(); } });
+    showStep(1, true); updateCount(); payPreview();
+    const lines = (el) => el.value.split("\n").map((x) => x.trim()).filter(Boolean).slice(0, 10);
+    document.getElementById("post").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (STEP < STEPS.length) { document.getElementById("pw-next").click(); return; }
+      for (let n = 1; n < STEPS.length; n++) if (!(() => { STEPS[n - 1].hidden = false; const ok = [...STEPS[n - 1].querySelectorAll("input, select, textarea")].every((el) => el.checkValidity()); STEPS[n - 1].hidden = true; return ok; })()) { showStep(n); stepValid(n); return; }
+      payPreview();
+      const f = e.target, btn = f.querySelector("button[type=submit]"), done = document.getElementById("done");
+      if (db() && !DEMO && !(await currentUser())) { // an account is needed to follow the offer, pay and confirm hires
+        saveDraft(); try { localStorage.setItem("alo-next", "post.html"); } catch {}
+        location.href = "signin.html?pour=publier"; return;
+      }
+      const pr = summary();
+      if (SEL.order) { const o = ORDERS.find((z) => z.id === SEL.order); if (o && pr.n > o.positions - o.used_positions) { const er = document.getElementById("pw-err"); er.textContent = `${t("Votre forfait couvre encore")} ${o.positions - o.used_positions} ${t("poste(s)")}. ${t("Réduisez le nombre de postes ou décochez « Utiliser mon forfait ».")}`; er.hidden = false; return; } }
+      btn.disabled = true; btn.textContent = t("Envoi…");
+      await ensureEmployer(f);   // the organization exists before the offer, so the offer and its order are linked to it
+      const err = await saveJob({
+        title: f.elements.title.value.trim(), company: f.elements.company.value.trim(), city: f.elements.city.value.trim(),
+        type: f.elements.type.value, category: f.elements.category.value, pay: f.elements.pay.value.trim(), about: f.elements.about.value.trim(),
+        needs: lines(f.elements.needs), responsibilities: lines(f.elements.responsibilities), benefits: lines(f.elements.benefits),
+        experience: f.elements.experience.value, questions: lines(f.elements.questions), documents: lines(f.elements.documents), salary_min: f.elements.salary_min.value ? Math.round(+f.elements.salary_min.value) : null,
+        contact: f.elements.contact.value.trim(),
+        positions: pr.n, plan: f.elements.plan.value, employer_size: f.elements.employer_size.value,
+        package: SEL.order ? undefined : SEL.pkg, addons: SEL.order ? undefined : SEL.addons, order_id: SEL.order || undefined, occupation: f.elements.occupation.value || null, department: f.elements.department.value || deptOf(f.elements.city.value) || null,
+        work_mode: f.elements.work_mode.value, skills: lines(f.elements.skills), deadline: f.elements.deadline.value || null,
+        salary_from: f.elements.salary_from.value ? Math.round(+f.elements.salary_from.value) : null, salary_to: f.elements.salary_to.value ? Math.round(+f.elements.salary_to.value) : null, salary_currency: f.elements.salary_currency.value,
+      });
+      btn.textContent = t("Publier l'offre");
+      done.textContent = err || t("Merci ! Votre offre sera en ligne après vérification.");
+      done.classList.toggle("err", !!err);
+      done.style.display = "block";
+      if (err) btn.disabled = false;
+      else {
+        try { localStorage.removeItem("alo-post-draft"); } catch {}
+        // What happens next: review by ALO, and (for a new order) payment by transfer with the order reference.
+        let o = null;
+        if (!SEL.order) { if (DEMO) o = { reference: "ALO-2026-00042", price_usd: pr.total, payment_status: "non_payee" };
+          else { try { const r = await db().rpc("my_orders"); o = (r.data || [])[0] || null; } catch {} } }
+        done.innerHTML = `<b>${esc(t("Merci ! Votre offre sera en ligne après vérification."))}</b>
+          ${o && o.price_usd != null ? `<div class="co-transfer pw-next-pay"><div class="co-ref"><span>${esc(t("Référence de commande"))}</span><b>${esc(o.reference || "")}</b></div><div class="co-ref"><span>${esc(t("Montant"))}</span><b>${usd(o.price_usd)}</b></div>
+            <p>${esc(t("Réglez la commande par virement en indiquant cette référence. L’équipe ALO vérifie l’offre et confirme le paiement ; ce sont deux étapes séparées."))}</p><p class="co-once">${esc(t("Paiement unique. Aucun renouvellement automatique."))}</p></div>`
+            : SEL.order ? `<p>${esc(t("Cette offre utilise votre forfait : aucun paiement supplémentaire."))}</p>` : ""}
+          <div class="row"><a class="btn" href="employeur.html${o ? "#achats" : ""}">${esc(t(o ? "Payer ou suivre ma commande" : "Suivre mon offre dans l’espace employeur"))}</a><button class="btn btn-plain" type="button" id="pw-again">${esc(t("Publier une autre offre"))}</button></div>`;
+        f.classList.add("pw-sent"); window.scrollTo({ top: 0, behavior: "smooth" });
+        document.getElementById("pw-again").onclick = () => { const keep = { company: f.elements.company.value, size: f.elements.employer_size.value, plan: f.elements.plan.value, contact: f.elements.contact.value };
+          f.reset(); f.elements.company.value = keep.company; f.elements.employer_size.value = keep.size; f.elements.contact.value = keep.contact;
+          const r = f.querySelector(`[name=plan][value="${keep.plan}"]`); if (r) r.checked = true; f.classList.remove("pw-sent"); done.style.display = "none"; MAX_SEEN = 1; refresh(); showStep(2); };
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

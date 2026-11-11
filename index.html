@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
+  <meta name="theme-color" content="#121A3A" />
+  <meta name="description" content="alo.ht — La plateforme de talents d'Haïti. Profil ALO, offres d'emploi et prime d'embauche." />
+  <title>alo.ht — Talents et emplois en Haïti</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261111d" />
+</head>
+<body>
+  <a class="skip" href="#main" data-t>Aller au contenu</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="index.html">alo<span>.</span>ht</a>
+      <nav class="nav" aria-label="Navigation principale"><a href="jobs.html" data-t>Trouver une opportunité</a><div class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true" data-t>Recruter</button><div class="nav-dd-menu" hidden><a href="pme.html" data-t>PME</a><a href="entreprises.html" data-t>Grandes entreprises</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="employeur.html" data-t>Espace employeur</a></div></div><a href="tarifs.html" data-t>Tarifs</a></nav>
+      <div class="spacer"></div>
+      
+      <a class="btn" href="post.html" data-t>Publier une offre</a>
+      <a class="btn btn-outline signin" href="signin.html" data-t>Connexion</a>
+      <div class="langs" role="group" aria-label="Langue / Lang / Language"><button class="lang-flag" type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg></button><button class="lang-flag" type="button" data-lang="kr" lang="ht" title="Kreyòl ayisyen" aria-label="Kreyòl ayisyen"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11" y="6.5" width="8" height="7" fill="#fff"/><path d="M15 7.6v4.6M13 12.2h4" stroke="#00843D" stroke-width="1"/></svg></button><button class="lang-flag" type="button" data-lang="en" lang="en" title="English" aria-label="English"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="0.00" width="30" height="1.54" fill="#B22234"/><rect y="3.08" width="30" height="1.54" fill="#B22234"/><rect y="6.15" width="30" height="1.54" fill="#B22234"/><rect y="9.23" width="30" height="1.54" fill="#B22234"/><rect y="12.31" width="30" height="1.54" fill="#B22234"/><rect y="15.38" width="30" height="1.54" fill="#B22234"/><rect y="18.46" width="30" height="1.54" fill="#B22234"/><rect width="13" height="10.77" fill="#3C3B6E"/></svg></button></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. Discover opportunities -->
+    <section class="hm-hero">
+      <div class="wrap hm-hero-in">
+        <div class="hm-copy reveal">
+          <span class="eyebrow"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8.5 3.2 3L13 4.5"/></svg><span data-t>Emplois · Consultances · Stages · Missions de projet</span></span>
+          <h1 data-t>Votre prochaine opportunité commence ici.</h1>
+          <p class="lead" data-t>Des opportunités en Haïti, consultables sans compte. Postulez en quelques minutes avec votre Profil ALO.</p>
+          <div class="hero-cta">
+            <a class="btn btn-lg" href="jobs.html" data-t>Explorer les opportunités</a>
+            <a class="link" href="signin.html?pour=profil" id="hero-create" data-t>Créer mon Profil ALO</a>
+          </div>
+        </div>
+        <form class="hm-search reveal" action="jobs.html" role="search">
+          <b class="hm-search-h" data-t>Que cherchez-vous ?</b>
+          <label class="field"><span data-t>Métier ou mot-clé</span><input name="q" placeholder="Ex. comptable, chauffeur, développeur" data-tp /></label>
+          <label class="field"><span data-t>Ville</span><input name="ville" list="hm-cities" placeholder="Ex. Port-au-Prince" data-tp /></label>
+          <datalist id="hm-cities"><option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option><option>Cap-Haïtien</option><option>Les Cayes</option><option>Jacmel</option><option>Gonaïves</option><option>Télétravail</option></datalist>
+          <button class="btn btn-block" type="submit" data-t>Rechercher</button>
+          <div class="hm-kinds"><a href="jobs.html?type=emplois" data-t>Emplois</a><a href="jobs.html?type=consultances" data-t>Consultances</a><a href="jobs.html?type=stages" data-t>Stages</a><a href="jobs.html?type=missions" data-t>Missions de projet</a></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. How ALO works -->
+    <section class="section hm-how">
+      <div class="wrap">
+        <h2 class="reveal" data-t>Comment ça marche</h2>
+        <ol class="hm-steps" id="hm-steps">
+          <li class="hm-step reveal">
+            <img class="hs-face" src="https://images.unsplash.com/photo-1618298363483-e31a31f1a1e2?w=160&h=160&fit=crop&crop=faces" alt="" />
+            <span class="tnum">01</span><b data-t>Trouvez votre opportunité</b>
+            <span data-t>Cherchez par métier, ville ou type de contrat.</span>
+          </li>
+          <li class="hm-step reveal">
+            <img class="hs-face" src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=160&h=160&fit=crop&crop=faces" alt="" />
+            <span class="tnum">02</span><b data-t>Postulez facilement</b>
+            <span data-t>Envoyez votre candidature avec votre Profil ALO.</span>
+          </li>
+          <li class="hm-step reveal">
+            <span class="tstamp"><svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="10.5"/><g transform="translate(16 16) scale(1.75) translate(-16 -15.9)" stroke-width="1.35"><path d="M17.8 13.4c-.5-.7-1.2-1-2-1-1.2 0-2 .7-2 1.6 0 2.2 4.4 1.2 4.4 3.6 0 .9-.9 1.7-2.2 1.7-.9 0-1.7-.4-2.2-1.1M16 11v1.4M16 19.3v1.5"/></g></svg></span>
+            <span class="tnum">03</span><b data-t>Décrochez un emploi</b>
+            <span><span data-t>Prime d’embauche : jusqu’à 5 % du premier salaire mensuel, sur les emplois éligibles.</span> <span class="hm-status" data-t>Programme en préparation</span></span>
+            <a class="link sm" href="recommander.html#conditions" data-t>Voir les conditions</a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3. Profil ALO -->
+    <section class="section soft hm-profile">
+      <div class="wrap hm-profile-in">
+        <div class="hm-pcopy reveal">
+          <h2 class="left" data-t>Votre parcours, prêt pour votre prochaine opportunité.</h2>
+          <p class="lead" data-t>Rassemblez vos expériences et vos compétences dans votre Profil ALO pour postuler plus facilement.</p>
+          <ul class="hm-benefits">
+            <li data-t>Présentez votre expérience.</li>
+            <li data-t>Réutilisez votre profil pour vos candidatures.</li>
+            <li data-t>Suivez vos candidatures au même endroit.</li>
+          </ul>
+          <button type="button" class="xp-btn" data-xp aria-controls="xp-profil" aria-expanded="false"><span class="xp-o"><span data-t>Voir tout ce que vous pouvez faire</span> ↓</span><span class="xp-c"><span data-t>Réduire</span> ↑</span></button>
+          <div class="xp" id="xp-profil" hidden>
+            <ul class="hm-more">
+              <li data-t>Créez votre profil en 7 sections guidées, enregistré automatiquement.</li>
+              <li data-t>Recevez des opportunités recommandées selon vos préférences.</li>
+              <li data-t>Enregistrez les opportunités qui vous intéressent.</li>
+              <li data-t>Choisissez si les recruteurs peuvent voir votre profil.</li>
+              <li data-t>Créez un CV à partir de votre profil.</li>
+              <li><span data-t>Déclarez votre embauche pour la Prime d’embauche.</span> <span class="hm-status" data-t>Programme en préparation</span></li>
+            </ul>
+            <a class="link" href="fonctionnalites.html#candidats" data-t>Découvrir toutes les fonctionnalités</a>
+          </div>
+          <a class="btn btn-lg" href="signin.html?pour=profil" data-t>Créer mon Profil ALO</a>
+        </div>
+        <div class="hm-demo" id="hm-demo" aria-label="Exemple de Profil ALO">
+          <span class="hm-ex" data-t>Exemple</span>
+          <div class="hm-id"><img src="https://images.unsplash.com/photo-1765005204227-bf58bcdd4449?w=160&h=160&fit=crop&crop=faces" alt="" /><div><b>Marie-Jeanne P.</b><span data-t>Assistante comptable · Delmas</span></div></div>
+          <div class="hm-part" data-part="1"><span class="hm-lbl" data-t>Expérience</span><b data-t>Assistante comptable</b><span>Cabinet Fanmi & Associés · 2022 –</span></div>
+          <div class="hm-part" data-part="2"><span class="hm-lbl" data-t>Compétences</span><div class="hm-chips"><span data-t>Comptabilité</span><span>Excel</span><span>Sage</span></div></div>
+          <div class="hm-part hm-sent" data-part="3"><b data-t>Candidature envoyée</b><span data-t>Exemple : avec le Profil ALO, en une minute</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Recruit with ALO -->
+    <section class="section hm-recruit" id="employeurs">
+      <div class="wrap hm-recruit-in">
+        <div class="reveal">
+          <span class="eyebrow dark" data-t>PME · Grandes entreprises · Organisations & Institutions</span>
+          <h2 class="left" data-t>Recrutez plus simplement.</h2>
+          <ul class="hm-benefits light">
+            <li data-t>Publiez une offre en quelques minutes, à partir de 49 $ US.</li>
+            <li data-t>Suivez chaque candidature, de la réception à l’embauche.</li>
+            <li data-t>Voyez quels critères de votre offre chaque candidat mentionne.</li>
+          </ul>
+          <div class="row">
+            <a class="btn" href="post.html" data-t>Publier une offre</a>
+            <a class="btn btn-ghost" href="tarifs.html" data-t>Voir les tarifs</a>
+          </div>
+          <a class="link hm-all" href="fonctionnalites.html#employeurs" data-t>Découvrir toutes les fonctionnalités</a>
+        </div>
+        <div class="hm-match reveal" aria-label="Exemple de suivi des candidatures">
+          <div class="hm-match-h"><b data-t>Assistant(e) comptable</b><span class="hm-ex dark" data-t>Exemple</span></div>
+          <div class="hm-row"><span class="ini">MJ</span><span class="nm">Marie-Jeanne P.</span><span class="hm-crit">5 / 6 <span data-t>critères</span></span></div>
+          <div class="hm-row"><span class="ini">JR</span><span class="nm">Jean-Robert L.</span><span class="hm-crit">4 / 6 <span data-t>critères</span></span></div>
+          <div class="hm-row"><span class="ini">SD</span><span class="nm">Stéphanie D.</span><span class="hm-crit">3 / 6 <span data-t>critères</span></span></div>
+          <p class="hm-note" data-t>Chaque critère indique s’il est mentionné dans la candidature. La décision vous appartient.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div><h4 data-t>Trouver une opportunité</h4><a href="jobs.html" data-t>Toutes les opportunités</a><a href="signin.html" data-t>Créer mon profil</a><a href="cv.html" data-t>Créer mon CV avec l’IA</a><a href="profil.html" data-t>Profil ALO</a><a href="recommander.html" data-t>Prime d'embauche</a></div>
+        <div><h4 data-t>PME</h4><a href="post.html" data-t>Publier une offre</a><a href="employeur.html" data-t>Espace employeur</a><a href="pme.html" data-t>Assistant IA de recrutement</a><a href="pme.html" data-t>Tarifs PME</a><a href="tarifs.html" data-t>Nos solutions de recrutement</a></div>
+        <div><h4 data-t>Grandes entreprises</h4><a href="entreprises.html" data-t>Solutions entreprise</a><a href="entreprises.html" data-t>Recrutement géré par ALO</a><a href="entreprises.html" data-t>Gestion du personnel</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="mailto:contact@alo.ht" data-t>Contacter l'équipe</a></div>
+        <div><h4><span class="brand">alo<span>.</span>ht</span></h4><a href="apropos.html" data-t>À propos</a><a href="aide.html" data-t>Aide</a><a href="confidentialite.html" data-t>Confidentialité</a><a href="conditions.html" data-t>Conditions d'utilisation</a></div>
+      </div>
+      <div class="foot-bottom">
+        <a class="logo" href="index.html">alo<span>.</span>ht</a>
+        <div>© 2026 <span class="brand">alo<span>.</span>ht</span> · <span data-t>Tous droits réservés.</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="config.js?v=20261111d"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js?v=20261111d"></script>
+</body>
+</html>

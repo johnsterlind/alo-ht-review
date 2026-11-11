@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
+  <meta name="theme-color" content="#121A3A" />
+  <title>Nos solutions de recrutement — alo.ht</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261111d" />
+</head>
+<body>
+  <a class="skip" href="#main" data-t>Aller au contenu</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="index.html">alo<span>.</span>ht</a>
+      <nav class="nav" aria-label="Navigation principale"><a href="jobs.html" data-t>Trouver une opportunité</a><div class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true" data-t>Recruter</button><div class="nav-dd-menu" hidden><a href="pme.html" data-t>PME</a><a href="entreprises.html" data-t>Grandes entreprises</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="employeur.html" data-t>Espace employeur</a></div></div><a href="tarifs.html" data-t>Tarifs</a></nav>
+      <div class="spacer"></div>
+      
+      <a class="btn" href="post.html" data-t>Publier une offre</a>
+      <a class="btn btn-outline signin" href="signin.html" data-t>Connexion</a>
+      <div class="langs" role="group" aria-label="Langue / Lang / Language"><button class="lang-flag" type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg></button><button class="lang-flag" type="button" data-lang="kr" lang="ht" title="Kreyòl ayisyen" aria-label="Kreyòl ayisyen"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11" y="6.5" width="8" height="7" fill="#fff"/><path d="M15 7.6v4.6M13 12.2h4" stroke="#00843D" stroke-width="1"/></svg></button><button class="lang-flag" type="button" data-lang="en" lang="en" title="English" aria-label="English"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="0.00" width="30" height="1.54" fill="#B22234"/><rect y="3.08" width="30" height="1.54" fill="#B22234"/><rect y="6.15" width="30" height="1.54" fill="#B22234"/><rect y="9.23" width="30" height="1.54" fill="#B22234"/><rect y="12.31" width="30" height="1.54" fill="#B22234"/><rect y="15.38" width="30" height="1.54" fill="#B22234"/><rect y="18.46" width="30" height="1.54" fill="#B22234"/><rect width="13" height="10.77" fill="#3C3B6E"/></svg></button></div>
+    </div>
+  </header>
+
+  <main id="main" class="tf-page">
+    <section class="tf-hero">
+      <div class="wrap">
+        <span class="eyebrow"><span data-t>Recruter avec ALO</span></span>
+        <h1 data-t>Nos solutions de recrutement</h1>
+        <p class="lead" data-t>Commencez à 49 $ US. Ajoutez des offres, des postes et des outils selon vos besoins.</p>
+        <p class="tf-cats"><a href="pme.html" data-t>PME</a> · <a href="entreprises.html" data-t>Grandes entreprises</a> · <a href="organisations.html" data-t>Organisations & Institutions</a> — <span data-t>toutes les formules sont ouvertes à tous les employeurs.</span></p>
+      </div>
+    </section>
+
+    <section class="section tf-sec">
+      <div class="wrap">
+        <div class="tf-grid" id="tf-packages"></div>
+        <div class="tf-matrix-wrap"><div id="tf-matrix"></div></div>
+        <ul class="tf-rules">
+          <li data-t>Prix en dollars US</li>
+          <li data-t>Sans abonnement mensuel</li>
+          <li data-t>Aucun frais lorsque vous embauchez</li>
+          <li data-t>Plusieurs postes possibles dans une même offre</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section soft" id="config">
+      <div class="wrap tf-config">
+        <div>
+          <h2 class="left" data-t>Personnaliser ma formule</h2>
+          
+          <form id="tf-form" class="ap-card"></form>
+        </div>
+        <aside class="tf-sum" id="tf-sum" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <section class="section" id="devis">
+      <div class="wrap tf-quote">
+        <div>
+          <h2 class="left" data-t>Demander un devis</h2>
+          <p data-t>Pour les recrutements multiples, les consultances et les besoins institutionnels : termes de référence, propositions techniques et financières, grilles d’évaluation, plusieurs évaluateurs, rapports, facturation sur devis et contrat.</p>
+          <p class="hint-l" data-t>Réponse de l’équipe ALO sous deux jours ouvrables.</p>
+        </div>
+        <form id="tf-quote" class="ap-card"></form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div><h4 data-t>Trouver une opportunité</h4><a href="jobs.html" data-t>Toutes les opportunités</a><a href="signin.html" data-t>Créer mon profil</a><a href="cv.html" data-t>Créer mon CV avec l’IA</a><a href="profil.html" data-t>Profil ALO</a><a href="recommander.html" data-t>Prime d'embauche</a></div>
+        <div><h4 data-t>PME</h4><a href="post.html" data-t>Publier une offre</a><a href="employeur.html" data-t>Espace employeur</a><a href="pme.html" data-t>Assistant IA de recrutement</a><a href="pme.html" data-t>Tarifs PME</a><a href="tarifs.html" data-t>Nos solutions de recrutement</a></div>
+        <div><h4 data-t>Grandes entreprises</h4><a href="entreprises.html" data-t>Solutions entreprise</a><a href="entreprises.html" data-t>Recrutement géré par ALO</a><a href="entreprises.html" data-t>Gestion du personnel</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="mailto:contact@alo.ht" data-t>Contacter l'équipe</a></div>
+        <div><h4><span class="brand">alo<span>.</span>ht</span></h4><a href="apropos.html" data-t>À propos</a><a href="aide.html" data-t>Aide</a><a href="confidentialite.html" data-t>Confidentialité</a><a href="conditions.html" data-t>Conditions d'utilisation</a></div>
+      </div>
+      <div class="foot-bottom">
+        <a class="logo" href="index.html">alo<span>.</span>ht</a>
+        <div>© 2026 <span class="brand">alo<span>.</span>ht</span> · <span data-t>Tous droits réservés.</span></div>
+      </div>
+    </div>
+  </footer>
+  <script src="config.js?v=20261111d"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js?v=20261111d"></script>
+  <script>
+    // « Nos solutions de recrutement »: packages, configurator (live total) and quotation request.
+    // Prices come from the database (pricing_catalog), edited by ALO administrators.
+    const x = (s) => esc(s || "");
+    const Q = new URLSearchParams(location.search);
+    const SEL = { pkg: Q.get("formule") === "professional" ? "professional" : "essential", postings: 1, positions: 1, extraDays: 0, addons: [] };
+    const SERVICES = ["Recrutement de consultants (termes de référence)", "Recrutement de projet", "Propositions techniques et financières", "Grilles d’évaluation des candidats",
+      "Plusieurs évaluateurs et circuits de validation", "Compte institutionnel avec plusieurs recruteurs", "Rapports et résultats d’évaluation téléchargeables",
+      "Facturation sur devis et contrat", "Campagnes de recrutement ciblées", "Données sur l’emploi en Haïti (bientôt)"];
+    const priceOf = (p) => p.price_usd == null ? t("Sur devis") : `${t("À partir de")} ${usd(p.price_usd)}`;
+
+    function drawPackages() {
+      document.getElementById("tf-packages").innerHTML = PACKAGES().map((p) => { const L = packageLadder(p.id), prevName = L.prev ? (catItem(L.prev) || {}).name || L.prev : null;
+        return `
+        <article class="tf-card ${p.id === "professional" ? "hl" : ""}">
+          <h3>${x(p.name)}</h3>
+          <p class="tf-for">${t(PACKAGE_PURPOSE[p.id] || "")}</p>
+          <div class="tf-price">${p.price_usd == null ? `<b>${t("Sur devis")}</b>` : `<span>${t("À partir de")}</span><b>${p.price_usd} <span class="cur">$</span> US</b>`}</div>
+          <div class="tf-limits">${p.price_usd == null ? `<span>${t("Offres, postes et durée sur mesure")}</span>` : `<span>${p.postings} ${t("offre")}</span><span>${p.days} ${t("jours")}</span>`}</div>
+          <div class="tf-inc"><span class="tf-inc-h">${prevName ? `${t("Tout ce qu’inclut")} ${x(prevName)}, ${t("plus :")}` : t("Inclus :")}</span>
+            <div class="tf-tags">${L.items.map((f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`).join("")}</div></div>
+          <div class="tf-cta">${p.price_usd == null
+            ? `<a class="btn btn-lg" href="#devis">${t("Demander un devis")}</a>`
+            : `<a class="btn btn-lg" href="post.html?formule=${p.id}">${t("Publier une offre")}</a><a class="btn btn-plain" href="#config" data-pick="${p.id}">${t("Personnaliser ma formule")}</a>`}</div>
+        </article>`; }).join("");
+    }
+
+    function drawMatrix() {
+      const pk = ["essential", "professional", "institutional"], label = { inclus: "Inclus", option: "Option", bientot: "Bientôt" };
+      const feats = Object.keys(FEATURES).filter((f) => !["overview", "assistant"].includes(f));
+      document.getElementById("tf-matrix").innerHTML = `<div class="tf-more">${xpButton("xp-matrix", t("Comparer les formules en détail"))}</div><div class="xp" id="xp-matrix" ${xpOpen("xp-matrix") ? "" : "hidden"}><div class="em-table"><table class="tf-matrix"><thead><tr><th>${t("Fonctionnalité")}</th>${pk.map((p) => `<th>${x((catItem(p) || {}).name || p)}</th>`).join("")}</tr></thead><tbody>
+        ${feats.map((f) => `<tr><td>${x(t(FEATURES[f].name))}</td>${pk.map((p) => { const st = featureStatus(f, p); return `<td>${st ? `<span class="fm fm-${st}">${t(label[st])}</span>` : `<span class="fm-no" aria-label="${t("Non inclus")}">—</span>`}</td>`; }).join("")}</tr>`).join("")}
+      </tbody></table></div>
+      <p class="hint-l">${t("« Inclus » : disponible dans la formule. « Option » : à ajouter, au prix indiqué ou sur devis. « Bientôt » : prévu, pas encore disponible — jamais facturé avant sa disponibilité.")}</p></div>`;
+    }
+    function drawForm() {
+      const pk = catItem(SEL.pkg);
+      document.getElementById("tf-form").innerHTML = `
+        <div class="field"><span>${t("Formule")}</span><div class="sk-row">${PACKAGES().filter((p) => p.price_usd != null).map((p) =>
+          `<label class="sk ${SEL.pkg === p.id ? "on" : ""}"><input type="radio" name="pkg" value="${p.id}" ${SEL.pkg === p.id ? "checked" : ""} />${x(p.name)}</label>`).join("")}</div></div>
+        <div class="three-f">
+          <label class="field"><span>${t("Offres d’emploi")}</span><input name="postings" type="number" min="1" max="500" value="${SEL.postings}" inputmode="numeric" /></label>
+          <label class="field"><span>${t("Postes à pourvoir au total")}</span><input name="positions" type="number" min="1" max="5000" value="${SEL.positions}" inputmode="numeric" /></label>
+          <label class="field"><span>${t("Durée prolongée")}</span><select name="extraDays">${[0, 1, 2, 3, 4].map((k) => `<option value="${k}" ${SEL.extraDays === k ? "selected" : ""}>${k ? `+${k * ((catItem("extra_days") || {}).days || 15)} ${t("jours")}` : t("Non")}</option>`).join("")}</select></label>
+        </div>
+        <div class="field"><span>${t("Outils et services")}</span>
+          <div class="tf-addons">${ADDONS().filter((a) => !["extra_posting", "extra_position", "extra_days"].includes(a.id)).map((a) => {
+            const inc = (pk.includes || []).includes(a.id), live = addonLive(a);
+            return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"}"><input type="checkbox" name="addon" value="${a.id}" ${inc || (live && SEL.addons.includes(a.id)) ? "checked" : ""} ${inc || !live ? "disabled" : ""} />
+              <span>${x(t(a.name))}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : a.price_usd == null || a.id === "campaign" ? t("Sur devis") : `${usd(a.price_usd)} ${t(a.unit)}`}</em></label>`; }).join("")}</div>
+        </div>`;
+    }
+    function drawSum() {
+      const q = quote(SEL);
+      document.getElementById("tf-sum").innerHTML = `
+        <div class="pj-sum-h">${t("Votre formule")}</div>
+        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Inclus") : l.amount == null ? t("Sur devis") : usd(l.amount)}</span></div>`).join("")}
+        ${q.needsQuote ? `<div class="tf-total sub"><span>${t("Sous-total chiffré")}</span><b>${usd(q.total)}</b></div>
+          <div class="tf-quote-items"><span>${t("À chiffrer sur devis")}</span><b>${q.lines.filter((l) => l.amount == null).map((l) => x(l.label)).join(", ")}</b></div>
+          <p class="tf-unconfirmed">${t("Total non confirmé : l’équipe ALO vous enverra le montant final avant tout paiement.")}</p>`
+          : `<div class="tf-total"><span>${t("Total")}</span><b>${usd(q.total)}</b></div>`}
+        <p class="hint-l">${q.n} ${q.n > 1 ? t("offres") : t("offre")} · ${q.v} ${q.v > 1 ? t("postes") : t("poste")} · ${q.days} ${t("jours")}</p>
+        <button class="btn btn-lg btn-block" type="button" id="tf-order">${t("Commander cette formule")}</button>`;
+    }
+    function drawQuote() {
+      document.getElementById("tf-quote").innerHTML = `
+        <div class="two">
+          <label class="field"><span>${t("Entreprise ou organisation")}</span><input name="organization" required minlength="2" maxlength="160" /></label>
+          <label class="field"><span>${t("Type d’employeur")}</span><select name="category">${EMPLOYER_TYPES.map(([k, l]) => `<option value="${k}" ${k === "organisation" ? "selected" : ""}>${t(l)}</option>`).join("")}</select></label>
+        </div>
+        <div class="two">
+          <label class="field"><span>${t("Taille de l’organisation")}</span><select name="size"><option value="">${t("Nombre d’employés")}</option>${ORG_SIZES.map((z) => `<option>${x(z)}</option>`).join("")}</select></label>
+          <label class="field"><span>${t("Personne à contacter")}</span><input name="contact_name" required minlength="2" maxlength="120" /></label>
+        </div>
+        <div class="two">
+          <label class="field"><span>${t("E-mail")}</span><input name="email" type="email" required maxlength="160" /></label>
+          <label class="field"><span>${t("Téléphone / WhatsApp")}</span><input name="phone" type="tel" maxlength="30" /></label>
+        </div>
+        <div class="two">
+          <label class="field"><span>${t("Offres d’emploi prévues")}</span><input name="postings_est" type="number" min="1" max="1000" inputmode="numeric" /></label>
+          <label class="field"><span>${t("Postes à pourvoir au total")}</span><input name="positions_est" type="number" min="1" max="10000" inputmode="numeric" /></label>
+        </div>
+        <div class="field"><span>${t("Services souhaités")}</span><div class="tf-services">${SERVICES.map((v) => `<label class="pq-consent"><input type="checkbox" name="services" value="${x(v)}" /><span>${x(t(v))}</span></label>`).join("")}</div></div>
+        <label class="field"><span>${t("Décrivez votre besoin")}</span><textarea name="needs" rows="4" maxlength="4000"></textarea></label>
+        <p class="ap-err" id="q-err" hidden></p>
+        <button class="btn btn-lg" type="submit">${t("Demander un devis")}</button>`;
+    }
+
+    document.addEventListener("click", (e) => {
+      const pick = e.target.closest("[data-pick]"); if (pick) { SEL.pkg = pick.dataset.pick; SEL.addons = []; drawForm(); drawSum(); }
+      if (e.target.id === "tf-order") order(e.target);
+    });
+    document.addEventListener("input", (e) => {
+      const f = e.target.form; if (!f || f.id !== "tf-form") return;
+      SEL.postings = Math.max(1, +f.elements.postings.value || 1); SEL.positions = Math.max(SEL.postings, +f.elements.positions.value || 1); drawSum();
+    });
+    document.addEventListener("change", (e) => {
+      const el = e.target, f = el.form; if (!f || f.id !== "tf-form") return;
+      if (el.name === "pkg") { SEL.pkg = el.value; return (drawForm(), drawSum()); }
+      if (el.name === "extraDays") SEL.extraDays = +el.value;
+      if (el.name === "addon") SEL.addons = [...f.querySelectorAll("input[name=addon]:checked:not(:disabled)")].map((i) => i.value);
+      if (el.name === "positions" && +el.value < SEL.postings) el.value = SEL.postings;
+      drawSum();
+    });
+    // The checkout (commande.html) confirms the organization and the purchasing path; the selection travels with it.
+    function order() {
+      try { const prev = JSON.parse(localStorage.getItem("alo-checkout") || "{}");
+        localStorage.setItem("alo-checkout", JSON.stringify({ ...prev, pkg: SEL.pkg, postings: SEL.postings, positions: SEL.positions, extraDays: SEL.extraDays, addons: SEL.addons, step: 1, done: null, path: prev.path || "" })); } catch {}
+      location.href = "commande.html";
+    }
+    document.getElementById("tf-quote").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, btn = f.querySelector("button[type=submit]"), err = document.getElementById("q-err");
+      const row = { organization: f.elements.organization.value.trim(), category: f.elements.category.value, size: f.elements.size.value || null,
+        contact_name: f.elements.contact_name.value.trim(), email: f.elements.email.value.trim(), phone: f.elements.phone.value.trim(),
+        postings_est: +f.elements.postings_est.value || null, positions_est: +f.elements.positions_est.value || null,
+        services: [...f.querySelectorAll("input[name=services]:checked")].map((i) => i.value), needs: f.elements.needs.value.trim() };
+      btn.disabled = true;
+      if (!DEMO && db()) {
+        const { error } = await db().from("quote_requests").insert(row);
+        if (error) { btn.disabled = false; err.textContent = t("Erreur. Vérifiez votre connexion et réessayez."); err.hidden = false; return; }
+      }
+      f.innerHTML = `<p class="em-ok">${t("Merci ! Votre demande de devis a bien été envoyée. L’équipe ALO vous répond sous deux jours ouvrables.")}</p>`;
+    });
+
+    function drawAll(withQuote) { drawPackages(); drawMatrix(); drawForm(); drawSum(); if (withQuote && !document.querySelector("#tf-quote .em-ok")) drawQuote(); }
+    window.onLang = () => drawAll(true);
+    drawAll(true);
+    loadCatalog().then(() => drawAll(false));   // keeps what was typed in the quote form
+  </script>
+</body>
+</html>

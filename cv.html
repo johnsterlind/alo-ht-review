@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
+  <meta name="theme-color" content="#121A3A" />
+  <title>Créer mon CV — alo.ht</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261111d" />
+</head>
+<body>
+  <a class="skip" href="#main" data-t>Aller au contenu</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="index.html">alo<span>.</span>ht</a>
+      <nav class="nav" aria-label="Navigation principale"><a href="jobs.html" data-t>Trouver une opportunité</a><div class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true" data-t>Recruter</button><div class="nav-dd-menu" hidden><a href="pme.html" data-t>PME</a><a href="entreprises.html" data-t>Grandes entreprises</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="employeur.html" data-t>Espace employeur</a></div></div><a href="tarifs.html" data-t>Tarifs</a></nav>
+      <div class="spacer"></div>
+      
+      <a class="btn" href="post.html" data-t>Publier une offre</a>
+      <a class="btn btn-outline signin" href="signin.html" data-t>Connexion</a>
+      <div class="langs" role="group" aria-label="Langue / Lang / Language"><button class="lang-flag" type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg></button><button class="lang-flag" type="button" data-lang="kr" lang="ht" title="Kreyòl ayisyen" aria-label="Kreyòl ayisyen"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11" y="6.5" width="8" height="7" fill="#fff"/><path d="M15 7.6v4.6M13 12.2h4" stroke="#00843D" stroke-width="1"/></svg></button><button class="lang-flag" type="button" data-lang="en" lang="en" title="English" aria-label="English"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="0.00" width="30" height="1.54" fill="#B22234"/><rect y="3.08" width="30" height="1.54" fill="#B22234"/><rect y="6.15" width="30" height="1.54" fill="#B22234"/><rect y="9.23" width="30" height="1.54" fill="#B22234"/><rect y="12.31" width="30" height="1.54" fill="#B22234"/><rect y="15.38" width="30" height="1.54" fill="#B22234"/><rect y="18.46" width="30" height="1.54" fill="#B22234"/><rect width="13" height="10.77" fill="#3C3B6E"/></svg></button></div>
+    </div>
+  </header>
+
+  <main id="main" class="cvb-page">
+    <!-- Start: choose how to begin -->
+    <section class="cv-start" id="cv-start">
+      <div class="wrap">
+        <span class="eyebrow"><span data-t>Profil ALO</span></span>
+        <h1 data-t>Créer mon CV avec l’IA</h1>
+        <p class="lead" data-t>Un CV clair et professionnel en quelques minutes. L’IA améliore la présentation de vos informations, sans jamais inventer d’expérience, de diplôme ou de compétence.</p>
+        <div class="start-grid">
+          <button type="button" class="start-card" data-start="profil"><b data-t>À partir de mon Profil ALO</b><span data-t>Votre CV est généré avec les informations de votre profil.</span></button>
+          <label class="start-card"><input type="file" id="import-file" accept=".pdf,.docx" hidden /><b data-t>Importer un CV existant</b><span data-t>PDF ou Word (.docx). L’IA range vos informations dans les bonnes sections.</span></label>
+          <button type="button" class="start-card" data-start="zero"><b data-t>Commencer de zéro</b><span data-t>Remplissez les sections une à une, avec l’aide de l’assistant.</span></button>
+        </div>
+        <p class="start-status" id="start-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Editor: tools left, preview right -->
+    <section class="cvb" id="cv-app" hidden>
+      <div class="cvb-left">
+        <div class="ver-bar">
+          <input id="ver-name" aria-label="Nom de la version" maxlength="80" />
+          <select id="ver-list" aria-label="Mes versions"></select>
+          <button type="button" class="btn" id="save" data-t>Enregistrer</button>
+          <button type="button" class="btn btn-plain" id="save-new" data-t>Nouvelle version</button>
+        </div>
+        <div class="cvb-tabs" role="tablist">
+          <button type="button" data-tab="ai" class="on" data-t>Assistant IA</button>
+          <button type="button" data-tab="edit" data-t>Modifier</button>
+          <button type="button" data-tab="style" data-t>Modèle</button>
+        </div>
+
+        <div class="tab" id="tab-ai">
+          <p class="ai-rule" data-t>L’IA reformule vos informations. Elle n’invente jamais d’expérience, de diplôme ou de compétence.</p>
+          <button type="button" class="xp-btn" data-xp aria-controls="xp-ai" aria-expanded="false"><span class="xp-o"><span data-t>Comment ça fonctionne</span> ↓</span><span class="xp-c"><span data-t>Réduire</span> ↑</span></button>
+          <div class="xp" id="xp-ai" hidden><dl class="fx-how">
+            <dt data-t>Ce qu’il utilise</dt><dd data-t>Uniquement les informations de votre CV ou de votre Profil ALO, et l’offre si vous l’ajoutez.</dd>
+            <dt data-t>Ce qu’il produit</dt><dd data-t>Des propositions de texte. Vous choisissez de les garder, de les modifier ou de les ignorer.</dd>
+            <dt data-t>Ses limites</dt><dd data-t>Il peut se tromper : relisez toujours avant d’envoyer. Il n’ajoute rien que vous n’avez pas écrit.</dd>
+          </dl></div>
+          <div class="quick-row">
+            <button type="button" class="qchip" data-quick="Améliore mon résumé professionnel." data-t>Améliorer mon résumé</button>
+            <button type="button" class="qchip" data-quick="Reformule mes expériences avec des verbes d’action." data-t>Renforcer mes expériences</button>
+            <button type="button" class="qchip" data-quick="Corrige les fautes d’orthographe et de grammaire." data-t>Corriger les fautes</button>
+          </div>
+          <details class="tailor">
+            <summary data-t>Adapter mon CV à une offre</summary>
+            <select id="job-pick" aria-label="Offre"></select>
+            <textarea id="job-text" rows="3" data-tp placeholder="Ou collez la description d’une offre"></textarea>
+            <button type="button" class="btn btn-plain" id="tailor" data-t>Adapter mon CV</button>
+          </details>
+          <div class="chat-log" id="chat-log" aria-live="polite"></div>
+          <form class="chat-form" id="chat-form">
+            <textarea name="msg" rows="2" data-tp placeholder="Demandez à l’assistant, par ex. « rends mon résumé plus court »"></textarea>
+            <button class="btn" type="submit" data-t>Envoyer</button>
+          </form>
+        </div>
+        <div class="tab" id="tab-edit" hidden></div>
+        <div class="tab" id="tab-style" hidden></div>
+      </div>
+
+      <div class="cvb-right">
+        <div class="prev-bar">
+          <button type="button" class="btn" id="dl-pdf" data-t>Télécharger en PDF</button>
+          <button type="button" class="btn btn-plain" id="dl-word" data-t>Télécharger en Word</button>
+          <button type="button" class="btn btn-plain" id="save-profile" data-t>Mettre à jour mon Profil ALO</button>
+          <a class="btn btn-plain" href="jobs.html" data-t>Postuler avec ce CV</a>
+          <button type="button" class="linkbtn" id="restart" data-t>Recommencer</button>
+        </div>
+        <div class="cv-stage" id="cv-stage"><div class="cv-preview" id="cv-preview"></div></div>
+      </div>
+      <div class="cv-flash" id="cv-flash" role="status"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div><h4 data-t>Trouver une opportunité</h4><a href="jobs.html" data-t>Toutes les opportunités</a><a href="signin.html" data-t>Créer mon profil</a><a href="cv.html" data-t>Créer mon CV avec l’IA</a><a href="profil.html" data-t>Profil ALO</a><a href="recommander.html" data-t>Prime d'embauche</a></div>
+        <div><h4 data-t>PME</h4><a href="post.html" data-t>Publier une offre</a><a href="employeur.html" data-t>Espace employeur</a><a href="pme.html" data-t>Assistant IA de recrutement</a><a href="pme.html" data-t>Tarifs PME</a><a href="tarifs.html" data-t>Nos solutions de recrutement</a></div>
+        <div><h4 data-t>Grandes entreprises</h4><a href="entreprises.html" data-t>Solutions entreprise</a><a href="entreprises.html" data-t>Recrutement géré par ALO</a><a href="entreprises.html" data-t>Gestion du personnel</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="mailto:contact@alo.ht" data-t>Contacter l'équipe</a></div>
+        <div><h4><span class="brand">alo<span>.</span>ht</span></h4><a href="apropos.html" data-t>À propos</a><a href="aide.html" data-t>Aide</a><a href="confidentialite.html" data-t>Confidentialité</a><a href="conditions.html" data-t>Conditions d'utilisation</a></div>
+      </div>
+      <div class="foot-bottom">
+        <a class="logo" href="index.html">alo<span>.</span>ht</a>
+        <div>© 2026 <span class="brand">alo<span>.</span>ht</span> · <span data-t>Tous droits réservés.</span></div>
+      </div>
+    </div>
+  </footer>
+  <script src="config.js?v=20261111d"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js?v=20261111d"></script>
+  <script src="jobs-lib.js?v=20261111d"></script>
+  <script src="ai-lib.js?v=20261111d"></script>
+  <script src="cv.js?v=20261111d"></script>
+</body>
+</html>

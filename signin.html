@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
+  <meta name="theme-color" content="#121A3A" />
+  <title>Connexion — alo.ht</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261111d" />
+</head>
+<body>
+  <a class="skip" href="#main" data-t>Aller au contenu</a>
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="index.html">alo<span>.</span>ht</a>
+      <nav class="nav" aria-label="Navigation principale"><a href="jobs.html" data-t>Trouver une opportunité</a><div class="nav-dd"><button type="button" class="nav-dd-btn" aria-expanded="false" aria-haspopup="true" data-t>Recruter</button><div class="nav-dd-menu" hidden><a href="pme.html" data-t>PME</a><a href="entreprises.html" data-t>Grandes entreprises</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="employeur.html" data-t>Espace employeur</a></div></div><a href="tarifs.html" data-t>Tarifs</a></nav>
+      <div class="spacer"></div>
+      
+      <a class="btn" href="post.html" data-t>Publier une offre</a>
+      <a class="btn btn-outline signin" href="signin.html" data-t>Connexion</a>
+      <div class="langs" role="group" aria-label="Langue / Lang / Language"><button class="lang-flag" type="button" data-lang="fr" lang="fr" title="Français" aria-label="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="10" height="20" fill="#002654"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/></svg></button><button class="lang-flag" type="button" data-lang="kr" lang="ht" title="Kreyòl ayisyen" aria-label="Kreyòl ayisyen"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11" y="6.5" width="8" height="7" fill="#fff"/><path d="M15 7.6v4.6M13 12.2h4" stroke="#00843D" stroke-width="1"/></svg></button><button class="lang-flag" type="button" data-lang="en" lang="en" title="English" aria-label="English"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#fff"/><rect y="0.00" width="30" height="1.54" fill="#B22234"/><rect y="3.08" width="30" height="1.54" fill="#B22234"/><rect y="6.15" width="30" height="1.54" fill="#B22234"/><rect y="9.23" width="30" height="1.54" fill="#B22234"/><rect y="12.31" width="30" height="1.54" fill="#B22234"/><rect y="15.38" width="30" height="1.54" fill="#B22234"/><rect y="18.46" width="30" height="1.54" fill="#B22234"/><rect width="13" height="10.77" fill="#3C3B6E"/></svg></button></div>
+    </div>
+  </header>
+  <main id="main" class="auth">
+    <div class="auth-card">
+      <div id="signed-out">
+        <h1 data-t>Bienvenue sur alo.ht</h1>
+        <p class="sub" data-t>Connectez-vous ou créez un compte en quelques secondes.</p>
+        <div class="why-signin" id="why" hidden></div>
+        <button class="btn btn-linkedin btn-block btn-lg" type="button" id="li">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>
+          <span data-t>Continuer avec LinkedIn</span>
+        </button>
+        <div class="or"><span data-t>ou</span></div>
+        <form id="email-form">
+          <label class="field"><span data-t>Adresse e-mail</span><input name="email" type="email" required autocomplete="email" placeholder="nom@exemple.com" /></label>
+          <button class="btn btn-block btn-lg" type="submit" data-t>Continuer avec l'e-mail</button>
+          <p class="hint" data-t>Pas de mot de passe : nous vous envoyons un lien de connexion.</p>
+        </form>
+        <div class="done" id="msg"></div>
+        <p class="legal" data-t>En continuant, vous acceptez les conditions d'utilisation et la politique de confidentialité d'alo.ht.</p>
+      </div>
+      <div id="signed-in" hidden>
+        <h1 data-t>Vous êtes connecté(e)</h1>
+        <p class="sub" id="who"></p>
+        <div class="row">
+          <a class="btn" href="espace.html" data-t>Mon espace ALO</a> <a class="btn btn-plain" href="jobs.html" data-t>Voir les offres</a>
+          <button class="btn btn-plain" type="button" id="out" data-t>Se déconnecter</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-cols">
+        <div><h4 data-t>Trouver une opportunité</h4><a href="jobs.html" data-t>Toutes les opportunités</a><a href="signin.html" data-t>Créer mon profil</a><a href="cv.html" data-t>Créer mon CV avec l’IA</a><a href="profil.html" data-t>Profil ALO</a><a href="recommander.html" data-t>Prime d'embauche</a></div>
+        <div><h4 data-t>PME</h4><a href="post.html" data-t>Publier une offre</a><a href="employeur.html" data-t>Espace employeur</a><a href="pme.html" data-t>Assistant IA de recrutement</a><a href="pme.html" data-t>Tarifs PME</a><a href="tarifs.html" data-t>Nos solutions de recrutement</a></div>
+        <div><h4 data-t>Grandes entreprises</h4><a href="entreprises.html" data-t>Solutions entreprise</a><a href="entreprises.html" data-t>Recrutement géré par ALO</a><a href="entreprises.html" data-t>Gestion du personnel</a><a href="organisations.html" data-t>Organisations & Institutions</a><a href="mailto:contact@alo.ht" data-t>Contacter l'équipe</a></div>
+        <div><h4><span class="brand">alo<span>.</span>ht</span></h4><a href="apropos.html" data-t>À propos</a><a href="aide.html" data-t>Aide</a><a href="confidentialite.html" data-t>Confidentialité</a><a href="conditions.html" data-t>Conditions d'utilisation</a></div>
+      </div>
+      <div class="foot-bottom">
+        <a class="logo" href="index.html">alo<span>.</span>ht</a>
+        <div>© 2026 <span class="brand">alo<span>.</span>ht</span> · <span data-t>Tous droits réservés.</span></div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="config.js?v=20261111d"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="app.js?v=20261111d"></script>
+  <script>
+    const msg = document.getElementById("msg");
+    function show(text, isErr) { msg.textContent = text; msg.classList.toggle("err", !!isErr); msg.style.display = "block"; }
+
+    async function refresh() {
+      const user = await currentUser();
+      document.getElementById("signed-out").hidden = !!user;
+      document.getElementById("signed-in").hidden = !user;
+      if (user) document.getElementById("who").textContent = user.email || "";
+      updateHeader();
+      // Came here to apply or save an offer? Go back to it once signed in.
+      let next = null;
+      try { next = localStorage.getItem("alo-next"); } catch {}
+      if (user && next && /^[a-z]+\.html(\?[^#]*)?$/.test(next)) {
+        try { localStorage.removeItem("alo-next"); } catch {}
+        location.replace(next);
+        return;
+      }
+      // Came from "Créer mon Profil ALO" while already signed in: go straight to the profile.
+      if (user && new URLSearchParams(location.search).get("pour") === "profil") { const prof = await loadMyProfile(); location.replace(profileStatus(prof) === "none" ? "mon-profil.html" : "espace.html"); return; }
+      // First sign-in with no profile yet: offer to create the Profil ALO (never required to apply).
+      // New account (no profile yet) → profile onboarding. Returning user → their space, never the onboarding again.
+      if (user && new URLSearchParams(location.search).get("pour") === "employeur") { location.replace("employeur.html"); return; }
+      if (user && !DEMO) {
+        const prof = await loadMyProfile();
+        let emp = null; try { ({ data: emp } = await db().from("employers").select("user_id").maybeSingle()); } catch {}
+        location.replace(profileStatus(prof) === "none" ? (emp ? "employeur.html" : "mon-profil.html") : "espace.html");
+        return;
+      }
+    }
+    const why = { postuler: "Connectez-vous pour postuler avec votre Profil ALO.", enregistrer: "Connectez-vous pour enregistrer des offres.", cv: "Connectez-vous pour enregistrer votre CV et utiliser l’assistant IA.", profil: "Créez votre compte gratuit pour commencer votre Profil ALO.", publier: "Connectez-vous pour publier votre offre et suivre vos candidatures.", employeur: "Connectez-vous pour accéder à votre espace employeur." }[new URLSearchParams(location.search).get("pour")];
+    if (why) { const w = document.getElementById("why"); w.hidden = false; w.dataset.t = ""; w.textContent = why; translatePage(); }
+
+    document.getElementById("li").onclick = async () => {
+      const err = await signInLinkedIn();
+      if (err) show(err, true);
+    };
+    document.getElementById("email-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector("button");
+      btn.disabled = true;
+      const err = await signInEmail(e.target.elements.email.value.trim());
+      btn.disabled = false;
+      show(err || t("Vérifiez votre boîte e-mail : nous vous avons envoyé un lien de connexion."), !!err);
+    });
+    document.getElementById("out").onclick = async () => { await signOut(); refresh(); };
+
+    // Coming back from the e-mail link or LinkedIn: the library reads the URL, then we refresh.
+    if (db()) db().auth.onAuthStateChange(() => refresh());
+    refresh();
+  </script>
+</body>
+</html>
