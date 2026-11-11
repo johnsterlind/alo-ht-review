@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111p"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111t"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Fonctionnalités — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111p" />
+  <link rel="stylesheet" href="styles.css?v=20261111t" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -50,9 +50,9 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111p"></script>
+  <script src="config.js?v=20261111t"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111p"></script>
+  <script src="app.js?v=20261111t"></script>
   <script>
     // Built from FEATURES / ENTITLEMENT_MAP in app.js so this page always matches the packages.
     const soon = (live) => live ? "" : ` <span class="soon">${t("Bientôt")}</span>`;
@@ -71,7 +71,7 @@
       document.getElementById("fx").innerHTML = `
         <section class="doc-sec" id="candidats"><h2 class="left">${t("Candidats")}</h2><p class="hint-l">${t("Gratuit pour les candidats.")}</p>
           ${CAND.map(([g, l]) => `<h3>${t(g)}</h3><ul class="fx-list">${l.map(([n, live]) => `<li>${t(n)}${soon(live)}</li>`).join("")}</ul>`).join("")}
-          <div class="fx-note"><b>${t("Prime d’embauche")}</b> <span class="hm-status">${t("Programme en préparation")}</span>
+          <div class="fx-note"><b>${t("Prime d’embauche")}</b>
             <p>${t("Jusqu’à 5 % du premier salaire mensuel, sur les emplois éligibles.")} <a class="link" href="recommander.html#conditions">${t("Voir les conditions")}</a></p></div>
           <a class="btn" href="signin.html?pour=profil">${t("Créer mon Profil ALO")}</a></section>
         <section class="doc-sec" id="employeurs"><h2 class="left">${t("Employeurs")}</h2><p class="hint-l">${t("Formules à partir de 49 $ US, sans abonnement. Chaque outil indique la formule qui l’inclut.")}</p>

@@ -2545,3 +2545,20 @@ body.ot-lock { overflow: hidden; }
 .cond-item:first-child span { color: #C9CFE0; }
 .cond-foot { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); }
 @media (max-width: 760px) { .cond-box { padding: 20px 16px; } .cond-grid { grid-template-columns: 1fr; } .cond-top { flex-direction: column; align-items: flex-start; text-align: left; } .cond-box, .cond-box * { text-align: left; } }
+/* Account button: initial + first name */
+.acct-btn { display: inline-flex; align-items: center; gap: 8px; padding-left: 6px; }
+.acct-ini { font-style: normal; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: var(--yellow); display: grid; place-items: center; font-weight: 800; font-size: 14px; flex: none; }
+.acct-name { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.acct-who b { font-size: 15px; }
+@media (max-width: 760px) { .acct-name { display: none; } .acct-btn { padding: 4px; min-width: 44px; justify-content: center; } }
+/* Benefit lists: plain lines with thin dividers, no decorative bullets (all screen sizes) */
+.hm-benefits { gap: 0; }
+.hm-benefits li { padding: 10px 0 !important; font-weight: 600; }
+.hm-benefits li::before { content: none !important; }
+.hm-benefits li + li { border-top: 1px solid var(--line); }
+.hm-benefits.light li + li { border-top-color: rgba(255,255,255,.15); }
+.employers li::before, .pc-mini li::before, .form-intro li::before { content: none !important; }
+.form-intro li { padding-left: 0 !important; }
+/* Homepage tags: plain small text instead of uppercase pills */
+.hm-copy .eyebrow, .hm-recruit .eyebrow { background: none; border: 0; padding: 0; text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 700; }
+.hm-recruit .eyebrow { color: var(--yellow); }

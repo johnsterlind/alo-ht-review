@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111p"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111t"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -399,12 +399,15 @@ async function buildAccountMenu(user) {
   const meta = user.user_metadata || {}, who = meta.full_name || meta.name || user.email || "";
   const box = document.createElement("div");
   box.className = "acct";
-  box.innerHTML = `<button type="button" class="btn btn-outline acct-btn" aria-haspopup="true" aria-expanded="false"><span data-t>Mon espace</span></button>
+  // The button shows who is signed in (initial + first name); the menu uses plain labels.
+  const first = String(meta.full_name || meta.name || "").trim().split(/\s+/)[0] || String(user.email || "").split("@")[0];
+  const initial = (first[0] || "?").toUpperCase();
+  box.innerHTML = `<button type="button" class="btn btn-outline acct-btn" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t("Compte"))} — ${esc(who)}"><i class="acct-ini" aria-hidden="true">${esc(initial)}</i><span class="acct-name">${esc(first)}</span></button>
     <div class="acct-menu" role="menu" hidden>
-      <div class="acct-who"><span data-t>Connecté(e) en tant que</span><b>${esc(who)}</b>${meta.full_name && user.email ? `<small>${esc(user.email)}</small>` : ""}</div>
-      <a role="menuitem" href="espace.html" data-t>Mon espace</a>
-      <a role="menuitem" href="mon-profil.html" data-t>Mon Profil ALO</a>
-      <a role="menuitem" href="preferences.html" data-t>Mes préférences</a>
+      <div class="acct-who"><b>${esc(who)}</b>${meta.full_name && user.email ? `<small>${esc(user.email)}</small>` : ""}</div>
+      <a role="menuitem" href="espace.html" data-t>Tableau de bord</a>
+      <a role="menuitem" href="mon-profil.html" data-t>Profil ALO</a>
+      <a role="menuitem" href="preferences.html" data-t>Préférences</a>
       ${employer ? `<a role="menuitem" href="employeur.html" data-t>Espace employeur</a>` : ""}
       <button type="button" role="menuitem" class="acct-out" data-t>Se déconnecter</button>
     </div>`;
