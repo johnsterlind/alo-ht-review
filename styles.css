@@ -2562,3 +2562,5 @@ body.ot-lock { overflow: hidden; }
 /* Homepage tags: plain small text instead of uppercase pills */
 .hm-copy .eyebrow, .hm-recruit .eyebrow { background: none; border: 0; padding: 0; text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 700; }
 .hm-recruit .eyebrow { color: var(--yellow); }
+/* Everywhere: tags above titles are plain small text, not uppercase pills */
+.eyebrow, .eyebrow.dark { background: none !important; border: 0 !important; padding: 0 !important; text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 700; border-radius: 0; }
