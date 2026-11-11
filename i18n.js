@@ -5754,5 +5754,118 @@ Object.assign(KR, {
 "Avantaj"
 ]
 }; for (const [fr, [en, kr]] of Object.entries(T)) { if (!(fr in EN)) EN[fr] = en; if (!(fr in KR)) KR[fr] = kr; } })();
+(() => { const T = {
+"Salarié(e)": [
+"Employee",
+"Anplwaye"
+],
+"Consultant(e) ou contractuel(le)": [
+"Consultant or contract worker",
+"Konsiltan oswa kontraktyèl"
+],
+"Montant brut du contrat par mois": [
+"Gross contract amount per month",
+"Montan brit kontra a pa mwa"
+],
+"Allocations par mois (facultatif)": [
+"Allowances per month (optional)",
+"Alokasyon pa mwa (si ou vle)"
+],
+"Primes, indemnités…": [
+"Bonuses, allowances…",
+"Prim, endemnite…"
+],
+"Taux de référence BRH du": [
+"BRH reference rate of",
+"To referans BRH"
+],
+"Converti au taux de référence de la BRH, sauf si vous indiquez un autre taux.": [
+"Converted at the BRH reference rate, unless you enter another rate.",
+"Konvèti ak to referans BRH a, sof si ou mete yon lòt to."
+],
+"Montant brut": [
+"Gross amount",
+"Montan brit"
+],
+"Allocations": [
+"Allowances",
+"Alokasyon"
+],
+"Acompte sur contrat": [
+"Contract tax advance",
+"Avans sou kontra"
+],
+"du montant brut": [
+"of the gross amount",
+"nan montan brit la"
+],
+"IRI — impôt sur le revenu": [
+"IRI: income tax",
+"IRI: taks sou revni"
+],
+"Retenue sur allocations": [
+"Deduction on allowances",
+"Retni sou alokasyon"
+],
+"des allocations": [
+"of allowances",
+"nan alokasyon yo"
+],
+"Au-delà de 1 000 000 HTG par an, le barème n’a pas encore été vérifié : le résultat peut être sous-estimé.": [
+"Above 1,000,000 HTG per year, the brackets have not been verified yet: the result may be too low.",
+"Pi wo pase 1 000 000 HTG pa ane, yo poko verifye tranch yo: rezilta a ka twò ba."
+],
+"Non compris : le 13e mois (boni) et les retenues propres à votre employeur (prêt, assurance…).": [
+"Not included: the 13th month (bonus) and deductions specific to your employer (loan, insurance…).",
+"Sa pa ladan: 13yèm mwa (bonis) ak retni patwon ou fè (prè, asirans…)."
+],
+"Avantages non imposés par mois (repas, transport payé…)": [
+"Untaxed monthly benefits (meals, paid transport…)",
+"Avantaj pa mwa ki pa peye taks (manje, transpò peye…)"
+],
+"Impôt sur le revenu individuel. L’employeur le retient chaque mois et le verse à la DGI. Il est calculé par tranches sur le salaire de l’année : plus le salaire est élevé, plus la part imposée est grande.": [
+"Individual income tax. The employer withholds it each month and pays it to the DGI. It is calculated by brackets on the year's salary: the higher the salary, the larger the share taxed.",
+"Taks sou revni endividyèl. Patwon an retni l chak mwa epi peye l bay DGI. Yo kalkile l pa tranch sou salè ane a: plis salè a wo, plis pati ki peye taks la gran."
+],
+"Cotisation pour votre pension de vieillesse à l’Office National d’Assurance-Vieillesse (ONA). Votre employeur verse aussi sa part.": [
+"Contribution to your old-age pension at the National Old-Age Insurance Office (ONA). Your employer also pays its share.",
+"Kotizasyon pou pansyon vyeyès ou nan Ofis Nasyonal Asirans Vyeyès (ONA). Patwon ou peye pa li tou."
+],
+"Contribution de 1 % du salaire brut, retenue chaque mois.": [
+"A 1% contribution on the gross salary, withheld each month.",
+"Yon kontribisyon 1 % sou salè brit la, yo retni chak mwa."
+],
+"Les allocations (primes, indemnités) ne sont pas ajoutées au salaire pour l’impôt : une retenue fixe s’applique dessus.": [
+"Allowances (bonuses, indemnities) are not added to the salary for income tax: a flat deduction applies to them.",
+"Yo pa mete alokasyon yo (prim, endemnite) sou salè a pou taks: yon retni fiks aplike sou yo."
+],
+"Pour un contrat de consultance ou de prestation : un acompte d’impôt est retenu sur le montant brut, à la place de l’IRI et des cotisations.": [
+"For a consultancy or service contract: a tax advance is withheld on the gross amount, instead of IRI and contributions.",
+"Pou yon kontra konsiltasyon oswa sèvis: yo retni yon avans taks sou montan brit la, olye IRI ak kotizasyon yo."
+],
+"Barème vérifié sur des fiches de paie réelles jusqu’à 1 000 000 HTG par an (à confirmer par un comptable).": [
+"Brackets checked on real payslips up to 1,000,000 HTG per year (to be confirmed by an accountant).",
+"Tranch verifye sou vrè fich peman jiska 1 000 000 HTG pa ane (yon kontab dwe konfime)."
+],
+"Date du taux BRH": [
+"BRH rate date",
+"Dat to BRH"
+],
+"Retenue sur allocations (%)": [
+"Deduction on allowances (%)",
+"Retni sou alokasyon (%)"
+],
+"Acompte sur contrat (%)": [
+"Contract tax advance (%)",
+"Avans sou kontra (%)"
+],
+"Taux de référence BRH (HTG pour 1 USD)": [
+"BRH reference rate (HTG for 1 USD)",
+"To referans BRH (HTG pou 1 USD)"
+]
+}; for (const [fr, [en, kr]] of Object.entries(T)) { if (!(fr in EN)) EN[fr] = en; if (!(fr in KR)) KR[fr] = kr; } })();
+(() => { const T = {"Estimation": ["Estimate", "Estimasyon"], "Salaire net par mois": ["Take-home pay per month", "Salè nèt pa mwa"], "Votre fiche de paie fait foi.": ["Your payslip is what counts.", "Se fich peman ou ki konte."], "Comment c’est calculé": ["How it's calculated", "Kijan yo kalkile l"], "Taux BRH utilisé si vous n’en indiquez pas d’autre.": ["BRH rate used unless you enter another.", "Se to BRH a yo itilize si ou pa mete yon lòt."]}; for (const [fr, [en, kr]] of Object.entries(T)) { if (!(fr in EN)) EN[fr] = en; if (!(fr in KR)) KR[fr] = kr; } })();
+(() => { const T = {"Pas encore d’offre proche de vos préférences.": ["No offer close to your preferences yet.", "Poko gen òf ki pre preferans ou."], "Pour commencer": ["Get started", "Pou kòmanse"], "Postuler à une offre": ["Apply for a job", "Aplike pou yon òf"], "Avec votre Profil ALO, en quelques minutes.": ["With your ALO Profile, in a few minutes.", "Ak Pwofil ALO ou, nan kèk minit."], "Voir les offres": ["See offers", "Wè òf yo"], "Créer mon CV": ["Create my CV", "Kreye CV mwen"], "À partir de votre Profil ALO.": ["From your ALO Profile.", "Apati Pwofil ALO ou."], "Créer": ["Create", "Kreye"], "Recommander un talent": ["Recommend a talent", "Rekòmande yon talan"], "Partagez votre lien avec une personne qui cherche un emploi.": ["Share your link with someone looking for a job.", "Pataje lyen ou ak yon moun k ap chèche travay."], "Mon lien": ["My link", "Lyen mwen"], "Déclarez votre embauche pour la Prime d’embauche.": ["Report your hire for the Hiring Bonus.", "Deklare anbochaj ou pou Prim anbochaj la."], "Déclarer": ["Report", "Deklare"], "net par mois": ["net per month", "nèt pa mwa"], "Entrez deux salaires bruts.": ["Enter two gross salaries.", "Antre de salè brit."], "Même salaire net.": ["Same take-home pay.", "Menm salè nèt."], "net par mois, avant transport": ["net per month, before transport", "nèt pa mwa, anvan transpò"], "Voir le détail": ["See the details", "Wè detay yo"], "Ajouter le transport et comparer": ["Add transport and compare", "Ajoute transpò epi konpare"], "B": ["B", "B"], "A": ["A", "A"]}; for (const [fr, [en, kr]] of Object.entries(T)) { if (!(fr in EN)) EN[fr] = en; if (!(fr in KR)) KR[fr] = kr; } })();
+(() => { const T = {"Toutes les villes": ["All cities", "Tout vil yo"], "Villes": ["Cities", "Vil"], "Rechercher une ville": ["Search a city", "Chèche yon vil"], "Effacer": ["Clear", "Efase"], "Valider": ["Apply", "Valide"], "Ajouter": ["Add", "Ajoute"], "Assurance de l’OFATMA, retenue par certains employeurs seulement : activez-la si elle figure sur votre fiche de paie.": ["OFATMA insurance, withheld by some employers only: switch it on if it is on your payslip.", "Asirans OFATMA, se kèk patwon sèlman ki retni l: aktive l si li sou fich peman ou."], "Consultant(e)": ["Consultant", "Konsiltan"], "Taux (HTG pour 1 USD)": ["Rate (HTG for 1 USD)", "To (HTG pou 1 USD)"], "non appliqué": ["not applied", "pa aplike"], "Barème à vérifier au-delà de 1 000 000 HTG par an.": ["Brackets to be checked above 1,000,000 HTG per year.", "Tranch yo poko verifye pi wo pase 1 000 000 HTG pa ane."], "Autres retenues": ["Other deductions", "Lòt retni"], "Touchez un interrupteur pour retirer ou ajouter une retenue, selon votre fiche de paie.": ["Tap a switch to remove or add a deduction, as on your payslip.", "Peze yon bouton pou retire oswa ajoute yon retni, dapre fich peman ou."], "Non compris : le 13e mois (boni).": ["Not included: the 13th month (bonus).", "Sa pa ladan: 13yèm mwa (bonis)."], "Allocations par mois": ["Allowances per month", "Alokasyon pa mwa"], "Autres retenues par mois": ["Other deductions per month", "Lòt retni pa mwa"], "Prêt, assurance…": ["Loan, insurance…", "Prè, asirans…"], "Entrez un salaire brut.": ["Enter a gross salary.", "Antre yon salè brit."], "Transport par jour": ["Transport per day", "Transpò pa jou"], "Jours par mois": ["Days per month", "Jou pa mwa"], "Avantages par mois": ["Benefits per month", "Avantaj pa mwa"], "repas, transport payé…": ["meals, paid transport…", "manje, transpò peye…"], "Meilleure offre": ["Better offer", "Pi bon òf"], "vous reste par mois": ["left each month", "rete w chak mwa"], "Net": ["Net", "Nèt"], "Différence": ["Difference", "Diferans"], "par mois": ["per month", "pa mwa"], "Calculé avec les retenues que vous avez choisies dans « Salaire net ».": ["Calculated with the deductions you chose in “Take-home pay”.", "Kalkile ak retni ou chwazi nan « Salè nèt »."]}; for (const [fr, [en, kr]] of Object.entries(T)) { if (!(fr in EN)) EN[fr] = en; if (!(fr in KR)) KR[fr] = kr; } })();
 window.ALO_I18N = { KR, EN };
 })();

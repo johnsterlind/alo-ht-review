@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Administration — alo.ht</title>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111d" />
+  <link rel="stylesheet" href="styles.css?v=20261111n" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -44,11 +44,11 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111d"></script>
+  <script src="config.js?v=20261111n"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111d"></script>
-  <script src="outils.js?v=20261111d"></script>
-  <script src="jobs-lib.js?v=20261111d"></script>
+  <script src="app.js?v=20261111n"></script>
+  <script src="outils.js?v=20261111n"></script>
+  <script src="jobs-lib.js?v=20261111n"></script>
   <script>
     // ALO administration: prices (packages, add-ons, discounts), quotation requests, orders and offers.
     // Access is checked by the database (is_admin()); this page only shows what the database allows.
@@ -192,9 +192,12 @@
         <p class="hint-l">${t("Utilisés par les outils « Salaire net » et « Comparer deux offres » des candidats. Tant que « Taux confirmés » n’est pas coché, les résultats affichent « Estimation — taux à confirmer ».")}</p>
         <form id="sr-form">
           <div class="three-f"><label class="field"><span>${t("Exercice fiscal")}</span><input name="year" value="${x(r.year)}" maxlength="20" /></label>
-            <label class="field"><span>${t("Taux HTG pour 1 USD (facultatif)")}</span><input name="usd_htg" type="number" step="0.01" min="0" value="${r.usd_htg ?? ""}" /></label>
+            <label class="field"><span>${t("Taux de référence BRH (HTG pour 1 USD)")}</span><input name="usd_htg" type="number" step="0.01" min="0" value="${r.usd_htg ?? ""}" /></label>
             <label class="pq-consent"><input type="checkbox" name="confirmed" ${r.confirmed ? "checked" : ""} /><span>${t("Taux confirmés")}</span></label></div>
           <label class="field"><span>${t("Source (loi de finances, circulaire…)")}</span><input name="source" value="${x(r.source)}" maxlength="300" /></label>
+          <div class="three-f"><label class="field"><span>${t("Date du taux BRH")}</span><input name="usd_date" type="date" value="${x(r.usd_date)}" /></label>
+            <label class="field"><span>${t("Retenue sur allocations (%)")}</span><input name="allowance_pct" type="number" min="0" max="100" step="0.5" value="${r.allowance_pct ?? ""}" /></label>
+            <label class="field"><span>${t("Acompte sur contrat (%)")}</span><input name="contract_pct" type="number" min="0" max="100" step="0.5" value="${r.contract_pct ?? ""}" /></label></div>
           <h3>${t("Barème de l’impôt sur le revenu (par an)")}</h3>
           ${r.brackets.map(([top, rate], i) => `<div class="ad-act"><span>${t("Jusqu’à")}</span><input name="b_top_${i}" type="number" min="0" step="1000" value="${top ?? ""}" placeholder="${t("sans limite")}" /> HTG <input name="b_rate_${i}" type="number" min="0" max="100" step="0.5" value="${rate}" /> % <button type="button" class="linkbtn" data-sr-del="b:${i}">${t("Retirer")}</button></div>`).join("")}
           <button type="button" class="btn btn-plain" data-sr-add="b">${t("Ajouter une tranche")}</button>
@@ -208,7 +211,8 @@
     function readSR() {
       const f = document.getElementById("sr-form"); if (!f) return;
       const v = (n) => f.elements[n] ? f.elements[n].value : "";
-      SR.year = v("year"); SR.source = v("source"); SR.usd_htg = v("usd_htg") === "" ? null : +v("usd_htg"); SR.confirmed = f.elements.confirmed.checked;
+      SR.year = v("year"); SR.source = v("source"); SR.usd_date = v("usd_date") || null; SR.usd_source = "BRH";
+      SR.allowance_pct = +v("allowance_pct") || 0; SR.contract_pct = +v("contract_pct") || 0; SR.usd_htg = v("usd_htg") === "" ? null : +v("usd_htg"); SR.confirmed = f.elements.confirmed.checked;
       SR.brackets = SR.brackets.map((b, i) => [v("b_top_" + i) === "" ? null : +v("b_top_" + i), +v("b_rate_" + i) || 0]);
       SR.deductions = SR.deductions.map((d, i) => ({ id: d.id || "c" + i, name: v("d_name_" + i), pct: +v("d_pct_" + i) || 0, deductible: f.elements["d_ded_" + i].checked }));
     }

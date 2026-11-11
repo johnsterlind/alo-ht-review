@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Toutes les opportunités — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111d" />
+  <link rel="stylesheet" href="styles.css?v=20261111n" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -31,14 +31,9 @@
     <div class="wrap">
       <form class="search" id="search" role="search">
         <label><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input name="q" data-tp placeholder="Métier, mot-clé ou entreprise" aria-label="Métier" /></label>
-        <label><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><input name="ville" data-tp placeholder="Ville" list="cities" aria-label="Ville" /></label>
+        <div class="search-city"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><input name="ville" data-cities /></div>
         <button class="btn" type="submit" data-t>Rechercher</button>
       </form>
-      <datalist id="cities">
-        <option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option>
-        <option>Cap-Haïtien</option><option>Les Cayes</option><option>Jacmel</option>
-        <option>Gonaïves</option><option>Télétravail</option>
-      </datalist>
       <div class="jfilters" id="filters">
         <select id="f-sector" aria-label="Secteur"></select>
         <select id="f-type" aria-label="Type de contrat"></select>
@@ -78,10 +73,10 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111d"></script>
+  <script src="config.js?v=20261111n"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111d"></script>
-  <script src="jobs-lib.js?v=20261111d"></script>
+  <script src="app.js?v=20261111n"></script>
+  <script src="jobs-lib.js?v=20261111n"></script>
 
   <script>
     const form = document.getElementById("search");
@@ -90,7 +85,7 @@
       q: params.get("q") || "", ville: params.get("ville") || "", sector: params.get("secteur") || "",
       type: params.get("contrat") || "", exp: params.get("experience") || "", pay: params.get("salaire") || "", saved: false,
     };
-    form.q.value = F.q; form.ville.value = F.ville;
+    form.q.value = F.q; form.ville.value = F.ville; setupCityPickers(form); form.ville._sync && form.ville._sync();
     let results = [], current = null;
     const wide = () => matchMedia("(min-width: 900px)").matches;
 
@@ -197,6 +192,7 @@
       if (e.key === "ArrowUp" || e.key === "k") { e.preventDefault(); step(-1); }
     });
 
+    form.ville.addEventListener("change", () => { F.ville = form.ville.value.trim(); current = null; render(); });
     form.addEventListener("submit", (e) => { e.preventDefault(); F.q = form.q.value.trim(); F.ville = form.ville.value.trim(); current = null; render(); });
     [["f-sector", "sector"], ["f-type", "type"], ["f-exp", "exp"], ["f-pay", "pay"]].forEach(([id, k]) =>
       document.getElementById(id).addEventListener("change", (e) => { F[k] = e.target.value; current = null; render(); }));
@@ -205,7 +201,7 @@
       F.saved = !F.saved; current = null; render();
     };
     document.getElementById("f-reset").onclick = () => {
-      Object.assign(F, { q: "", ville: "", sector: "", type: "", exp: "", pay: "", saved: false, kind: "" });
+      Object.assign(F, { q: "", ville: "", sector: "", type: "", exp: "", pay: "", saved: false, kind: "" }); form.ville.value = ""; form.ville._sync && form.ville._sync();
       form.reset(); current = null; render();
     };
 

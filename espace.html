@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Mon espace — alo.ht</title>
@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111d" />
+  <link rel="stylesheet" href="styles.css?v=20261111n" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -43,11 +43,11 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111d"></script>
+  <script src="config.js?v=20261111n"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111d"></script>
-  <script src="outils.js?v=20261111d"></script>
-  <script src="jobs-lib.js?v=20261111d"></script>
+  <script src="app.js?v=20261111n"></script>
+  <script src="outils.js?v=20261111n"></script>
+  <script src="jobs-lib.js?v=20261111n"></script>
   <script>
     const STATUS_CLASS = { "Envoyée": "s-sent", "Consultée": "s-seen", "Entretien": "s-int", "Retenue": "s-ok", "Non retenue": "s-no" };
     const x = (s) => esc(s || "");
@@ -64,6 +64,7 @@
         return;
       }
       const profile = await loadMyProfile();
+      await loadSalaryRules();   // the tool tiles calculate with the rates set by ALO
       if (DEMO) {
         DATA = { profile, apps: [{ id: 1, job_id: 1, job_title: "Assistant(e) comptable", company: "Cabinet Fanmi & Associés", created_at: new Date(Date.now() - 2 * 864e5), status: "Retenue" },
                                   { id: 2, job_id: 3, job_title: "Agent(e) service client", company: "Konekte Telecom", created_at: new Date(Date.now() - 9 * 864e5), status: "Entretien" }],
@@ -145,15 +146,15 @@
         soon(junior ? "Formations" : "Certifications professionnelles", junior ? "Programmes pour bien démarrer votre carrière." : "Faites reconnaître vos compétences."),
         soon(senior ? "Missions de consultance" : "Conseils de carrière", senior ? "Missions courtes pour experts." : "Des repères pour la prochaine étape."),
       ].filter(Boolean).join("");
-      return `
-        <div class="rc-grid">
-          <section class="ap-card rc-col"><h2>${t("Pour vous")}</h2>
-            ${forYou.map((r) => jobRow(r.j, whyText(r.why))).join("") || `<p class="hint-l">${t("Pas encore d’offre très proche de vos préférences. Consultez « À découvrir » ou toutes les offres.")}</p>`}
-            <a class="link" href="jobs.html">${t("Voir toutes les offres")} →</a></section>
-          <section class="ap-card rc-col"><h2>${t("À découvrir")}</h2>
-            ${discover.map((r) => jobRow(r.j, `${t("Un autre domaine à explorer :")} ${t(r.j.category)}`)).join("") || `<p class="hint-l">${t("Rien de nouveau pour l’instant.")}</p>`}</section>
-          <section class="ap-card rc-col"><h2>${t("Votre évolution")}</h2>${evo}</section>
-        </div>`;
+      // Only sections with something in them; when nothing matches yet, one short line and one button.
+      const cols = [
+        `<section class="ap-card rc-col"><h2>${t("Pour vous")}</h2>
+          ${forYou.map((r) => jobRow(r.j, whyText(r.why))).join("") || `<p class="hint-l">${t("Pas encore d’offre proche de vos préférences.")}</p>`}
+          <a class="btn btn-plain" href="jobs.html">${t("Voir toutes les offres")}</a></section>`,
+        discover.length ? `<section class="ap-card rc-col"><h2>${t("À découvrir")}</h2>${discover.map((r) => jobRow(r.j, `${t("Un autre domaine à explorer :")} ${t(r.j.category)}`)).join("")}</section>` : "",
+        `<section class="ap-card rc-col"><h2>${t("Votre évolution")}</h2>${evo}</section>`,
+      ].filter(Boolean);
+      return `<div class="rc-grid n${cols.length}">${cols.join("")}</div>`;
     }
 
     function bonusCard() {
@@ -220,22 +221,26 @@
       const saved = JOBS.filter((j) => SAVED.has(j.id)).map((j) => `
         <div class="sp-row"><div><b>${x(j.title)}</b><span>${x(j.company)} · ${x(j.city)}</span></div><a class="btn btn-plain" href="${jobUrl(j)}">${t("Voir l’offre")}</a></div>`).join("");
       const cvs = DATA.cvs.map((v) => `<div class="sp-row"><div><b>${x(v.name)}</b><span>${t("Modifié le")} ${fmt(v.updated_at)}</span></div><a class="btn btn-plain" href="cv.html">${t("Ouvrir")}</a></div>`).join("");
+      // Full cards only when they have something in them; everything still empty goes into one « Pour commencer » card.
+      const cards = [], start = [];
+      const todo = (title, text, href, btn) => start.push(`<div class="sp-todo"><div><b>${t(title)}</b><span>${t(text)}</span></div><a class="btn btn-plain" href="${href}">${t(btn)}</a></div>`);
+      if (DATA.apps.length || drafts) cards.push(`<section class="ap-card"><h2>${t("Mes candidatures")} <span class="cnt">${DATA.apps.length}</span></h2>${apps}${drafts ? `<h3 class="sp-h3">${t("Brouillons en cours")}</h3>${drafts}` : ""}</section>`);
+      else todo("Postuler à une offre", "Avec votre Profil ALO, en quelques minutes.", "jobs.html", "Voir les offres");
+      if (DATA.claims.length || DATA.bonuses.some((b) => b.kind === "embauche")) cards.push(bonusCard());
+      if (DATA.cvs.length) cards.push(`<section class="ap-card"><h2>${t("Mes CV")} <span class="cnt">${DATA.cvs.length}</span></h2>${cvs}<a class="btn btn-plain" href="cv.html">${t("Créer mon CV avec l’IA")}</a></section>`);
+      else todo("Créer mon CV", "À partir de votre Profil ALO.", "cv.html", "Créer");
+      if (SAVED.size) cards.push(`<section class="ap-card"><h2>${t("Offres enregistrées")} <span class="cnt">${SAVED.size}</span></h2>${saved}</section>`);
+      if (DATA.referrals.length || DATA.bonuses.some((b) => b.kind === "recommandation")) cards.push(referralCard());
+      else todo("Recommander un talent", "Partagez votre lien avec une personne qui cherche un emploi.", "recommander.html#lien", "Mon lien");
+      if (!DATA.claims.length) todo("J’ai été embauché(e)", "Déclarez votre embauche pour la Prime d’embauche.", "embauche.html", "Déclarer");
+      cards.push(prefsCard());
+      if (start.length) cards.unshift(`<section class="ap-card sp-start"><h2>${t("Pour commencer")}</h2>${start.join("")}</section>`);
       document.getElementById("sp").innerHTML = `
         <div class="em-head"><h1>${t("Mon espace ALO")}</h1>${DATA.employer ? `<a class="btn btn-plain" href="employeur.html">${t("Espace employeur")} — ${x(DATA.employer.company)}</a>` : ""}</div>
         ${profileCard()}
         ${toolsCard()}
         ${personal()}
-        <div class="sp-grid2">
-          <section class="ap-card"><h2>${t("Mes candidatures")} <span class="cnt">${DATA.apps.length}</span></h2>
-            ${apps || `<p class="hint-l">${t("Aucune candidature pour l’instant.")} <a class="link" href="jobs.html">${t("Découvrir les offres")}</a></p>`}
-            ${drafts ? `<h3 class="sp-h3">${t("Brouillons en cours")}</h3>${drafts}` : ""}
-          </section>
-          ${bonusCard()}
-          <section class="ap-card"><h2>${t("Mes CV")} <span class="cnt">${DATA.cvs.length}</span></h2>${cvs || `<p class="hint-l">${t("Aucun CV enregistré pour l’instant.")}</p>`}<a class="btn btn-plain" href="cv.html">${t("Créer mon CV avec l’IA")}</a></section>
-          <section class="ap-card"><h2>${t("Offres enregistrées")} <span class="cnt">${SAVED.size}</span></h2>${saved || `<p class="hint-l">${t("Aucune offre enregistrée pour le moment.")}</p>`}<a class="btn btn-plain" href="jobs.html">${t("Explorer les offres d’emploi")}</a></section>
-          ${referralCard()}
-          ${prefsCard()}
-        </div>`;
+        <div class="sp-grid2 sp-flow">${cards.join("")}</div>`;
     }
     window.onLang = () => { if (DATA) draw(); drawTool(); };
     load();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111d"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111n"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <meta name="description" content="alo.ht — La plateforme de talents d'Haïti. Profil ALO, offres d'emploi et prime d'embauche." />
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111d" />
+  <link rel="stylesheet" href="styles.css?v=20261111n" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -44,8 +44,7 @@
         <form class="hm-search reveal" action="jobs.html" role="search">
           <b class="hm-search-h" data-t>Que cherchez-vous ?</b>
           <label class="field"><span data-t>Métier ou mot-clé</span><input name="q" placeholder="Ex. comptable, chauffeur, développeur" data-tp /></label>
-          <label class="field"><span data-t>Ville</span><input name="ville" list="hm-cities" placeholder="Ex. Port-au-Prince" data-tp /></label>
-          <datalist id="hm-cities"><option>Port-au-Prince</option><option>Pétion-Ville</option><option>Delmas</option><option>Cap-Haïtien</option><option>Les Cayes</option><option>Jacmel</option><option>Gonaïves</option><option>Télétravail</option></datalist>
+          <div class="field"><span data-t>Ville</span><input name="ville" data-cities /></div>
           <button class="btn btn-block" type="submit" data-t>Rechercher</button>
           <div class="hm-kinds"><a href="jobs.html?type=emplois" data-t>Emplois</a><a href="jobs.html?type=consultances" data-t>Consultances</a><a href="jobs.html?type=stages" data-t>Stages</a><a href="jobs.html?type=missions" data-t>Missions de projet</a></div>
         </form>
@@ -59,19 +58,19 @@
         <ol class="hm-steps" id="hm-steps">
           <li class="hm-step reveal">
             <img class="hs-face" src="https://images.unsplash.com/photo-1618298363483-e31a31f1a1e2?w=160&h=160&fit=crop&crop=faces" alt="" />
-            <span class="tnum">01</span><b data-t>Trouvez votre opportunité</b>
+            <span class="tnum">01</span><a class="hs-go" href="jobs.html"><b data-t>Trouvez votre opportunité</b></a>
             <span data-t>Cherchez par métier, ville ou type de contrat.</span>
           </li>
           <li class="hm-step reveal">
             <img class="hs-face" src="https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=160&h=160&fit=crop&crop=faces" alt="" />
-            <span class="tnum">02</span><b data-t>Postulez facilement</b>
+            <span class="tnum">02</span><a class="hs-go" href="signin.html?pour=profil"><b data-t>Postulez facilement</b></a>
             <span data-t>Envoyez votre candidature avec votre Profil ALO.</span>
           </li>
           <li class="hm-step reveal">
             <span class="tstamp"><svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="10.5"/><g transform="translate(16 16) scale(1.75) translate(-16 -15.9)" stroke-width="1.35"><path d="M17.8 13.4c-.5-.7-1.2-1-2-1-1.2 0-2 .7-2 1.6 0 2.2 4.4 1.2 4.4 3.6 0 .9-.9 1.7-2.2 1.7-.9 0-1.7-.4-2.2-1.1M16 11v1.4M16 19.3v1.5"/></g></svg></span>
             <span class="tnum">03</span><b data-t>Décrochez un emploi</b>
             <span><span data-t>Prime d’embauche : jusqu’à 5 % du premier salaire mensuel, sur les emplois éligibles.</span> <span class="hm-status" data-t>Programme en préparation</span></span>
-            <a class="link sm" href="recommander.html#conditions" data-t>Voir les conditions</a>
+            <a class="link sm hs-go" href="recommander.html#conditions" data-t>Voir les conditions</a>
           </li>
         </ol>
       </div>
@@ -156,8 +155,8 @@
     </div>
   </footer>
 
-  <script src="config.js?v=20261111d"></script>
+  <script src="config.js?v=20261111n"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111d"></script>
+  <script src="app.js?v=20261111n"></script>
 </body>
 </html>

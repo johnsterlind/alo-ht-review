@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111d"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111n"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -91,6 +91,7 @@ const LANG_NAMES = { fr: ["FR", "Français"], kr: ["KR", "Kreyòl ayisyen"], en:
 
 const BRAND = `<span class="brand">alo<span>.</span>ht</span>`;
 function translatePage() {
+  document.querySelectorAll("input[data-cities]").forEach((i) => i._texts && i._texts());
   const root = document.documentElement;
   root.lang = LANG === "kr" ? "ht" : LANG === "en" ? "en" : "fr";
   document.querySelectorAll("[data-t]").forEach((el) => {
@@ -224,13 +225,59 @@ function ago(d) {
   if (LANG === "en") return `${d} days ago`;
   return `${t("Il y a")} ${d} ${t("jours")}`;
 }
+// city can hold several cities separated by commas: an offer matches if it is in any of them.
 function searchJobs(q, city) {
-  const nq = norm(q), nc = norm(city);
+  const nq = norm(q), cities = String(city || "").split(",").map((c) => norm(c.trim())).filter(Boolean);
   return JOBS.filter((j) =>
     (!nq || norm(`${j.title} ${j.company} ${j.category}`).includes(nq)) &&
-    (!nc || norm(j.city).includes(nc))
+    (!cities.length || cities.some((c) => norm(j.city).includes(c)))
   );
 }
+
+// ---- City picker: choose one or several cities (replaces the browser's plain suggestion list) ----
+const CITY_LIST = ["Port-au-Prince", "Pétion-Ville", "Delmas", "Tabarre", "Carrefour", "Croix-des-Bouquets", "Cap-Haïtien", "Les Cayes", "Gonaïves", "Saint-Marc",
+  "Jacmel", "Jérémie", "Hinche", "Port-de-Paix", "Fort-Liberté", "Ouanaminthe", "Léogâne", "Petit-Goâve", "Miragoâne", "Mirebalais", "Télétravail"];
+function setupCityPicker(inp) {
+  if (inp._cp) return; inp._cp = true;
+  inp.removeAttribute("list"); inp.type = "hidden";
+  const wrap = document.createElement("div"); wrap.className = "cp";
+  wrap.innerHTML = `<button type="button" class="cp-btn" aria-haspopup="dialog" aria-expanded="false"></button>
+    <div class="cp-panel" role="dialog" hidden><div class="cp-top"><b class="cp-title"></b><button type="button" class="cp-close"></button></div>
+      <input class="cp-find" type="text" autocomplete="off" />
+      <div class="cp-list"></div>
+      <div class="cp-foot"><button type="button" class="btn btn-plain cp-clear"></button><button type="button" class="btn cp-ok"></button></div></div>`;
+  inp.after(wrap);
+  const btn = wrap.querySelector(".cp-btn"), panel = wrap.querySelector(".cp-panel"), find = wrap.querySelector(".cp-find"), list = wrap.querySelector(".cp-list");
+  let sel = new Set();
+  const read = () => new Set(String(inp.value || "").split(",").map((c) => c.trim()).filter(Boolean));
+  const label = () => { const a = [...read()]; btn.innerHTML = a.length ? `<span>${esc(a.slice(0, 2).map((c) => t(c)).join(", "))}${a.length > 2 ? ` +${a.length - 2}` : ""}</span>` : `<span class="cp-ph">${t("Toutes les villes")}</span>`; };
+  const drawList = () => {
+    const q = norm(find.value.trim()), extra = [...sel].filter((c) => !CITY_LIST.includes(c));
+    const names = [...extra, ...CITY_LIST].filter((c) => !q || norm(c).includes(q) || norm(t(c)).includes(q));
+    const typed = find.value.trim();
+    list.innerHTML = names.map((c) => `<label class="cp-item ${sel.has(c) ? "on" : ""}"><input type="checkbox" value="${esc(c)}" ${sel.has(c) ? "checked" : ""} /><span>${esc(t(c))}</span></label>`).join("")
+      + (typed && !names.some((c) => norm(c) === norm(typed)) ? `<button type="button" class="cp-add" data-v="${esc(typed)}">${t("Ajouter")} « ${esc(typed)} »</button>` : "");
+  };
+  const texts = () => { wrap.querySelector(".cp-title").textContent = t("Villes"); wrap.querySelector(".cp-close").textContent = t("Fermer"); find.placeholder = t("Rechercher une ville");
+    wrap.querySelector(".cp-clear").textContent = t("Effacer"); wrap.querySelector(".cp-ok").textContent = t("Valider"); label(); };
+  const open = () => { sel = read(); find.value = ""; drawList(); panel.hidden = false; btn.setAttribute("aria-expanded", "true"); document.body.classList.add("cp-lock"); if (!matchMedia("(max-width: 760px)").matches) find.focus(); };
+  const close = () => { panel.hidden = true; btn.setAttribute("aria-expanded", "false"); document.body.classList.remove("cp-lock"); };
+  const apply = () => { inp.value = [...sel].join(", "); label(); close(); inp.dispatchEvent(new Event("change", { bubbles: true })); };
+  btn.onclick = () => (panel.hidden ? open() : close());
+  wrap.querySelector(".cp-close").onclick = close;
+  wrap.querySelector(".cp-ok").onclick = apply;
+  wrap.querySelector(".cp-clear").onclick = () => { sel.clear(); drawList(); };
+  find.oninput = drawList;
+  find.onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); const v = find.value.trim(); if (v) { const m = CITY_LIST.find((c) => norm(c) === norm(v)) || v; sel.add(m); find.value = ""; drawList(); } } };
+  list.onchange = (e) => { const c = e.target.value; e.target.checked ? sel.add(c) : sel.delete(c); e.target.closest(".cp-item").classList.toggle("on", e.target.checked); };
+  list.onclick = (e) => { const a = e.target.closest(".cp-add"); if (a) { sel.add(a.dataset.v); find.value = ""; drawList(); } };
+  document.addEventListener("click", (e) => { if (!panel.hidden && !wrap.contains(e.target)) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) { close(); btn.focus(); } });
+  inp._sync = label;
+  texts(); inp._texts = texts;
+}
+function setupCityPickers(root = document) { root.querySelectorAll("input[data-cities]").forEach(setupCityPicker); }
+document.addEventListener("DOMContentLoaded", () => setupCityPickers());
 
 // ---- Supabase ------------------------------------------------------------
 const CFG = window.ALO_CONFIG || {};
