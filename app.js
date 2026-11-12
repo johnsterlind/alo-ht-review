@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111x"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111z"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -332,6 +332,10 @@ async function saveJob(job) {
   const c = db();
   if (!c || DEMO) return null; // sample mode: nothing is saved
   let { error } = await c.from("jobs").insert({ ...job, status: "pending" });
+  if (error && error.code === "PGRST204" && "comp_unit" in job) { // supabase-update-13.sql not run yet: the pay text still says it all
+    const { comp_unit, duration_value, duration_unit, deliverables, ...rest } = job; job = rest;
+    ({ error } = await c.from("jobs").insert({ ...job, status: "pending" }));
+  }
   if ((error && error.code === "PGRST204") || (error && error.code === "23514" && job.plan === "organisation")) { // supabase-update-8.sql not run yet
     const { employer_size, package: _pk, addons, order_id, ...rest } = job; job = { ...rest, plan: rest.plan === "organisation" ? "entreprise" : rest.plan };
     ({ error } = await c.from("jobs").insert({ ...job, status: "pending" }));
@@ -502,18 +506,18 @@ const DEFAULT_CATALOG = [
     features: ["Présélection des candidats par l’IA", "Gestion des candidatures", "Planification des entretiens", "Évaluations de compétences", "Statistiques de recrutement"], sort: 2 },
   { id: "institutional", kind: "package", name: "ALO Institutional", price_usd: null, unit: "sur devis", postings: null, days: null, includes: ["ai_screening", "assessments", "interviews", "team", "analytics"],
     features: ["Plusieurs recruteurs", "Grilles d’évaluation", "Recrutement de consultants (termes de référence)", "Rapports de recrutement", "Circuits de validation institutionnels"], sort: 3 },
-  { id: "extra_posting", kind: "addon", name: "Offres d’emploi supplémentaires", price_usd: null, unit: "par offre", sort: 10 },
-  { id: "extra_position", kind: "addon", name: "Postes supplémentaires dans une même offre", price_usd: null, unit: "par poste", sort: 11 },
-  { id: "extra_days", kind: "addon", name: "Durée de publication prolongée", price_usd: null, unit: "par tranche de 15 jours", days: 15, sort: 12 },
-  { id: "ai_screening", kind: "addon", name: "Analyse et tri des candidatures", price_usd: null, unit: "par offre", grants: ["candidate_insights", "screening_advanced"], sort: 13 },
-  { id: "assessments", kind: "addon", name: "Évaluations de compétences", price_usd: null, unit: "par offre", grants: ["assessments"], sort: 14 },
-  { id: "interviews", kind: "addon", name: "Planification des entretiens", price_usd: null, unit: "par offre", grants: ["interviews"], sort: 15 },
-  { id: "team", kind: "addon", name: "Collaboration en équipe", price_usd: null, unit: "par offre", grants: ["team"], sort: 16 },
-  { id: "analytics", kind: "addon", name: "Statistiques de recrutement avancées", price_usd: null, unit: "par offre", grants: ["analytics"], sort: 17 },
-  { id: "featured", kind: "addon", name: "Offre mise en avant", price_usd: null, unit: "par offre", sort: 18 },
-  { id: "campaign", kind: "addon", name: "Campagne de recrutement ciblée", price_usd: null, unit: "sur devis", grants: ["campaigns"], sort: 19 },
-  { id: "evaluation_matrix", kind: "addon", name: "Grilles d’évaluation", price_usd: null, unit: "par offre", grants: ["evaluation_matrix"], sort: 20 },
-  { id: "employment_intel", kind: "addon", name: "Données sur l’emploi", price_usd: null, unit: "sur devis", grants: ["employment_intel"], sort: 21 },
+  { id: "extra_posting", kind: "addon", description: "1 offre de plus, même durée de publication que la formule", name: "Offres d’emploi supplémentaires", price_usd: null, unit: "par offre", sort: 10 },
+  { id: "extra_position", kind: "addon", description: "1 poste de plus à pourvoir dans la même offre", name: "Postes supplémentaires dans une même offre", price_usd: null, unit: "par poste", sort: 11 },
+  { id: "extra_days", kind: "addon", description: "15 jours de publication en plus pour une offre", name: "Durée de publication prolongée", price_usd: null, unit: "par tranche de 15 jours", days: 15, sort: 12 },
+  { id: "ai_screening", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Analyse et tri des candidatures", price_usd: null, unit: "par offre", grants: ["candidate_insights", "screening_advanced"], sort: 13 },
+  { id: "assessments", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Évaluations de compétences", price_usd: null, unit: "par offre", grants: ["assessments"], sort: 14 },
+  { id: "interviews", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Planification des entretiens", price_usd: null, unit: "par offre", grants: ["interviews"], sort: 15 },
+  { id: "team", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Collaboration en équipe", price_usd: null, unit: "par offre", grants: ["team"], sort: 16 },
+  { id: "analytics", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Statistiques de recrutement avancées", price_usd: null, unit: "par offre", grants: ["analytics"], sort: 17 },
+  { id: "featured", kind: "addon", description: "1 offre mise en avant pendant toute sa durée de publication", name: "Offre mise en avant", price_usd: null, unit: "par offre", sort: 18 },
+  { id: "campaign", kind: "addon", description: "Service sur mesure, chiffré sur devis", name: "Campagne de recrutement ciblée", price_usd: null, unit: "sur devis", grants: ["campaigns"], sort: 19 },
+  { id: "evaluation_matrix", kind: "addon", description: "Pour 1 offre, pendant toute sa durée de publication", name: "Grilles d’évaluation", price_usd: null, unit: "par offre", grants: ["evaluation_matrix"], sort: 20 },
+  { id: "employment_intel", kind: "addon", description: "Service sur mesure, chiffré sur devis", name: "Données sur l’emploi", price_usd: null, unit: "sur devis", grants: ["employment_intel"], sort: 21 },
 ];
 let CATALOG = DEFAULT_CATALOG;
 async function loadCatalog() {
@@ -523,6 +527,13 @@ async function loadCatalog() {
   return CATALOG;
 }
 const catItem = (id) => CATALOG.find((x) => x.id === id);
+// Standard extras have a fixed price set by ALO in admin.html, with what it includes (description: quantity, duration or usage).
+// Only custom services are « Sur devis ». A standard extra without an approved price shows « Prix à confirmer » (the order then goes through a quote).
+const CUSTOM_ADDONS = ["campaign", "employment_intel"];
+const isCustomAddon = (a) => CUSTOM_ADDONS.includes(a.id) || a.unit === "sur devis";
+const addonPriceLabel = (a, plus = true) => isCustomAddon(a) ? t("Sur devis") : a.price_usd == null ? t("Prix à confirmer") : `${plus ? "+ " : ""}${usd(a.price_usd)}`;
+const addonAllowance = (a) => { const d = a.description || ((DEFAULT_CATALOG.find((z) => z.id === a.id) || {}).description) || "";
+  return a.id === "extra_days" && a.days ? d.replace(/^\d+/, a.days) : d; };
 const PACKAGES = () => CATALOG.filter((x) => x.kind === "package" && x.active !== false);
 const ADDONS = () => CATALOG.filter((x) => x.kind === "addon" && x.active !== false);
 // ---- Employer tools (entitlements) ---------------------------------------------------------
@@ -690,11 +701,11 @@ function quote({ pkg = "essential", postings = 1, positions, extraDays = 0, addo
   const disc = CATALOG.filter((d) => d.kind === "discount" && d.active !== false).sort((a, b) => b.discount_pct - a.discount_pct)
     .find((d) => (d.applies_to === "postings" && n >= d.min_qty) || (d.applies_to === "positions" && v >= d.min_qty));
   if (disc) { const off = total * disc.discount_pct / 100; total -= off; lines.push({ label: `${t("Remise")} : ${disc.name}`, amount: -off }); }
-  if (extraDays > 0) { const a = catItem("extra_days"); if (!a || a.price_usd == null) { needsQuote = true; lines.push({ label: t("Durée de publication prolongée"), amount: null }); } else { const x = a.price_usd * extraDays * n; total += x; lines.push({ label: `${t("Durée de publication prolongée")} (+${extraDays * (a.days || 15)} ${t("jours")})`, amount: x }); } }
+  if (extraDays > 0) { const a = catItem("extra_days"); if (!a || a.price_usd == null) { needsQuote = true; lines.push({ label: t("Durée de publication prolongée"), amount: null, toConfirm: true }); } else { const x = a.price_usd * extraDays * n; total += x; lines.push({ label: `${t("Durée de publication prolongée")} (+${extraDays * (a.days || 15)} ${t("jours")})`, amount: x }); } }
   for (const id of addons) {
     const a = catItem(id); if (!a || ["extra_posting", "extra_position", "extra_days"].includes(id)) continue;
     if ((pk.includes || []).includes(id)) { lines.push({ label: t(a.name), amount: 0, included: true }); continue; }
-    if (a.price_usd == null || id === "campaign") { needsQuote = true; lines.push({ label: t(a.name), amount: null }); }
+    if (a.price_usd == null || isCustomAddon(a)) { needsQuote = true; lines.push({ label: t(a.name), amount: null, toConfirm: !isCustomAddon(a) }); }
     else { total += a.price_usd * n; lines.push({ label: t(a.name), amount: a.price_usd * n }); }
   }
   return { total: Math.round(total * 100) / 100, needsQuote, lines, n, v, days: (pk.days || 30) + extraDays * ((catItem("extra_days") || {}).days || 15) };

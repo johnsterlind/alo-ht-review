@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111x"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111z"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Prime d'embauche — alo.ht</title>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111x" />
+  <link rel="stylesheet" href="styles.css?v=20261111z" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -97,6 +97,7 @@
             <div class="cond-item"><b class="cond-k" data-t>Contrôle</b><b data-t>Après vérification</b><span data-t>Elle n’est versée qu’après vérification de l’embauche par l’employeur et du premier salaire reçu.</span></div>
             <div class="cond-item"><b class="cond-k" data-t>Privé</b><b data-t>Votre salaire reste privé</b><span data-t>La personne qui vous a recommandé(e) peut aussi recevoir une récompense. Son montant ne dépend pas de votre salaire et votre salaire ne lui est jamais communiqué.</span></div>
           </div>
+          <dl class="cond-rules" id="cond-rules"></dl>
         </div>
       </div>
     </section>
@@ -116,10 +117,28 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111x"></script>
+  <script src="config.js?v=20261111z"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111x"></script>
+  <script src="app.js?v=20261111z"></script>
   <script>
+    // Exact terms, from the database (bonus_terms). Anything ALO has not decided yet says « À définir ».
+    let BT = null;
+    async function drawTerms() {
+      if (!BT) { BT = { candidate_max_pct: RULES.candidateBonusMaxPct, candidate_cap_htg: RULES.candidateBonusCapHTG, payout_days: null, payout_methods: [], referral_reward_htg: RULES.referralReward };
+        if (db() && !DEMO) { try { const r = await db().rpc("bonus_terms"); if (!r.error && r.data) BT = { ...BT, ...Object.fromEntries(Object.entries(r.data).filter(([, v]) => v != null)) }; } catch {} } }
+      const n = (v) => Math.round(v).toLocaleString("fr-FR"), pct = +BT.candidate_max_pct || 0, cap = BT.candidate_cap_htg == null ? null : +BT.candidate_cap_htg;
+      const ex = 40000, exv = Math.min(ex * pct / 100, cap ?? Infinity), tbd = `<em class="cond-tbd">${t("À définir")}</em>`;
+      const row = (k, v) => `<div><dt>${t(k)}</dt><dd>${v}</dd></div>`;
+      document.getElementById("cond-rules").innerHTML =
+        row("Calcul", `${t("Premier salaire mensuel")} × ${pct} %${cap != null ? `, ${t("limité à")} ${n(cap)} HTG` : ""}<small>${t("Exemple")} : ${n(ex)} HTG × ${pct} % = ${n(exv)} HTG</small>`)
+        + row("Admissibilité", t("Emploi salarié éligible, obtenu après une candidature envoyée sur alo.ht."))
+        + row("Plafond", cap != null ? `${n(cap)} HTG ${t("par embauche")}` : tbd)
+        + row("Vérification", t("Confirmation de l’embauche par l’employeur, puis votre première fiche de paie."))
+        + row("Délai de versement", BT.payout_days ? `${BT.payout_days} ${t("jours après la vérification")}` : tbd)
+        + row("Mode de versement", (BT.payout_methods || []).length ? BT.payout_methods.map((m) => esc(t(m))).join(", ") : tbd)
+        + row("Récompense de la personne qui recommande", BT.referral_reward_htg ? `${n(BT.referral_reward_htg)} HTG` : tbd);
+    }
+    drawTerms();
     async function drawRef() {
       const user = await currentUser();
       const box = document.getElementById("ref-box");
@@ -145,7 +164,7 @@
         try { await navigator.clipboard.writeText(link); document.getElementById("copy").textContent = t("Copié !"); } catch {}
       };
     }
-    window.onLang = drawRef;
+    window.onLang = () => { drawRef(); drawTerms(); };
     drawRef();
   </script>
 </body>

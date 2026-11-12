@@ -12,6 +12,9 @@ let USER_OK = false, ROLE_OK = true, SETTINGS = {}, BUSY = false, ERR = "";
 
 try { Object.assign(CO, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch {}
 if (Q.get("formule")) { CO.pkg = Q.get("formule"); CO.addons = []; CO.done = null; CO.step = 1; }
+// ?order=ID: the order created with a saved offer. Its content is fixed (the offer is attached to it); only billing and the purchasing path are chosen here.
+const FROM_OFFER = Q.get("order");
+if (FROM_OFFER) { CO.locked = true; CO.done = null; CO.step = 2; CO.path = ""; CO.extraDays = 0; CO.addons = []; } else CO.locked = false;
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(CO)); } catch {} };
 const sel = () => ({ pkg: CO.pkg, postings: CO.postings, positions: CO.positions, extraDays: CO.extraDays, addons: CO.addons });
 const sig = () => JSON.stringify(sel());
@@ -27,7 +30,7 @@ function summary() {
   const tax = SETTINGS.tax_note ? t(SETTINGS.tax_note) : t("Taxes éventuelles : confirmées par ALO avant tout paiement.");
   return `
     <div class="pj-sum-h">${x(pk.name)}</div>
-    ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Déjà inclus") : l.amount == null ? t("Sur devis") : usd(l.amount)}</span></div>`).join("")}
+    ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Déjà inclus") : l.amount == null ? t(l.toConfirm ? "Prix à confirmer" : "Sur devis") : usd(l.amount)}</span></div>`).join("")}
     ${q.needsQuote ? `<div class="tf-total sub"><span>${t("Sous-total chiffré")}</span><b>${usd(q.total)}</b></div><p class="tf-unconfirmed">${t("Total non confirmé : l’équipe ALO vous enverra le montant final avant tout paiement.")}</p>`
       : `<div class="tf-total"><span>${t("Total")}</span><b>${usd(q.total)}</b></div>`}
     <p class="co-small">${t("Montants en dollars US.")} ${tax}</p>
@@ -38,6 +41,10 @@ function summary() {
 
 // ---------- Step 1: package and extras ----------
 function step1() {
+  if (CO.locked) { const pk = catItem(CO.pkg) || {};
+    return `<p class="co-saved"><b>${t("Votre offre est enregistrée.")}</b> ${t("Elle sera mise en ligne après vérification par l’équipe ALO et l’activation de votre formule.")}</p>
+      <div class="pj-line"><span>${t("Formule")}</span><b>${x(pk.name)}</b></div>
+      <div class="pj-line"><span>${t("Postes à pourvoir au total")}</span><b>${CO.positions}</b></div>`; }
   const pk = catItem(CO.pkg) || {}, blk = (catItem("extra_days") || {}).days || 15;
   const extras = ADDONS().filter((a) => !["extra_posting", "extra_position", "extra_days"].includes(a.id));
   return `
@@ -56,8 +63,8 @@ function step1() {
       <div class="co-extras">${extras.map((a) => {
         const inc = (pk.includes || []).includes(a.id), live = addonLive(a), on = !inc && live && CO.addons.includes(a.id);
         return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"} ${on ? "on" : ""}"><input type="checkbox" name="addon" value="${a.id}" ${inc || on ? "checked" : ""} ${inc || !live ? "disabled" : ""} />
-          <span>${x(t(a.name))}<small>${inc ? "" : x(t(a.unit || ""))}</small></span>
-          <em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : a.price_usd == null || a.id === "campaign" ? t("Sur devis") : `+ ${usd(a.price_usd)}`}</em></label>`; }).join("")}</div></div>`;
+          <span>${x(t(a.name))}<small>${inc ? "" : x(t(addonAllowance(a)))}</small></span>
+          <em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : addonPriceLabel(a)}</em></label>`; }).join("")}</div></div>`;
 }
 
 // ---------- Step 2: organization and billing ----------
@@ -106,8 +113,9 @@ function doneView() {
   const o = CO.done, back = `<div class="row"><a class="btn btn-plain" href="employeur.html#achats">${t("Voir mes achats et factures")}</a><button class="linkbtn" type="button" data-act="new">${t("Nouvelle commande")}</button></div>`;
   if (o.path === "payer") return `<section class="ap-card co-done"><h2>${t("Commande enregistrée")}</h2>
     <p>${t("Pour régler votre commande, faites un virement bancaire avec la référence ci-dessous.")}</p>${transferBox(o, SETTINGS)}
-    <p class="hint-l">${t("Ensuite, publiez votre offre : elle est vérifiée par l’équipe ALO avant sa mise en ligne, et sa durée de publication commence le jour où elle est en ligne.")}</p>
-    <div class="row"><a class="btn" href="post.html?formule=${x(o.package)}">${t("Publier une offre")}</a></div>${back}</section>`;
+    ${o.fromOffer ? `<p class="hint-l">${t("Votre offre est enregistrée.")} ${t("Elle sera mise en ligne après vérification par l’équipe ALO et l’activation de votre formule.")}</p>${back}</section>`
+      : `<p class="hint-l">${t("Ensuite, publiez votre offre : elle est vérifiée par l’équipe ALO avant sa mise en ligne, et sa durée de publication commence le jour où elle est en ligne.")}</p>
+    <div class="row"><a class="btn" href="post.html?formule=${x(o.package)}">${t("Publier une offre")}</a></div>${back}</section>`}`;
   if (o.path === "devis") return `<section class="ap-card co-done"><h2>${t("Votre devis est prêt pour validation interne.")}</h2>
     <p>${t("Référence")} : <b>${x(o.reference)}</b></p>
     <div class="row"><a class="btn" href="devis.html?id=${x(o.id)}" target="_blank" rel="noopener">${t("Télécharger le devis")}</a></div>
@@ -146,7 +154,7 @@ function draw() {
 function readForm() {
   const f = $("co-form"); if (!f) return;
   const v = (n) => f.elements[n] ? f.elements[n].value.trim() : undefined;
-  if (CO.step === 1) {
+  if (CO.step === 1 && !CO.locked) {
     CO.postings = Math.max(1, Math.min(500, +v("postings") || 1));
     CO.positions = Math.max(CO.postings, Math.min(5000, +v("positions") || 1));
     CO.extraDays = +v("extraDays") || 0;
@@ -198,7 +206,7 @@ async function submit() {
     if (DEMO) { ref = "ALO-2026-00042"; oid = "demo"; }
     else {
       const c = db();
-      if (oid && CO.sig !== sig()) { try { await c.rpc("cancel_my_order", { p_order: oid }); } catch {} oid = null; } // selection changed: replace the unpaid draft
+      if (oid && CO.sig !== sig() && !CO.locked) { try { await c.rpc("cancel_my_order", { p_order: oid }); } catch {} oid = null; } // selection changed: replace the unpaid draft
       if (!oid) {
         const r = await c.rpc("create_order", { p_package: CO.pkg, p_postings: CO.postings, p_positions: CO.positions, p_extra_days: CO.extraDays, p_addons: CO.addons, p_note: null });
         if (r.error) throw r.error;
@@ -215,8 +223,8 @@ async function submit() {
       }
     }
     const q = quote(sel());
-    CO.done = { id: oid, reference: ref, path: CO.path, package: CO.pkg, price_usd: q.needsQuote ? null : q.total };
-    CO.orderId = null; CO.sig = null; save();
+    CO.done = { id: oid, reference: ref, path: CO.path, package: CO.pkg, price_usd: q.needsQuote ? null : q.total, fromOffer: !!CO.locked };
+    CO.orderId = null; CO.sig = null; CO.locked = false; save();
     BUSY = false; draw(); scrollTo(0, 0);
   } catch (e) {
     BUSY = false;
@@ -236,8 +244,8 @@ document.addEventListener("submit", (e) => {
 document.addEventListener("click", (e) => {
   const a = e.target.closest("[data-act]"); if (!a) return;
   if (a.dataset.act === "back") { readForm(); CO.step--; save(); draw(); }
-  if (a.dataset.act === "signin") { readForm(); try { localStorage.setItem("alo-next", "commande.html"); } catch {} }
-  if (a.dataset.act === "new") { CO = { ...CO, done: null, step: 1, path: "", deferred: {}, supplier: "", addons: [] }; save(); draw(); }
+  if (a.dataset.act === "signin") { readForm(); try { localStorage.setItem("alo-next", "commande.html" + location.search); } catch {} }
+  if (a.dataset.act === "new") { if (CO.locked) { location.href = "commande.html"; return; } CO = { ...CO, done: null, step: 1, path: "", deferred: {}, supplier: "", addons: [] }; save(); draw(); }
 });
 document.addEventListener("change", (e) => {
   const el = e.target; if (!el.form || el.form.id !== "co-form") return;
@@ -253,11 +261,20 @@ document.addEventListener("input", (e) => {
   const m = document.querySelector(".co-sum-m summary b"); if (m) { const q = quote(sel()); m.textContent = q.needsQuote ? t("Sur devis") : usd(q.total); }
 });
 
+async function fromOffer() {
+  if (!FROM_OFFER) return;
+  if (DEMO) { CO.orderId = "demo"; CO.postings = 1; CO.positions = +(Q.get("postes") || 1); CO.sig = sig(); return; }
+  try { const r = await db().rpc("my_orders"); const o = (r.data || []).find((k) => k.id === FROM_OFFER);
+    if (!o || ["annulee", "refusee"].includes(o.approval_status) || o.payment_status === "payee") { CO.locked = false; CO.step = 1; return; }
+    Object.assign(CO, { pkg: o.package, postings: o.postings, positions: o.positions, extraDays: o.extra_days || 0, addons: o.addons || [], orderId: o.id }); CO.sig = sig();
+  } catch { CO.locked = false; CO.step = 1; }
+}
 async function load() {
   await loadCatalog();
   if (!catItem(CO.pkg) || (catItem(CO.pkg).kind !== "package")) CO.pkg = "essential";
-  if (DEMO) { USER_OK = true; CO.billing = { organization: "Konekte Telecom", contact: "Marie Delva", email: "facturation@exemple.com", ...CO.billing }; return draw(); }
+  if (DEMO) { await fromOffer(); USER_OK = true; CO.billing = { organization: "Konekte Telecom", contact: "Marie Delva", email: "facturation@exemple.com", ...CO.billing }; return draw(); }
   const user = await currentUser(); USER_OK = !!user;
+  if (user) await fromOffer();
   if (user && db()) {
     try { const s = await db().rpc("checkout_settings"); if (!s.error && s.data) SETTINGS = s.data; } catch {}
     try {

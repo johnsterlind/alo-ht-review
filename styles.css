@@ -2674,3 +2674,41 @@ b .unit { font-size: .45em; font-weight: 700; margin-left: 5px; letter-spacing: 
   .sp-gauge { width: 260px; }
 }
 @media (prefers-reduced-motion: reduce) { .sp-gauge .pr, .sp-ring .pr { animation: none; } }
+
+/* Checkout continued from a saved offer */
+.co-saved { background: #EAF6F0; border: 1px solid #B7DFCB; border-radius: 12px; padding: 12px 14px; margin: 0 0 14px; line-height: 1.5; }
+.co-saved b { color: #086B4D; }
+/* « Changer » package dialog in the posting flow */
+.pw-dlg { border: 0; border-radius: 16px; padding: 0; width: min(760px, calc(100vw - 24px)); max-height: calc(100vh - 32px); box-shadow: 0 20px 60px rgba(18,26,58,.3); }
+.pw-dlg::backdrop { background: rgba(18,26,58,.45); }
+.pw-dlg-h { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line, #e6e8ef); position: sticky; top: 0; background: #fff; z-index: 1; }
+.pw-dlg-b { padding: 14px 18px; }
+.pw-dlg-b fieldset { border: 0; padding: 0; margin: 0; }
+.pw-dlg-f { padding: 12px 18px 16px; border-top: 1px solid var(--line, #e6e8ef); position: sticky; bottom: 0; background: #fff; }
+@media (max-width: 760px) { .pw-dlg { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border-radius: 0; margin: 0; } }
+/* Pay that fits the opportunity */
+.pw-cond { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 760px) { .pw-cond { grid-template-columns: 1fr; } }
+.pw-seg { display: flex; gap: 8px; margin: 6px 0 10px; }
+.pw-seg label { flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--line, #d9dce6); border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 14px; }
+.pw-seg label.on { border-color: #121A3A; background: #121A3A; color: #fff; }
+.pw-seg input { position: absolute; opacity: 0; pointer-events: none; }
+.tf-soon-n { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.tf-card .xp-btn { margin-top: 8px; }
+.tf-card .xp .tf-tags { margin-top: 8px; }
+.tf-addon span small { display: block; font-weight: 400; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.ad-warn { color: #8A4B00; background: #FFF4DB; border-radius: 8px; padding: 8px 12px; font-size: 14px; display: inline-block; }
+/* Phones: the headline is there at once (no blank hero); only the lead and buttons rise in, briefly. */
+@media (max-width: 760px) {
+  .js-motion .hw { opacity: 1; transform: none; filter: none; animation: none; }
+  .js-motion .hm-copy .lead { animation-duration: .35s; animation-delay: .05s; }
+  .js-motion .hm-copy .hero-cta { animation-duration: .35s; animation-delay: .12s; }
+}
+/* Hiring bonus: exact terms */
+.cond-rules { margin: 18px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.cond-rules > div { padding: 12px 0; border-top: 1px solid var(--line); }
+.cond-rules dt { font-size: 13px; color: var(--muted); margin-bottom: 3px; }
+.cond-rules dd { margin: 0; font-weight: 600; line-height: 1.45; color: var(--navy); }
+.cond-rules small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; margin-top: 3px; }
+.cond-tbd { font-style: normal; font-weight: 600; color: #8A4B00; }
+@media (max-width: 760px) { .cond-rules { grid-template-columns: 1fr; } }

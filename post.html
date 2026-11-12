@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111x"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111z"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Publier une offre — alo.ht</title>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111x" />
+  <link rel="stylesheet" href="styles.css?v=20261111z" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -45,8 +45,8 @@
     <form id="post" class="form-card pw-form" novalidate>
       <p class="post-account" id="post-account" hidden><span data-t>Un compte employeur gratuit est nécessaire pour publier, suivre vos candidatures et confirmer vos embauches.</span> <a class="link" href="signin.html?pour=publier" data-t>Connexion</a></p>
 
-      <section class="pw-step" data-step="1" data-title="Votre entreprise">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Votre entreprise</span></h2>
+      <section class="pw-step" data-step="1" data-title="Organisation">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Organisation</span></h2>
         <p class="pw-sub" data-t>Qui recrute ? Ces informations sont reprises automatiquement pour vos prochaines offres.</p>
         <label class="field"><span data-t>Entreprise ou organisation</span><input name="company" required maxlength="120" autocomplete="organization" enterkeyhint="next" /></label>
         <div class="field"><span data-t>Type d’employeur</span>
@@ -59,40 +59,35 @@
         <label class="field"><span data-t>Taille de l’organisation</span><select name="employer_size" id="employer_size" required></select></label>
       </section>
 
-      <section class="pw-step" data-step="2" data-title="Le poste">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Le poste</span></h2>
+      <section class="pw-step" data-step="2" data-title="Opportunité">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Opportunité</span></h2>
         <p class="pw-sub" data-t>Un intitulé clair attire les bons candidats.</p>
-        <label class="field"><span data-t>Intitulé du poste</span><input name="title" required maxlength="120" placeholder="Ex. Caissier / Caissière" data-tp autocapitalize="sentences" enterkeyhint="next" /></label>
+        <label class="field"><span data-t>Intitulé</span><input name="title" required maxlength="120" placeholder="Ex. Caissier / Caissière" data-tp autocapitalize="sentences" enterkeyhint="next" /></label>
         <div class="two">
-          <label class="field"><span data-t>Type de contrat</span>
+          <label class="field"><span data-t>Type d’opportunité</span>
             <select name="type">
               <option value="Temps plein" data-t>Temps plein</option>
               <option value="Temps partiel" data-t>Temps partiel</option>
-              <option value="Contrat" data-t>Contrat</option>
               <option value="Stage" data-t>Stage</option>
               <option value="Consultance" data-t>Consultance</option>
+              <option value="Contrat" data-t>Mission de projet</option>
             </select>
           </label>
           <label class="field"><span data-t>Nombre de postes à pourvoir</span><input name="positions" type="number" min="1" max="50" value="1" required inputmode="numeric" /></label>
         </div>
-        <label class="field"><span data-t>Expérience demandée</span>
-          <select name="experience">
-            <option value="Tous niveaux" data-t>Tous niveaux</option>
-            <option value="Débutant" data-t>Débutant</option>
-            <option value="1 à 3 ans" data-t>1 à 3 ans</option>
-            <option value="3 à 5 ans" data-t>3 à 5 ans</option>
-            <option value="5 ans et plus" data-t>5 ans et plus</option>
-          </select>
-        </label>
         <div class="two">
+          <label class="field"><span data-t>Expérience demandée</span>
+            <select name="experience">
+              <option value="Tous niveaux" data-t>Tous niveaux</option>
+              <option value="Débutant" data-t>Débutant</option>
+              <option value="1 à 3 ans" data-t>1 à 3 ans</option>
+              <option value="3 à 5 ans" data-t>3 à 5 ans</option>
+              <option value="5 ans et plus" data-t>5 ans et plus</option>
+            </select>
+          </label>
           <label class="field"><span data-t>Secteur</span><select name="category" id="category"></select></label>
-          <label class="field"><span data-t>Domaine professionnel</span><select name="occupation" id="occupation"></select></label>
         </div>
-      </section>
-
-      <section class="pw-step" data-step="3" data-title="Lieu et dates">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Lieu et dates</span></h2>
-        <p class="pw-sub" data-t>Où se trouve le poste, et jusqu’à quand recevez-vous des candidatures ?</p>
+        <label class="field"><span data-t>Domaine professionnel</span><select name="occupation" id="occupation"></select></label>
         <label class="field"><span data-t>Ville</span><input name="city" required list="cities" maxlength="80" autocomplete="address-level2" enterkeyhint="next" /></label>
         <div class="pw-chips" id="city-chips"></div>
         <datalist id="cities">
@@ -107,52 +102,61 @@
         <label class="field"><span data-t>Date limite de candidature (facultatif)</span><input name="deadline" type="date" /></label>
       </section>
 
-      <section class="pw-step" data-step="4" data-title="Description">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Description</span></h2>
+      <section class="pw-step" data-step="3" data-title="Description et critères">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Description et critères</span></h2>
         <p class="pw-sub" data-t>Écrivez une idée par ligne : les listes sont plus faciles à lire pour les candidats.</p>
-        <label class="field"><span data-t>Description du poste</span><textarea name="about" rows="5" required minlength="10" maxlength="4000" placeholder="Présentez l’entreprise, l’équipe et la mission du poste." data-tp></textarea><small class="pw-count" data-for="about"></small></label>
+        <label class="field"><span data-t>Description</span><textarea name="about" rows="5" required minlength="10" maxlength="4000" placeholder="Présentez l’entreprise, l’équipe et la mission du poste." data-tp></textarea><small class="pw-count" data-for="about"></small></label>
         <label class="field"><span data-t>Compétences demandées (une par ligne)</span><textarea name="skills" rows="3" placeholder="Excel&#10;Service client"></textarea></label>
+        <label class="field pw-deliv" hidden><span data-t>Livrables attendus (un par ligne)</span><textarea name="deliverables" rows="3" placeholder="Rapport d’évaluation&#10;Plan d’action"></textarea></label>
         <details class="pw-more" id="more-desc"><summary data-t>Ajouter les responsabilités et les qualifications (facultatif)</summary>
           <label class="field"><span data-t>Responsabilités (une ligne par point)</span><textarea name="responsibilities" rows="3" placeholder="Accueillir les clients&#10;Tenir la caisse"></textarea></label>
           <label class="field"><span data-t>Qualifications (une ligne par point)</span><textarea name="needs" rows="3" placeholder="Permis de conduire&#10;2 ans d'expérience"></textarea></label>
         </details>
       </section>
 
-      <section class="pw-step" data-step="5" data-title="Salaire">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Salaire</span></h2>
-        <p class="pw-sub" data-t>Confidentiel par défaut. Il sert au calcul des primes d’embauche et à des statistiques anonymes sur l’emploi.</p>
-        <div class="three-f">
-          <label class="field"><span data-t>Minimum par mois</span><input name="salary_from" type="number" min="0" step="500" inputmode="numeric" /></label>
-          <label class="field"><span data-t>Maximum par mois</span><input name="salary_to" type="number" min="0" step="500" inputmode="numeric" /></label>
-          <label class="field"><span data-t>Devise</span><select name="salary_currency"><option>HTG</option><option>USD</option></select></label>
+      <section class="pw-step" data-step="4" data-title="Conditions et candidatures">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Conditions et candidatures</span></h2>
+        <div class="pw-cond">
+          <div class="pw-comp">
+            <b class="pw-comp-h" id="comp-title"></b>
+            <div class="pw-seg" id="comp-mode" hidden>
+              <label class="on"><input type="radio" name="comp_mode" value="jour" checked /><span data-t>Honoraires par jour</span></label>
+              <label><input type="radio" name="comp_mode" value="projet" /><span data-t>Budget total</span></label>
+            </div>
+            <div class="three-f">
+              <label class="field"><span id="lbl-from"></span><input name="salary_from" type="text" inputmode="decimal" autocomplete="off" /></label>
+              <label class="field"><span id="lbl-to"></span><input name="salary_to" type="text" inputmode="decimal" autocomplete="off" /></label>
+              <label class="field"><span data-t>Devise</span><select name="salary_currency"><option>HTG</option><option>USD</option></select></label>
+            </div>
+            <div class="two pw-dur" hidden>
+              <label class="field"><span data-t>Durée</span><input name="duration_value" type="text" inputmode="numeric" autocomplete="off" /></label>
+              <label class="field"><span data-t>Unité</span><select name="duration_unit"><option value="jours" data-t>jours</option><option value="semaines" data-t>semaines</option><option value="mois" data-t>mois</option></select></label>
+            </div>
+            <label class="pq-consent"><input type="checkbox" name="show_salary" /><span data-t>Afficher la rémunération sur l’offre</span></label>
+            <p class="pw-preview" id="pw-pay"></p>
+            <input type="hidden" name="pay" /><input type="hidden" name="salary_min" />
+          </div>
+          <label class="field pw-benefits"><span data-t>Avantages (une ligne par point, facultatif)</span><textarea name="benefits" rows="5" placeholder="Assurance santé&#10;Transport remboursé"></textarea></label>
         </div>
-        <label class="pq-consent"><input type="checkbox" name="show_salary" /><span data-t>Afficher ce salaire sur l’offre (les offres avec salaire reçoivent souvent plus de candidatures)</span></label>
-        <p class="pw-preview" id="pw-pay"></p>
-        <input type="hidden" name="pay" /><input type="hidden" name="salary_min" />
-      </section>
-
-      <section class="pw-step" data-step="6" data-title="Candidatures">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Candidatures</span></h2>
-        <p class="pw-sub" data-t>Comment les candidats vous joignent, et ce que vous voulez recevoir.</p>
         <label class="field"><span data-t>WhatsApp ou e-mail de contact</span><input name="contact" required maxlength="120" autocomplete="tel" enterkeyhint="next" placeholder="+509 3700 0000" />
           <small class="hint-l" data-t>Un numéro WhatsApp (8 chiffres ou plus) ou une adresse e-mail.</small></label>
-        <details class="pw-more" id="more-apply"><summary data-t>Questions, documents et avantages (facultatif)</summary>
+        <details class="pw-more" id="more-apply"><summary data-t>Questions et documents demandés (facultatif)</summary>
           <label class="field"><span data-t>Questions aux candidats (une par ligne, facultatif)</span><textarea name="questions" rows="2" placeholder="Pourquoi ce poste vous intéresse-t-il ?"></textarea></label>
           <label class="field"><span data-t>Documents demandés (un par ligne, facultatif)</span><textarea name="documents" rows="2" placeholder="Copie du diplôme&#10;Lettre de recommandation"></textarea></label>
-          <label class="field"><span data-t>Avantages (une ligne par point, facultatif)</span><textarea name="benefits" rows="2" placeholder="Assurance santé&#10;Transport remboursé"></textarea></label>
         </details>
       </section>
 
-      <section class="pw-step" data-step="7" data-title="Formule et publication">
-        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Formule et publication</span></h2>
-        <fieldset class="pj-pack">
+      <section class="pw-step" data-step="5" data-title="Aperçu et validation">
+        <h2 class="pw-h"><span class="pw-n"></span><span data-t>Aperçu et validation</span></h2>
+        <div class="pw-review" id="pw-review"></div>
+        <fieldset class="pj-pack" id="pj-pack">
           <legend data-t>Votre formule</legend>
+          <p class="hint-l" id="pj-credit" hidden></p>
           <div id="pj-orders"></div>
           <div class="pj-cards" id="pj-cards"></div>
           <div class="tf-addons" id="pj-addons"></div>
           <p class="hint-l"><span data-t>Plusieurs offres, une consultance ou un besoin institutionnel ?</span> <a class="link" href="tarifs.html#config" data-t>Personnaliser ma formule</a> · <a class="link" href="tarifs.html#devis" data-t>Demander un devis</a></p>
         </fieldset>
-        <div class="pw-review" id="pw-review"></div>
         <div class="pj-sum" id="pj-sum" aria-live="polite"></div>
       </section>
 
@@ -163,6 +167,8 @@
         <button class="btn" type="button" id="pw-next" data-t>Suivant</button>
         <button class="btn btn-main" type="submit" id="pw-publish" data-t>Publier l'offre</button>
       </div>
+      <dialog class="pw-dlg" id="pw-pack-dlg" aria-labelledby="pw-dlg-t"><div class="pw-dlg-h"><b id="pw-dlg-t" data-t>Votre formule</b><button type="button" class="linkbtn" data-pack-close data-t>Fermer</button></div>
+        <div class="pw-dlg-b"></div><div class="pw-dlg-f"><button type="button" class="btn btn-block" data-pack-close data-t>Valider</button></div></dialog>
       <div class="done" id="done" data-t>Merci ! Votre offre sera en ligne après vérification.</div>
     </form>
   </main>
@@ -183,9 +189,9 @@
   </footer>
 
 
-  <script src="config.js?v=20261111x"></script>
+  <script src="config.js?v=20261111z"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111x"></script>
+  <script src="app.js?v=20261111z"></script>
   <script>
     document.getElementById("category").innerHTML =
       [...Object.keys(CATS), "Autre"].map((c) => `<option>${esc(c)}</option>`).join("");
@@ -216,9 +222,24 @@
           <div class="tf-tags">${packageHighlights(p.id).map((f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`).join("")}</div></label>`).join("")}</div>`;
       document.getElementById("pj-addons").innerHTML = SEL.order ? "" : QUICK_ADDONS.map(catItem).filter(Boolean).map((a) => {
         const inc = (pk.includes || []).includes(a.id), live = addonLive(a);
-        return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"}"><input type="checkbox" name="addon" value="${a.id}" ${inc || (live && SEL.addons.includes(a.id)) ? "checked" : ""} ${inc || !live ? "disabled" : ""} /><span>${x(t(a.name))}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : a.price_usd == null ? t("Sur devis") : usd(a.price_usd)}</em></label>`; }).join("");
+        return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"}"><input type="checkbox" name="addon" value="${a.id}" ${inc || (live && SEL.addons.includes(a.id)) ? "checked" : ""} ${inc || !live ? "disabled" : ""} /><span>${x(t(a.name))}${inc ? "" : `<small>${x(t(addonAllowance(a)))}</small>`}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : addonPriceLabel(a, false)}</em></label>`; }).join("");
     }
     function x(s) { return esc(s || ""); }
+    // Amounts typed freely: "45 000", "45000", "1 500,50".
+    const num = (v) => { const s = String(v || "").replace(/\s/g, "").replace(",", "."); const n = parseFloat(s.replace(/[^\d.]/g, "")); return isFinite(n) ? n : 0; };
+    // Pay adapts to the opportunity: monthly salary (jobs, internships), daily fees or budget (consultancies), budget + duration + deliverables (project assignments).
+    function compUnit() { const f = document.getElementById("post"), ty = f.elements.type.value; return ty === "Consultance" ? f.elements.comp_mode.value : ty === "Contrat" ? "projet" : "mois"; }
+    function compUI() {
+      const f = document.getElementById("post"), ty = f.elements.type.value, u = compUnit();
+      const T = { mois: ty === "Stage" ? ["Allocation de stage (facultatif)", "Minimum par mois", "Maximum par mois"] : ["Salaire mensuel", "Minimum par mois", "Maximum par mois"],
+        jour: ["Honoraires", "Minimum par jour", "Maximum par jour"], projet: ["Budget du projet", "Budget minimum", "Budget maximum (facultatif)"] }[u];
+      document.getElementById("comp-title").textContent = t(T[0]); document.getElementById("lbl-from").textContent = t(T[1]); document.getElementById("lbl-to").textContent = t(T[2]);
+      document.getElementById("comp-mode").hidden = ty !== "Consultance";
+      document.querySelectorAll("#comp-mode label").forEach((l) => l.classList.toggle("on", l.querySelector("input").checked));
+      document.querySelector(".pw-dur").hidden = u === "mois";
+      document.querySelector(".pw-deliv").hidden = !["Consultance", "Contrat"].includes(ty);
+      payPreview();
+    }
     function summary() {
       const f = document.getElementById("post"), positions = Math.max(1, Math.min(RULES.maxPositions, Math.round(+f.elements.positions.value || 1)));
       document.querySelectorAll("#plan .sk").forEach((l) => l.classList.toggle("on", l.querySelector("input").checked));
@@ -231,35 +252,53 @@
       const q = quote({ pkg: SEL.pkg, postings: 1, positions, addons: SEL.addons });
       document.getElementById("pj-sum").innerHTML = `
         <div class="pj-sum-h">${t("Récapitulatif avant publication")}</div>
-        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Déjà inclus") : l.amount == null ? t("Sur devis") : usd(l.amount)}</span></div>`).join("")}
+        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Déjà inclus") : l.amount == null ? t(l.toConfirm ? "Prix à confirmer" : "Sur devis") : usd(l.amount)}</span></div>`).join("")}
         <div class="pj-line"><span>${q.v} ${q.v > 1 ? t("postes") : t("poste")} · ${q.days} ${t("jours")}</span><b>${usd(q.total)}${q.needsQuote ? " + " + t("options sur devis") : ""}</b></div>
         <p class="hint-l">${t("Paiement unique, sans frais en cas d’embauche. Après l’envoi, réglez la commande par virement avec sa référence, dans « Achats et factures ».")}</p>`;
       return { n: q.v, total: q.total };
     }
-    function refresh() { drawPack(); summary(); packChip(); }
+    // Existing credits are used when they cover the offer; otherwise the offer goes to checkout.
+    const left = (o) => o.positions - o.used_positions;
+    let CREDIT_NOTE = "";
+    function pickOrder() {
+      const need = Math.max(1, +document.getElementById("post").elements.positions.value || 1), cur = ORDERS.find((o) => o.id === SEL.order);
+      if (cur && left(cur) >= need) { CREDIT_NOTE = ""; return; }
+      const ok = ORDERS.find((o) => left(o) >= need);
+      CREDIT_NOTE = !ok && ORDERS.length && (SEL.order || SEL.autoOrder) ? `${t("Votre forfait couvre encore")} ${Math.max(...ORDERS.map(left))} ${t("poste(s)")}. ${t("Cette offre passera par une nouvelle commande.")}` : "";
+      SEL.order = ok ? ok.id : ""; SEL.autoOrder = !!ok || SEL.autoOrder;
+    }
+    function refresh() { drawPack(); summary(); packChip(); const n = document.getElementById("pj-credit"); if (n) { n.textContent = CREDIT_NOTE; n.hidden = !CREDIT_NOTE; } }
     // The chosen package and its price stay visible at every step, with a way to change it.
     function packChip() {
       const box = document.getElementById("pw-pack"); if (!box) return;
       const f = document.getElementById("post"), positions = Math.max(1, +f.elements.positions.value || 1);
-      let label, price, showChange = true; try { showChange = STEP !== STEPS.length; } catch {}
+      let label, price, showChange = true;
       if (SEL.order) { const o = ORDERS.find((z) => z.id === SEL.order); label = `${(catItem(o.package) || {}).name || ""} · ${t("Inclus dans votre forfait")}`; price = usd(0); }
       else { const q = quote({ pkg: SEL.pkg, postings: 1, positions, addons: SEL.addons }); label = `${(catItem(SEL.pkg) || {}).name} · ${q.days} ${t("jours")}`; price = usd(q.total) + (q.needsQuote ? ` + ${t("options sur devis")}` : ""); }
-      box.innerHTML = `<span class="pw-pack-l">${t("Votre formule")}</span><b>${esc(label)}</b><span class="pw-pack-p">${price}</span>${showChange ? `<button type="button" class="linkbtn" data-goto="7">${t("Changer")}</button>` : ""}`;
+      box.innerHTML = `<span class="pw-pack-l">${t("Votre formule")}</span><b>${esc(label)}</b><span class="pw-pack-p">${price}</span>${showChange ? `<button type="button" class="linkbtn" data-pack-open>${t("Changer")}</button>` : ""}`;
+      const pub = document.getElementById("pw-publish"); if (pub) pub.textContent = t(SEL.order ? "Publier l'offre" : "Publier et continuer vers le paiement");
     }
+    // « Changer » opens the package choice at any step, without checking the offer fields first.
+    const DLG = document.getElementById("pw-pack-dlg"), PACK = document.getElementById("pj-pack");
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-pack-open]")) { DLG.querySelector(".pw-dlg-b").appendChild(PACK); refresh(); DLG.showModal(); }
+      if (e.target.closest("[data-pack-close]")) DLG.close();
+    });
+    DLG.addEventListener("close", () => { document.getElementById("pj-sum").before(PACK); refresh(); });
     document.getElementById("post").addEventListener("input", summary);
     document.getElementById("post").addEventListener("change", (e) => {
       const el = e.target;
       if (el.name === "pkg") { SEL.pkg = el.value; SEL.addons = SEL.addons.filter((a) => !(catItem(SEL.pkg).includes || []).includes(a)); return refresh(); }
       if (el.name === "addon") { SEL.addons = [...document.querySelectorAll("#pj-addons input[name=addon]:checked:not(:disabled)")].map((i) => i.value); return refresh(); }
-      if (el.id === "use-order") { SEL.order = el.checked ? document.getElementById("order-pick").value : ""; return refresh(); }
+      if (el.id === "use-order") { SEL.optOut = !el.checked; SEL.order = el.checked ? document.getElementById("order-pick").value : ""; if (el.checked) pickOrder(); else CREDIT_NOTE = ""; return refresh(); }
       if (el.id === "order-pick") { SEL.order = el.value; return refresh(); }
       summary();
     });
     refresh();
     loadCatalog().then(refresh);
     // Keep what was typed while the employer signs in, then bring it back.
-    const POST_FIELDS = ["title", "company", "employer_size", "city", "type", "positions", "department", "work_mode", "category", "occupation", "experience", "deadline", "pay", "salary_min", "salary_from", "salary_to", "salary_currency", "about", "responsibilities", "needs", "skills", "questions", "documents", "benefits", "contact"];
-    function saveDraft() { const f = document.getElementById("post"); const d = { plan: f.elements.plan.value, pkg: SEL.pkg, addons: SEL.addons, show_salary: f.elements.show_salary.checked, step: STEP }; POST_FIELDS.forEach((k) => d[k] = f.elements[k].value); try { localStorage.setItem("alo-post-draft", JSON.stringify(d)); } catch {} }
+    const POST_FIELDS = ["title", "company", "employer_size", "city", "type", "positions", "department", "work_mode", "category", "occupation", "experience", "deadline", "pay", "salary_min", "salary_from", "salary_to", "salary_currency", "about", "responsibilities", "needs", "skills", "questions", "documents", "benefits", "contact", "deliverables", "duration_value", "duration_unit"];
+    function saveDraft() { const f = document.getElementById("post"); const d = { plan: f.elements.plan.value, comp_mode: f.elements.comp_mode.value, pkg: SEL.pkg, addons: SEL.addons, show_salary: f.elements.show_salary.checked, step: STEP }; POST_FIELDS.forEach((k) => d[k] = f.elements[k].value); try { localStorage.setItem("alo-post-draft", JSON.stringify(d)); } catch {} }
     async function ensureEmployer(f) {
       if (!db() || DEMO) return;
       const { data } = await db().from("employers").select("user_id").maybeSingle();
@@ -269,9 +308,11 @@
       const f = document.getElementById("post");
       let d = null; try { d = JSON.parse(localStorage.getItem("alo-post-draft") || "null"); } catch {}
       if (d) { POST_FIELDS.forEach((k) => { if (d[k] != null && f.elements[k]) f.elements[k].value = d[k]; }); const r = f.querySelector(`[name=plan][value="${d.plan}"]`); if (r) r.checked = true; if (d.pkg) SEL.pkg = d.pkg; if (d.addons) SEL.addons = d.addons;
-        f.elements.show_salary.checked = !!d.show_salary;
-        ["responsibilities", "needs"].some((k) => d[k]) && (document.getElementById("more-desc").open = true); ["questions", "documents", "benefits"].some((k) => d[k]) && (document.getElementById("more-apply").open = true);
-        setTimeout(() => { refresh(); MAX_SEEN = d.step || 1; showStep(d.step || 1, true); payPreview(); updateCount(); }); }
+        f.elements.show_salary.checked = !!d.show_salary; { const m = f.querySelector(`[name=comp_mode][value="${d.comp_mode}"]`); if (m) m.checked = true; }
+        ["responsibilities", "needs"].some((k) => d[k]) && (document.getElementById("more-desc").open = true); ["questions", "documents"].some((k) => d[k]) && (document.getElementById("more-apply").open = true);
+        setTimeout(() => { refresh(); MAX_SEEN = Math.min(d.step || 1, 5); showStep(Math.min(d.step || 1, 5), true); compUI(); updateCount(); }); }
+      if (DEMO && new URLSearchParams(location.search).get("credits")) { // sample: a paid package with postings left
+        ORDERS = [{ id: "demo-credit", package: "professional", postings: 3, used_postings: 1, positions: 5, used_positions: 2, days: 45, activation_status: "active" }]; pickOrder(); refresh(); }
       if (!db() || DEMO) return;
       const user = await currentUser();
       const note = document.getElementById("post-account");
@@ -279,12 +320,12 @@
       const { data: orders } = await db().rpc("my_orders");
       ORDERS = (orders || []).filter((o) => !["annulee", "refusee"].includes(o.approval_status || (o.status === "annulee" ? "annulee" : "")) && o.price_usd != null
         && !["terminee", "suspendue"].includes(o.activation_status) && o.used_postings < o.postings && o.used_positions < o.positions);
-      if (ORDERS.length) { SEL.order = ORDERS[0].id; refresh(); }
+      if (ORDERS.length) { pickOrder(); refresh(); }
       const { data: emp } = await db().from("employers").select("company,plan,size,city,phone").maybeSingle();
       if (emp && !d) { f.elements.company.value = emp.company; if (emp.size) f.elements.employer_size.value = emp.size; const r = f.querySelector(`[name=plan][value="${emp.plan}"]`); if (r) r.checked = true; if (!f.elements.contact.value) f.elements.contact.value = emp.phone || user.email || ""; summary(); if (f.elements.company.value && f.elements.employer_size.value) showStep(2, true); }
     })();
     window.onLang = () => { const f = document.getElementById("post"), keep = [f.elements.occupation.value, f.elements.department.value, f.elements.work_mode.value, f.elements.employer_size.value]; fillLists(); [f.elements.occupation.value, f.elements.department.value, f.elements.work_mode.value, f.elements.employer_size.value] = keep; refresh(); drawCityChips(); };
-    { const base = window.onLang; window.onLang = () => { base(); drawSteps(); payPreview(); updateCount(); if (STEP === STEPS.length) review(); }; }
+    { const base = window.onLang; window.onLang = () => { base(); drawSteps(); compUI(); updateCount(); if (STEP === STEPS.length) review(); }; }
 
     // ---------- Step-by-step form ----------
     const STEPS = [...document.querySelectorAll(".pw-step")];
@@ -319,7 +360,8 @@
       // Checks the browser cannot do alone: contact format, salary range, a deadline that is not already past.
       const c = f.elements.contact.value.trim();
       f.elements.contact.setCustomValidity(!c || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c) || c.replace(/\D/g, "").length >= 8 ? "" : t("Indiquez un numéro WhatsApp (8 chiffres ou plus) ou une adresse e-mail."));
-      const lo = +f.elements.salary_from.value || 0, hi = +f.elements.salary_to.value || 0;
+      const lo = num(f.elements.salary_from.value), hi = num(f.elements.salary_to.value);
+      f.elements.salary_from.setCustomValidity(f.elements.salary_from.value.trim() && !lo ? t("vérifiez cette valeur.") : "");
       f.elements.salary_to.setCustomValidity(lo && hi && hi < lo ? t("Le maximum doit être supérieur ou égal au minimum.") : "");
       f.elements.deadline.setCustomValidity(f.elements.deadline.value && f.elements.deadline.value < f.elements.deadline.min ? t("Choisissez une date à venir.") : "");
       const short = (el) => el.minLength > 0 && el.value.trim().length > 0 && el.value.trim().length < el.minLength;
@@ -335,14 +377,16 @@
     }
     // Salary: one range; shown on the offer only if the employer agrees.
     function payPreview() {
-      const f = document.getElementById("post"), lo = +f.elements.salary_from.value || 0, hi = +f.elements.salary_to.value || 0, cur = f.elements.salary_currency.value;
-      const n = (v) => v.toLocaleString("fr-FR");
+      const f = document.getElementById("post"), lo = num(f.elements.salary_from.value), hi = num(f.elements.salary_to.value), cur = f.elements.salary_currency.value, u = compUnit();
+      const n = (v) => v.toLocaleString("fr-FR", Number.isInteger(v) ? {} : { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const dv = num(f.elements.duration_value.value), du = f.elements.duration_unit.value;
+      const per = { mois: "/ mois", jour: "/ jour", projet: "" }[u], range = lo && hi ? `${n(lo)} – ${n(hi)} ${cur}` : lo ? `${n(lo)} ${cur}` : hi ? `${n(hi)} ${cur}` : "";
       // Stored on the offer in French (the site language); shown here in the reader's language.
-      const fr = lo && hi ? `${n(lo)} – ${n(hi)} ${cur} / mois` : lo ? `À partir de ${n(lo)} ${cur} / mois` : hi ? `Jusqu’à ${n(hi)} ${cur} / mois` : "";
-      const txt = lo && hi ? `${n(lo)} – ${n(hi)} ${cur} ${t("/ mois")}` : lo ? `${t("À partir de")} ${n(lo)} ${cur} ${t("/ mois")}` : hi ? `${t("Jusqu’à")} ${n(hi)} ${cur} ${t("/ mois")}` : "";
+      const fr = !range ? "" : u === "projet" ? `Budget : ${range}${dv ? ` · ${dv} ${du}` : ""}` : `${!hi && lo && u === "mois" ? "À partir de " : ""}${range} ${per}${u === "jour" && dv ? ` · ${dv} ${du}` : ""}`;
+      const txt = !range ? "" : u === "projet" ? `${t("Budget")} : ${range}${dv ? ` · ${dv} ${t(du)}` : ""}` : `${!hi && lo && u === "mois" ? t("À partir de") + " " : ""}${range} ${t(per)}${u === "jour" && dv ? ` · ${dv} ${t(du)}` : ""}`;
       const show = f.elements.show_salary.checked && txt;
-      f.elements.pay.value = show ? fr : "";
-      f.elements.salary_min.value = show && cur === "HTG" && lo ? lo : "";
+      f.elements.pay.value = show ? fr.trim() : "";
+      f.elements.salary_min.value = show && u === "mois" && cur === "HTG" && lo ? lo : "";
       document.getElementById("pw-pay").textContent = !txt ? "" : show ? `${t("Affiché sur l’offre")} : ${txt}` : `${t("Non affiché sur l’offre")} (${txt})`;
     }
     function review() {
@@ -353,11 +397,9 @@
       payPreview();
       document.getElementById("pw-review").innerHTML = `<h3>${t("Vérifiez votre offre")}</h3>
         ${box(1, row("Entreprise ou organisation", v("company")) + row("Type d’employeur", esc(t(employerTypeLabel(f.elements.plan.value)))) + row("Taille de l’organisation", sel("employer_size")))}
-        ${box(2, row("Intitulé du poste", v("title")) + row("Type de contrat", sel("type")) + row("Nombre de postes à pourvoir", v("positions")) + row("Expérience demandée", sel("experience")))}
-        ${box(3, row("Ville", v("city")) + row("Département", sel("department")) + row("Mode de travail", sel("work_mode")) + row("Date limite", f.elements.deadline.value ? esc(fmtDay(f.elements.deadline.value)) : ""))}
-        ${box(4, `<p class="pw-rv-txt">${v("about").slice(0, 220)}${f.elements.about.value.length > 220 ? "…" : ""}</p>` + row("Compétences demandées", lines("skills").map(esc).join(", ")))}
-        ${box(5, row("Salaire", esc(document.getElementById("pw-pay").textContent)))}
-        ${box(6, row("WhatsApp ou e-mail de contact", v("contact")) + row("Questions aux candidats", String(lines("questions").length)) + row("Documents demandés", String(lines("documents").length)))}`;
+        ${box(2, row("Intitulé", v("title")) + row("Type d’opportunité", sel("type")) + row("Nombre de postes à pourvoir", v("positions")) + row("Ville", v("city")) + row("Date limite", f.elements.deadline.value ? esc(fmtDay(f.elements.deadline.value)) : ""))}
+        ${box(3, `<p class="pw-rv-txt">${v("about").slice(0, 220)}${f.elements.about.value.length > 220 ? "…" : ""}</p>` + row("Compétences demandées", lines("skills").map(esc).join(", ")) + (lines("deliverables").length ? row("Livrables attendus", lines("deliverables").map(esc).join(", ")) : ""))}
+        ${box(4, row("Rémunération", esc(document.getElementById("pw-pay").textContent)) + row("Avantages", lines("benefits").map(esc).join(", ")) + row("WhatsApp ou e-mail de contact", v("contact")))}`;
     }
     function autosave() { clearTimeout(saveT); saveT = setTimeout(() => { saveDraft(); const el = document.getElementById("pw-saved"); el.textContent = t("Brouillon enregistré"); setTimeout(() => (el.textContent = ""), 1800); }, 700); }
     function updateCount() { const ta = document.querySelector('[name="about"]'), c = document.querySelector('.pw-count[data-for="about"]'); const n = ta.value.trim().length; c.textContent = n < 10 ? t("Au moins 10 caractères") : `${n} / 4000`; }
@@ -365,11 +407,11 @@
     document.getElementById("pw-back").onclick = () => showStep(STEP - 1);
     document.addEventListener("click", (e) => { const g = e.target.closest("[data-goto]"); if (!g || g.disabled) return; const n = +g.dataset.goto;
       if (n > STEP) { for (let k = STEP; k < n; k++) { if (!stepValid(k)) { showStep(k); stepValid(k); return; } } } showStep(n); });
-    document.getElementById("post").addEventListener("input", (e) => { if (e.target.name === "city") autoDept(); if (e.target.name === "positions") packChip(); if (["salary_from", "salary_to"].includes(e.target.name)) payPreview(); if (e.target.name === "about") updateCount(); autosave(); });
-    document.getElementById("post").addEventListener("change", (e) => { if (e.target.name === "department") DEPT_AUTO = false; if (e.target.name === "city") autoDept(); if (["show_salary", "salary_currency"].includes(e.target.name)) payPreview(); autosave(); });
+    document.getElementById("post").addEventListener("input", (e) => { if (e.target.name === "city") autoDept(); if (e.target.name === "positions") { if (ORDERS.length && !SEL.optOut) pickOrder(); refresh(); } if (["salary_from", "salary_to", "duration_value"].includes(e.target.name)) payPreview(); if (e.target.name === "about") updateCount(); autosave(); });
+    document.getElementById("post").addEventListener("change", (e) => { if (["type", "comp_mode"].includes(e.target.name)) compUI(); if (e.target.name === "department") DEPT_AUTO = false; if (e.target.name === "city") autoDept(); if (["show_salary", "salary_currency"].includes(e.target.name)) payPreview(); autosave(); });
     // Enter in a field goes to the next step instead of publishing.
     document.getElementById("post").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.tagName === "INPUT" && STEP < STEPS.length) { e.preventDefault(); document.getElementById("pw-next").click(); } });
-    showStep(1, true); updateCount(); payPreview();
+    showStep(1, true); updateCount(); compUI();
     const lines = (el) => el.value.split("\n").map((x) => x.trim()).filter(Boolean).slice(0, 10);
     document.getElementById("post").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -394,9 +436,11 @@
         positions: pr.n, plan: f.elements.plan.value, employer_size: f.elements.employer_size.value,
         package: SEL.order ? undefined : SEL.pkg, addons: SEL.order ? undefined : SEL.addons, order_id: SEL.order || undefined, occupation: f.elements.occupation.value || null, department: f.elements.department.value || deptOf(f.elements.city.value) || null,
         work_mode: f.elements.work_mode.value, skills: lines(f.elements.skills), deadline: f.elements.deadline.value || null,
-        salary_from: f.elements.salary_from.value ? Math.round(+f.elements.salary_from.value) : null, salary_to: f.elements.salary_to.value ? Math.round(+f.elements.salary_to.value) : null, salary_currency: f.elements.salary_currency.value,
+        salary_from: num(f.elements.salary_from.value) || null, salary_to: num(f.elements.salary_to.value) || null, salary_currency: f.elements.salary_currency.value,
+        comp_unit: compUnit(), duration_value: num(f.elements.duration_value.value) || null, duration_unit: compUnit() === "mois" ? null : f.elements.duration_unit.value,
+        deliverables: ["Consultance", "Contrat"].includes(f.elements.type.value) ? lines(f.elements.deliverables) : [],
       });
-      btn.textContent = t("Publier l'offre");
+      btn.textContent = t(SEL.order ? "Publier l'offre" : "Publier et continuer vers le paiement");
       done.textContent = err || t("Merci ! Votre offre sera en ligne après vérification.");
       done.classList.toggle("err", !!err);
       done.style.display = "block";
@@ -405,8 +449,10 @@
         try { localStorage.removeItem("alo-post-draft"); } catch {}
         // What happens next: review by ALO, and (for a new order) payment by transfer with the order reference.
         let o = null;
-        if (!SEL.order) { if (DEMO) o = { reference: "ALO-2026-00042", price_usd: pr.total, payment_status: "non_payee" };
-          else { try { const r = await db().rpc("my_orders"); o = (r.data || [])[0] || null; } catch {} } }
+        if (!SEL.order) { if (DEMO) o = { id: "demo", reference: "ALO-2026-00042", price_usd: pr.total, payment_status: "non_payee" };
+          else { try { const r = await db().rpc("my_orders"); o = (r.data || [])[0] || null; } catch {} }
+          // The offer is saved (it waits for review); the purchase continues in the checkout: pay now, quote or deferred payment.
+          if (o && o.id) { location.href = `commande.html?order=${encodeURIComponent(o.id)}${DEMO ? `&demo=1&formule=${SEL.pkg}` : ""}`; return; } }
         done.innerHTML = `<b>${esc(t("Merci ! Votre offre sera en ligne après vérification."))}</b>
           ${o && o.price_usd != null ? `<div class="co-transfer pw-next-pay"><div class="co-ref"><span>${esc(t("Référence de commande"))}</span><b>${esc(o.reference || "")}</b></div><div class="co-ref"><span>${esc(t("Montant"))}</span><b>${usd(o.price_usd)}</b></div>
             <p>${esc(t("Réglez la commande par virement en indiquant cette référence. L’équipe ALO vérifie l’offre et confirme le paiement ; ce sont deux étapes séparées."))}</p><p class="co-once">${esc(t("Paiement unique. Aucun renouvellement automatique."))}</p></div>`

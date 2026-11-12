@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111x"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111z"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Nos solutions de recrutement — alo.ht</title>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111x" />
+  <link rel="stylesheet" href="styles.css?v=20261111z" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -88,9 +88,9 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111x"></script>
+  <script src="config.js?v=20261111z"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111x"></script>
+  <script src="app.js?v=20261111z"></script>
   <script>
     // « Nos solutions de recrutement »: packages, configurator (live total) and quotation request.
     // Prices come from the database (pricing_catalog), edited by ALO administrators.
@@ -102,6 +102,8 @@
       "Facturation sur devis et contrat", "Campagnes de recrutement ciblées", "Données sur l’emploi en Haïti (bientôt)"];
     const priceOf = (p) => p.price_usd == null ? t("Sur devis") : `${t("À partir de")} ${usd(p.price_usd)}`;
 
+    const tag = (f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`;
+    // Three defining benefits; the rest one click away. Price, limits and « Bientôt » stay visible.
     function drawPackages() {
       document.getElementById("tf-packages").innerHTML = PACKAGES().map((p) => { const L = packageLadder(p.id), prevName = L.prev ? (catItem(L.prev) || {}).name || L.prev : null;
         return `
@@ -111,7 +113,10 @@
           <div class="tf-price">${p.price_usd == null ? `<b>${t("Sur devis")}</b>` : `<span>${t("À partir de")}</span><b>${p.price_usd}<span class="cur">$ US</span></b>`}</div>
           <div class="tf-limits">${p.price_usd == null ? `<span>${t("Offres, postes et durée sur mesure")}</span>` : `<span>${p.postings} ${t("offre")}</span><span>${p.days} ${t("jours")}</span>`}</div>
           <div class="tf-inc"><span class="tf-inc-h">${prevName ? `${t("Tout ce qu’inclut")} ${x(prevName)}, ${t("plus :")}` : t("Inclus :")}</span>
-            <div class="tf-tags">${L.items.map((f) => `<span class="tf-tag ${f.live ? "" : "soon-tag"}">${x(t(f.name))}${f.live ? "" : ` <em>${t("Bientôt")}</em>`}</span>`).join("")}</div></div>
+            <div class="tf-tags">${L.items.slice(0, 3).map(tag).join("")}</div>
+            ${L.items.length > 3 ? `${L.items.slice(3).some((f) => !f.live) ? (() => { const k = L.items.slice(3).filter((f) => !f.live).length; return `<p class="tf-soon-n">${t("Dont")} ${k} ${t(k > 1 ? "autres fonctionnalités" : "autre fonctionnalité")} <span class="soon">${t("Bientôt")}</span></p>`; })() : ""}
+              <div class="xp" id="xp-card-${p.id}" ${xpOpen("xp-card-" + p.id) ? "" : "hidden"}><div class="tf-tags">${L.items.slice(3).map(tag).join("")}</div></div>
+              ${xpButton("xp-card-" + p.id, t("Voir toutes les fonctionnalités"))}` : ""}</div>
           <div class="tf-cta">${p.price_usd == null
             ? `<a class="btn btn-lg" href="#devis">${t("Demander un devis")}</a>`
             : `<a class="btn btn-lg" href="post.html?formule=${p.id}">${t("Publier une offre")}</a><a class="btn btn-plain" href="#config" data-pick="${p.id}">${t("Personnaliser ma formule")}</a>`}</div>
@@ -140,14 +145,14 @@
           <div class="tf-addons">${ADDONS().filter((a) => !["extra_posting", "extra_position", "extra_days"].includes(a.id)).map((a) => {
             const inc = (pk.includes || []).includes(a.id), live = addonLive(a);
             return `<label class="tf-addon ${inc ? "inc" : ""} ${live ? "" : "off"}"><input type="checkbox" name="addon" value="${a.id}" ${inc || (live && SEL.addons.includes(a.id)) ? "checked" : ""} ${inc || !live ? "disabled" : ""} />
-              <span>${x(t(a.name))}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : a.price_usd == null || a.id === "campaign" ? t("Sur devis") : `${usd(a.price_usd)} ${t(a.unit)}`}</em></label>`; }).join("")}</div>
+              <span>${x(t(a.name))}${addonAllowance(a) ? `<small>${x(t(addonAllowance(a)))}</small>` : ""}</span><em>${inc && !live ? t("Inclus, bientôt disponible") : inc ? t("Déjà inclus") : !live ? t("Bientôt") : addonPriceLabel(a, false)}</em></label>`; }).join("")}</div>
         </div>`;
     }
     function drawSum() {
       const q = quote(SEL);
       document.getElementById("tf-sum").innerHTML = `
         <div class="pj-sum-h">${t("Votre formule")}</div>
-        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Inclus") : l.amount == null ? t("Sur devis") : usd(l.amount)}</span></div>`).join("")}
+        ${q.lines.map((l) => `<div class="pj-line sm"><span>${x(l.label)}</span><span>${l.included ? t("Inclus") : l.amount == null ? t(l.toConfirm ? "Prix à confirmer" : "Sur devis") : usd(l.amount)}</span></div>`).join("")}
         ${q.needsQuote ? `<div class="tf-total sub"><span>${t("Sous-total chiffré")}</span><b>${usd(q.total)}</b></div>
           <div class="tf-quote-items"><span>${t("À chiffrer sur devis")}</span><b>${q.lines.filter((l) => l.amount == null).map((l) => x(l.label)).join(", ")}</b></div>
           <p class="tf-unconfirmed">${t("Total non confirmé : l’équipe ALO vous enverra le montant final avant tout paiement.")}</p>`

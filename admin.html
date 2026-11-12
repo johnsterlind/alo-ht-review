@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111x"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111z"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Administration — alo.ht</title>
@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111x" />
+  <link rel="stylesheet" href="styles.css?v=20261111z" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -45,11 +45,11 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111x"></script>
+  <script src="config.js?v=20261111z"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111x"></script>
-  <script src="outils.js?v=20261111x"></script>
-  <script src="jobs-lib.js?v=20261111x"></script>
+  <script src="app.js?v=20261111z"></script>
+  <script src="outils.js?v=20261111z"></script>
+  <script src="jobs-lib.js?v=20261111z"></script>
   <script>
     // ALO administration: prices (packages, add-ons, discounts), quotation requests, orders and offers.
     // Access is checked by the database (is_admin()); this page only shows what the database allows.
@@ -60,7 +60,7 @@
     const ORDER_ST = { devis_demande: "Devis demandé", devis_envoye: "Devis envoyé", en_attente_paiement: "Paiement en attente", payee: "Payée", annulee: "Annulée" };
     const QUOTE_ST = { nouvelle: "Nouvelle", en_cours: "En cours", envoyee: "Devis envoyé", acceptee: "Acceptée", refusee: "Refusée" };
     const JOB_ST = { pending: "En vérification", approved: "En ligne", closed: "Fermée" };
-    let TAB = location.hash.slice(1) || "prix", QUOTES = [], ORD = [], JOBSA = [], MSG = "", OQ = "traiter", ODET = null, OSEL = null;
+    let BONUS = null, TAB = location.hash.slice(1) || "prix", QUOTES = [], ORD = [], JOBSA = [], MSG = "", OQ = "traiter", ODET = null, OSEL = null;
 
     async function load() {
       if (DEMO) { demo(); return draw(); }
@@ -76,6 +76,7 @@
       if (cat.data && cat.data.length) CATALOG = cat.data;
       QUOTES = q.data || []; ORD = o.data || []; JOBSA = j.data || [];
       SALARY_LOADED = false; await loadSalaryRules(); SR = null;
+      try { const r = await c.rpc("bonus_terms"); if (!r.error) BONUS = r.data; } catch {}
     }
     const opts = (map, cur) => Object.entries(map).map(([k, v]) => `<option value="${k}" ${k === cur ? "selected" : ""}>${t(v)}</option>`).join("");
 
@@ -90,7 +91,7 @@
     }
     function prices() {
       const row = (c) => `<tr data-id="${x(c.id)}">
-        <td><b>${x(c.name)}</b><small>${x(c.id)}</small></td>
+        <td><b>${x(c.name)}</b><small>${x(c.id)}</small>${c.kind === "addon" ? `<input class="ad-in" data-f="description" data-text="1" maxlength="160" value="${x(c.description || "")}" placeholder="${t("Ce qui est inclus (quantité, durée ou usage)")}" aria-label="${t("Ce qui est inclus (quantité, durée ou usage)")}" />` : ""}</td>
         <td><input class="ad-in" data-f="price_usd" type="number" min="0" step="0.01" value="${c.price_usd ?? ""}" placeholder="${t("Sur devis")}" /></td>
         <td>${x(t(c.unit || ""))}</td>
         <td>${c.kind === "package" || c.id === "extra_days" ? `<input class="ad-in sm" data-f="days" type="number" min="1" value="${c.days ?? ""}" />` : "—"}</td>
@@ -99,7 +100,8 @@
       return `
         <section class="ap-card"><h2>${t("Formules")}</h2><p class="hint-l">${t("Prix vide = « Sur devis ». Les modifications s’appliquent immédiatement sur le site.")}</p>
           <div class="em-table"><table><thead><tr><th>${t("Nom")}</th><th>${t("Prix ($ US)")}</th><th>${t("Unité")}</th><th>${t("Jours")}</th><th>${t("Actif")}</th></tr></thead><tbody>${CATALOG.filter((c) => c.kind === "package").map(row).join("")}</tbody></table></div></section>
-        <section class="ap-card"><h2>${t("Options")}</h2><p class="hint-l">${t("Sans prix, une option est proposée « sur devis ». Sans prix, les offres et postes supplémentaires coûtent le prix de la formule.")}</p>
+        <section class="ap-card"><h2>${t("Options")}</h2><p class="hint-l">${t("Les options standard ont un prix fixe et précisent ce qui est inclus. Sans prix approuvé, elles affichent « Prix à confirmer ». Seuls les services sur mesure sont « sur devis ».")}</p>
+          ${(() => { const n = CATALOG.filter((c) => c.kind === "addon" && c.active !== false && c.price_usd == null && !isCustomAddon(c)).length; return n ? `<p class="ad-warn">${n} ${t("option(s) standard sans prix approuvé")}</p>` : ""; })()}
           <div class="em-table"><table><thead><tr><th>${t("Nom")}</th><th>${t("Prix ($ US)")}</th><th>${t("Unité")}</th><th>${t("Jours")}</th><th>${t("Actif")}</th></tr></thead><tbody>${CATALOG.filter((c) => c.kind === "addon").map(row).join("")}</tbody></table></div></section>
         <section class="ap-card"><h2>${t("Remises sur volume")}</h2>
           ${disc.length ? `<div class="em-table"><table><thead><tr><th>${t("Nom")}</th><th>${t("S’applique à")}</th><th>${t("À partir de")}</th><th>${t("Remise (%)")}</th><th>${t("Actif")}</th></tr></thead><tbody>${disc.map((d) => `<tr data-id="${x(d.id)}"><td><b>${x(d.name)}</b></td><td>${t(d.applies_to === "postings" ? "offres" : "postes")}</td><td><input class="ad-in sm" data-f="min_qty" type="number" min="2" value="${d.min_qty}" /></td><td><input class="ad-in sm" data-f="discount_pct" type="number" min="0" max="90" step="0.5" value="${d.discount_pct}" /></td><td><input type="checkbox" data-f="active" ${d.active !== false ? "checked" : ""} /></td></tr>`).join("")}</tbody></table></div>` : `<p class="hint-l">${t("Aucune remise pour l’instant.")}</p>`}
@@ -110,7 +112,20 @@
             <input name="discount_pct" type="number" min="1" max="90" step="0.5" required placeholder="%" />
             <button class="btn" type="submit">${t("Ajouter une remise")}</button>
           </form>
-        </section>`;
+        </section>${bonusTerms()}`;
+    }
+    // Hiring bonus terms shown on recommander.html#conditions. Empty = « À définir » on the page.
+    function bonusTerms() {
+      const b = BONUS || {};
+      return `<section class="ap-card"><h2>${t("Prime d’embauche")}</h2><p class="hint-l">${t("Ces conditions sont publiées sur la page « Recommander un talent ». Laissez vide ce qui n’est pas encore décidé : la page affiche « À définir ».")}</p>
+        <form id="ad-bonus" class="ot-form">
+          <div class="two"><label class="field"><span>${t("Pourcentage du premier salaire mensuel")}</span><input name="candidate_max_pct" type="number" min="0" max="20" step="0.5" required value="${b.candidate_max_pct ?? RULES.candidateBonusMaxPct}" /></label>
+            <label class="field"><span>${t("Plafond par embauche (HTG)")}</span><input name="candidate_cap_htg" type="number" min="0" step="1" value="${b.candidate_cap_htg ?? ""}" /></label></div>
+          <div class="two"><label class="field"><span>${t("Délai de versement (jours après la vérification)")}</span><input name="payout_days" type="number" min="1" max="180" value="${b.payout_days ?? ""}" /></label>
+            <label class="field"><span>${t("Récompense de la personne qui recommande (HTG)")}</span><input name="referral_reward_htg" type="number" min="0" step="1" value="${b.referral_reward_htg ?? ""}" /></label></div>
+          <label class="field"><span>${t("Modes de versement (séparés par des virgules)")}</span><input name="payout_methods" maxlength="200" value="${x((b.payout_methods || []).join(", "))}" placeholder="${t("Ex. virement bancaire")}" /></label>
+          <div class="row"><button class="btn" type="submit">${t("Publier ces conditions")}</button></div>
+        </form></section>`;
     }
     function quotes() {
       return `<section class="ap-card">${QUOTES.map((q) => `
@@ -259,11 +274,19 @@
     document.addEventListener("change", (e) => {
       const el = e.target, tr = el.closest("tr");
       if (el.dataset.f && tr && tr.dataset.id) {
-        const v = el.type === "checkbox" ? el.checked : el.value === "" ? null : +el.value;
+        const v = el.type === "checkbox" ? el.checked : el.dataset.text ? el.value.trim() : el.value === "" ? null : +el.value;
         return save(() => db().from("pricing_catalog").update({ [el.dataset.f]: v, updated_at: new Date().toISOString() }).eq("id", tr.dataset.id));
       }
       if (el.dataset.quote) return save(() => db().from("quote_requests").update({ status: el.value }).eq("id", el.dataset.quote));
       if (el.dataset.job) return save(() => db().rpc("admin_set_job", { p_job: +el.dataset.job, p_status: el.value }));
+    });
+    document.addEventListener("submit", (e) => {
+      if (e.target.id !== "ad-bonus") return; e.preventDefault();
+      const f = e.target, v = (k) => f.elements[k].value.trim();
+      const terms = { candidate_max_pct: +v("candidate_max_pct"), candidate_cap_htg: v("candidate_cap_htg"), payout_days: v("payout_days"), referral_reward_htg: v("referral_reward_htg"),
+        payout_methods: v("payout_methods").split(",").map((z) => z.trim()).filter(Boolean) };
+      if (DEMO) { BONUS = terms; MSG = t("Enregistré."); return draw(); }
+      save(async () => { const r = await db().rpc("admin_set_bonus_terms", { p_terms: terms }); if (!r.error) BONUS = terms; return r; });
     });
     document.addEventListener("submit", (e) => {
       if (e.target.id !== "ad-disc") return; e.preventDefault();
