@@ -2712,3 +2712,54 @@ b .unit { font-size: .45em; font-weight: 700; margin-left: 5px; letter-spacing: 
 .cond-rules small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; margin-top: 3px; }
 .cond-tbd { font-style: normal; font-weight: 600; color: #8A4B00; }
 @media (max-width: 760px) { .cond-rules { grid-template-columns: 1fr; } }
+
+/* ---------- Employer platform: actions, requests, history, sharing, duplicates, onboarding, report ---------- */
+.ew-prio li { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.ew-prio li > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ew-prio li small { color: var(--muted); font-size: 13px; }
+.ew-late { color: #B42318; font-weight: 700; }
+.ew-ai { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 14px; }
+.ew-ai small { flex-basis: 100%; color: var(--muted); font-size: 12.5px; }
+.ew-ai .btn[disabled] { opacity: .6; cursor: not-allowed; }
+.ew-req, .ew-onb { border-top: 1px solid var(--line); padding: 14px 0; }
+.ew-req:first-of-type, .ew-onb:first-of-type { border-top: 0; }
+.ew-just { margin: 8px 0; line-height: 1.5; }
+.ew-comment { background: var(--soft); border-radius: 10px; padding: 8px 12px; margin: 8px 0; font-size: 14px; }
+.ew-comment b { margin-right: 6px; }
+.ew-decide { margin-top: 10px; }
+.st.s-warn { background: #FFF4DB; color: #8A4B00; }
+.st.s-no { background: #FDECEC; color: #B42318; }
+.ew-next h2 { font-size: 17px; margin: 0 0 6px; }
+.ew-share { display: flex; gap: 8px; margin: 8px 0 10px; }
+.ew-share input { flex: 1; min-width: 0; font-size: 14px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
+.ew-share-to .btn { min-height: 44px; }
+.ew-dup-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 0; border-top: 1px solid var(--line); }
+.ew-hist { list-style: none; padding: 0; margin: 0; }
+.ew-hist li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.ew-hist li:first-child { border-top: 0; }
+.ew-hist-k { font-size: 13px; font-weight: 700; color: #086B4D; }
+.ew-hist p { margin: 4px 0; } .ew-hist small { color: var(--muted); font-size: 12.5px; }
+.ew-bar { height: 6px; background: var(--soft); border-radius: 6px; overflow: hidden; margin: 10px 0; }
+.ew-bar i { display: block; height: 100%; background: #086B4D; }
+.ew-tasks { list-style: none; padding: 0; margin: 0 0 8px; }
+.ew-tasks li { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; align-items: center; flex-wrap: wrap; }
+.ew-tasks label { display: flex; gap: 10px; align-items: center; min-height: 44px; cursor: pointer; }
+.ew-tasks input { width: 20px; height: 20px; }
+.ew-tasks li.done span { color: var(--muted); text-decoration: line-through; }
+.ew-tasks small { color: var(--muted); font-size: 12.5px; }
+.ew-doc { font-style: normal; font-size: 12px; color: #086B4D; font-weight: 600; margin-left: 6px; }
+.ew-fs { border: 0; padding: 0; margin: 8px 0; } .ew-fs legend { font-weight: 600; margin-bottom: 4px; }
+.ew-onb-f { margin-top: 12px; }
+.ew-reps { list-style: none; padding: 0; margin: 0 0 12px; }
+.ew-reps li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.rp h2 { font-size: 20px; } .rp h3 { font-size: 15px; margin: 18px 0 6px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+.rp-meta, .rp-note { color: var(--muted); font-size: 13px; }
+.rp-l { display: flex; gap: 10px; } .rp-l span { color: var(--muted); min-width: 110px; }
+.rp-miss { background: #FFF4DB; border-radius: 10px; padding: 10px 14px; margin: 10px 0; } .rp-miss ul { margin: 6px 0 0; }
+.pw-req { background: #EAF6F0; color: #086B4D; border-radius: 10px; padding: 8px 12px; font-weight: 600; font-size: 14px; }
+@media (max-width: 760px) {
+  .ew-prio li { flex-direction: column; align-items: stretch; } .ew-prio li .btn { width: 100%; }
+  .ew-hist li { grid-template-columns: 1fr; gap: 2px; }
+  .ew-share { flex-direction: column; }
+  .ew-reps li { flex-direction: column; align-items: flex-start; }
+}

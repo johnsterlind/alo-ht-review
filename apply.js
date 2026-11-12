@@ -317,7 +317,9 @@ async function send() {
       };
       const row = { job_id: JOB.id, name: a.contact.name, phone: a.contact.phone || a.contact.email, email: a.contact.email || ME.email, message: a.message,
         job_title: JOB.title, company: JOB.company, data: sent, answers: a.answers, files, cv_version_id: cv ? cv.id : null, cv_snapshot: cv ? cv.data : null };
+      const src = applySource(JOB.id); if (src !== "alo") row.source = src;
       let { error } = await c.from("applications").insert(row);
+      if (error && error.code === "PGRST204" && row.source) { delete row.source; ({ error } = await c.from("applications").insert(row)); } // supabase-update-14.sql not run yet
       if (error && error.code === "PGRST204") { // database not updated yet: send the basic fields
         ({ error } = await c.from("applications").insert({ job_id: JOB.id, name: row.name, phone: row.phone, email: row.email, message: row.message }));
       }

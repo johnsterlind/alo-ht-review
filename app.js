@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261112a"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261112d"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -294,6 +294,11 @@ const JOB_COLS_2 = JOB_COLS.replace(",questions,documents", "");
 const JOB_COLS_6 = JOB_COLS + ",positions,occupation,department,work_mode,skills,deadline";
 const DEMO = new URLSearchParams(location.search).has("demo") || (() => { try { return sessionStorage.getItem("alo-demo") === "1"; } catch { return false; } })();
 if (DEMO) { try { sessionStorage.setItem("alo-demo", "1"); } catch {} }
+// Where an application comes from (shared link: job.html?id=12&src=whatsapp). Recorded with the application; it never decides bonus eligibility.
+const APPLY_SOURCES = { lien: "Lien partagé", site: "Site de l’employeur", reseaux: "Réseaux sociaux", email: "E-mail", whatsapp: "WhatsApp", import: "Import", alo: "alo.ht", autre: "Autre" };
+{ const q = new URLSearchParams(location.search), src = q.get("src"), id = q.get("id");
+  if (src && APPLY_SOURCES[src] && src !== "import" && id) { try { sessionStorage.setItem("alo-src", JSON.stringify({ src, job: String(id) })); } catch {} } }
+function applySource(jobId) { try { const v = JSON.parse(sessionStorage.getItem("alo-src") || "null"); return v && v.job === String(jobId) ? v.src : "alo"; } catch { return "alo"; } }
 
 // Loads approved jobs from Supabase, or keeps the sample jobs when not configured.
 async function loadJobs() {
@@ -334,6 +339,7 @@ async function saveJob(job) {
   const c = db();
   if (!c || DEMO) return null; // sample mode: nothing is saved
   let { error } = await c.from("jobs").insert({ ...job, status: "pending" });
+  if (error && error.code === "PGRST204" && "request_id" in job) { const { request_id, ...rest } = job; job = rest; ({ error } = await c.from("jobs").insert({ ...job, status: "pending" })); } // update 14 not run yet
   if (error && error.code === "PGRST204" && "comp_unit" in job) { // supabase-update-13.sql not run yet: the pay text still says it all
     const { comp_unit, duration_value, duration_unit, deliverables, ...rest } = job; job = rest;
     ({ error } = await c.from("jobs").insert({ ...job, status: "pending" }));
@@ -557,7 +563,7 @@ const FEATURES = {
   analytics:          { name: "Statistiques de recrutement", live: true, pitch: "Comprenez ce qui fonctionne dans vos recrutements." },
   talent_discovery:   { name: "Talents à découvrir", live: true, pitch: "Découvrez des professionnels qui ont choisi d’être visibles par les recruteurs." },
   reports:            { name: "Rapports institutionnels", live: true, pitch: "Exportez l’activité, les évaluations et les délais de recrutement." },
-  approvals:          { name: "Circuits d’approbation", live: false, pitch: "Faites valider chaque étape par les bonnes personnes." },
+  approvals:          { name: "Circuits d’approbation", live: true, pitch: "Faites valider chaque étape par les bonnes personnes." },
   departments:        { name: "Gestion par département et par projet", live: false, pitch: "Organisez vos recrutements par département ou par projet." },
   campaigns:          { name: "Campagnes de recrutement ciblées", live: false, pitch: "Touchez les professionnels qui correspondent à vos besoins." },
   employment_intel:   { name: "Données sur l’emploi", live: false, pitch: "Repères sur le marché de l’emploi en Haïti." },
