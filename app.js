@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111z"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261112a"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -299,8 +299,10 @@ if (DEMO) { try { sessionStorage.setItem("alo-demo", "1"); } catch {} }
 async function loadJobs() {
   const c = db();
   if (!c || DEMO) return JOBS;
-  let { data, error } = await c.from("jobs").select(JOB_COLS_6).eq("status", "approved")
+  let { data, error } = await c.from("jobs").select(JOB_COLS_6 + ",comp_unit,duration_value,duration_unit,deliverables").eq("status", "approved")
     .order("created_at", { ascending: false }).limit(200);
+  if (error && ["42703", "42501"].includes(error.code)) // supabase-update-13.sql (grants) not run yet
+    ({ data, error } = await c.from("jobs").select(JOB_COLS_6).eq("status", "approved").order("created_at", { ascending: false }).limit(200));
   if (error && error.code === "42703") { // supabase-update-6.sql not run yet
     ({ data, error } = await c.from("jobs").select(JOB_COLS).eq("status", "approved").order("created_at", { ascending: false }).limit(200));
   }
@@ -313,7 +315,7 @@ async function loadJobs() {
   }
   if (error) { console.error("ALO: loading jobs failed", error); JOBS = []; return JOBS; }
   JOBS = data.map((j) => ({
-    ...j, skills: j.skills || [], needs: j.needs || [], responsibilities: j.responsibilities || [], benefits: j.benefits || [], questions: j.questions || [], documents: j.documents || [],
+    ...j, skills: j.skills || [], needs: j.needs || [], responsibilities: j.responsibilities || [], benefits: j.benefits || [], deliverables: j.deliverables || [], questions: j.questions || [], documents: j.documents || [],
     days: Math.max(0, Math.floor((Date.now() - new Date(j.created_at)) / 864e5)),
   }));
   return JOBS;

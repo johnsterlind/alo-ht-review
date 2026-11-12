@@ -121,6 +121,7 @@ function jobDetail(j, opts = {}) {
   <div class="jd-body">
     <section><h2>${t("Description du poste")}</h2><p>${esc(j.about)}</p></section>
     ${j.responsibilities && j.responsibilities.length ? `<section><h2>${t("Responsabilités")}</h2>${list(j.responsibilities)}</section>` : ""}
+    ${j.deliverables && j.deliverables.length ? `<section><h2>${t("Livrables attendus")}</h2>${list(j.deliverables)}</section>` : ""}
     ${j.needs && j.needs.length ? `<section><h2>${t("Qualifications")}</h2>${list(j.needs)}</section>` : ""}
     ${j.skills && j.skills.length ? `<section><h2>${t("Compétences demandées")}</h2>${list(j.skills)}</section>` : ""}
     ${j.benefits && j.benefits.length ? `<section><h2>${t("Avantages")}</h2>${list(j.benefits)}</section>` : ""}
