@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111v"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
+  <script>(function(){try{var q=(new URLSearchParams(location.search).get("lang")||"").toLowerCase(),l=q==="ht"?"kr":q||localStorage.getItem("alo-lang");if(l==="en"||l==="kr"){document.documentElement.classList.add("i18n-wait");document.write('<script src="i18n.js?v=20261111x"><\/script>');setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},2500)}}catch(e){}})();</script>
   <style>html.i18n-wait body{opacity:0}body{transition:opacity .12s ease-out}</style>
   <meta name="theme-color" content="#121A3A" />
   <title>Mon espace — alo.ht</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFC629'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-weight='700' font-size='26' fill='%23121A3A' text-anchor='middle'%3Ealo%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2" />
+  <link rel="apple-touch-icon" href="brand/alo-ht-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261111v" />
+  <link rel="stylesheet" href="styles.css?v=20261111x" />
 </head>
 <body>
   <a class="skip" href="#main" data-t>Aller au contenu</a>
@@ -43,11 +44,11 @@
       </div>
     </div>
   </footer>
-  <script src="config.js?v=20261111v"></script>
+  <script src="config.js?v=20261111x"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="app.js?v=20261111v"></script>
-  <script src="outils.js?v=20261111v"></script>
-  <script src="jobs-lib.js?v=20261111v"></script>
+  <script src="app.js?v=20261111x"></script>
+  <script src="outils.js?v=20261111x"></script>
+  <script src="jobs-lib.js?v=20261111x"></script>
   <script>
     const STATUS_CLASS = { "Envoyée": "s-sent", "Consultée": "s-seen", "Entretien": "s-int", "Retenue": "s-ok", "Non retenue": "s-no" };
     const x = (s) => esc(s || "");
@@ -88,27 +89,33 @@
       draw();
     }
 
+    // Summary at the top: a gauge for the Profil ALO, small rings for the applications (real data only).
     function profileCard() {
-      const p = DATA.profile, st = profileStatus(p), pct = profileCompletion(p);
-      if (st === "none") return `
-        <section class="ap-card sp-profile">
-          <div class="spp-body"><h2>${t("Profil ALO")}</h2><p class="hint-l">${t("Votre profil n’est pas encore créé. Il n’est pas obligatoire pour postuler.")}</p></div>
-          <a class="btn btn-lg" href="mon-profil.html">${t("Créer mon Profil ALO")}</a>
-        </section>`;
-      const photo = p.photo ? `<img class="spp-photo" src="${x(p.photo)}" alt="" referrerpolicy="no-referrer" />` : `<span class="spp-photo ini">${x((p.name || "?").split(" ").map((w) => w[0]).slice(0, 2).join(""))}</span>`;
-      if (st === "started") return `
-        <section class="ap-card sp-profile">
-          ${photo}
-          <div class="spp-body"><h2>${t("Profil ALO")}</h2><p class="spp-name">${x(p.name) || "—"}</p>
-            <div class="mp-progress"><div class="mp-bar"><i style="width:${pct}%"></i></div><span>${t("Profil complété à")} ${pct} %</span></div></div>
-          <a class="btn btn-lg" href="mon-profil.html">${t("Continuer mon profil")}</a>
-        </section>`;
+      const p = DATA.profile, st = profileStatus(p), pct = st === "none" ? 0 : profileCompletion(p);
+      const meta = (USER && USER.user_metadata) || {}, first = String((p && p.name) || meta.full_name || meta.name || "").trim().split(/\s+/)[0];
+      const apps = DATA.apps, n = apps.length, seen = apps.filter((a) => ["Consultée", "Entretien", "Retenue", "Non retenue"].includes(a.status)).length;
+      const inter = apps.filter((a) => ["Entretien", "Retenue"].includes(a.status)).length, kept = apps.filter((a) => a.status === "Retenue").length;
+      const L = Math.PI * 80, R = 2 * Math.PI * 24;
+      const ring = (val, part, label) => { const k = n ? part / n : 0; return `<div class="sp-ring"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" class="tr"/><circle cx="30" cy="30" r="24" class="pr" style="stroke-dasharray:${R};stroke-dashoffset:${R * (1 - k)}"/></svg><b>${val}</b><span>${t(label)}</span></div>`; };
+      const head = st === "none" ? "Créons votre Profil ALO." : pct >= 100 ? "Votre profil est prêt." : "Votre profil avance bien.";
+      const btn = st === "none" ? `<a class="btn btn-lg" href="mon-profil.html">${t("Créer mon Profil ALO")}</a>`
+        : st === "started" ? `<a class="btn btn-lg" href="mon-profil.html">${t("Continuer mon profil")}</a>`
+        : `<a class="btn btn-lg" href="mon-profil.html">${t("Voir mon profil")}</a><a class="link" href="mon-profil.html?edit=1">${t("Modifier mon profil")}</a>`;
       return `
-        <section class="ap-card sp-profile done">
-          ${photo}
-          <div class="spp-body"><span class="spp-label">${t("Profil ALO")}</span><h2 class="spp-name">${x(p.name)}</h2><p class="spp-title">${x(p.title)}${p.city ? " · " + x(p.city) : ""}</p>
-            <div class="mp-progress"><div class="mp-bar"><i style="width:${pct}%"></i></div><span>${t("Profil complété à")} ${pct} %</span></div></div>
-          <div class="spp-act"><a class="btn" href="mon-profil.html">${t("Voir mon profil")}</a><a class="btn btn-plain" href="mon-profil.html?edit=1">${t("Modifier mon profil")}</a></div>
+        <section class="ap-card sp-hero">
+          <div class="sp-hero-l">
+            <p class="sp-hello">${first ? `${t("Bonjour")}, ${x(first)}` : t("Bonjour")}</p>
+            <h2>${t(head)}</h2>
+            <div class="sp-hero-act">${btn}</div>
+          </div>
+          <div class="sp-gauge" role="img" aria-label="${t("Profil ALO")} ${pct} %">
+            <div class="sp-g-side l"><b>${n}</b><span>${t(n > 1 ? "candidatures" : "candidature")}</span></div>
+            <div class="sp-g-side r"><b>${SAVED.size}</b><span>${t("enregistrées")}</span></div>
+            <svg viewBox="0 0 200 110" aria-hidden="true"><defs><linearGradient id="spg" x1="0" x2="1"><stop offset="0" stop-color="#FFC629"/><stop offset="1" stop-color="#1DB27C"/></linearGradient></defs>
+              <path d="M20 100 A80 80 0 0 1 180 100" class="tr"/><path d="M20 100 A80 80 0 0 1 180 100" class="pr" style="stroke-dasharray:${L};stroke-dashoffset:${L * (1 - pct / 100)}"/></svg>
+            <div class="sp-g-mid"><b>${pct}<small>%</small></b><span>${t("Profil ALO")}</span></div>
+          </div>
+          <div class="sp-rings">${ring(seen, seen, "Vues par l’employeur")}${ring(inter, inter, "Entretiens")}${ring(kept, kept, "Retenues")}</div>
         </section>`;
     }
 

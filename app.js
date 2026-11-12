@@ -79,7 +79,7 @@ mergeI18n();
 let I18N_LOADING = null;
 function loadI18n() {
   if (window.ALO_I18N) { mergeI18n(); return Promise.resolve(); }
-  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111v"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
+  return I18N_LOADING || (I18N_LOADING = new Promise((ok) => { const s = document.createElement("script"); s.src = "i18n.js?v=20261111x"; s.onload = () => { mergeI18n(); ok(); }; s.onerror = () => ok(); document.head.appendChild(s); }));
 }
 function getLang() { try { const l = localStorage.getItem("alo-lang"); return ["fr", "kr", "en"].includes(l) ? l : "fr"; } catch { return "fr"; } }
 function setLang(l) { try { localStorage.setItem("alo-lang", l); } catch {} }
@@ -835,7 +835,13 @@ function setupMotion() {
   const steps = document.getElementById("hm-steps");
   if (steps) items.push([steps, () => [...steps.children].forEach((li, i) => { setTimeout(() => li.classList.add("lit"), 250 + i * 450); setTimeout(() => li.classList.remove("lit"), 1150 + i * 450); })]);
   const demo = document.getElementById("hm-demo");
-  if (demo) items.push([demo, () => demo.querySelectorAll(".hm-part").forEach((p, i) => setTimeout(() => p.classList.add("in"), 200 + i * 450))]);
+  // The example profile fills in, the application is sent, then the employer « types » and answers.
+  if (demo) items.push([demo, () => { const parts = demo.querySelectorAll(".hm-part"); parts.forEach((p, i) => setTimeout(() => p.classList.add("in"), 200 + i * 450));
+    const chat = demo.querySelector(".hm-chat"); if (chat) setTimeout(() => chat.classList.add("typed"), 200 + parts.length * 450 + 1400); }]);
+  // The homepage title arrives word by word.
+  requestAnimationFrame(() => { const h = document.querySelector(".hm-copy h1"); if (!h || h.querySelector(".hw")) return;
+    const words = h.textContent.trim().split(/\s+/); h.setAttribute("aria-label", h.textContent.trim());
+    h.innerHTML = words.map((w, i) => `<span class="hw" aria-hidden="true" style="--i:${i}">${esc(w)}</span>`).join(" "); });
   let pending = items;
   const check = () => {
     pending = pending.filter(([el, run]) => { const r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.95 && r.bottom > 0) { run(); return false; } return true; });
@@ -846,6 +852,28 @@ function setupMotion() {
   addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll);
   requestAnimationFrame(check);
 }
+
+// ---- Homepage « En ce moment sur alo.ht »: real opportunities slide into a phone screen, the counter counts up ----
+async function setupLiveFeed() {
+  const sec = document.getElementById("hm-live"), feed = document.getElementById("hm-feed"); if (!sec || !feed) return;
+  try { await loadJobs(); } catch {}
+  const jobs = (typeof JOBS !== "undefined" ? JOBS : []).slice().sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0)).slice(0, 10);
+  if (!jobs.length) return;   // nothing published yet: no section rather than an empty one
+  sec.hidden = false;
+  const url = (j) => `job.html?id=${encodeURIComponent(j.id)}${DEMO ? "&demo=1" : ""}`;
+  const card = (j) => `<a class="hm-job" href="${url(j)}">${avatar(j)}<span><b>${esc(j.title)}</b><small>${esc(j.company)} · ${esc(j.city)}</small>${j.days != null ? `<em>${esc(ago(j.days))}</em>` : ""}</span></a>`;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const countEl = document.getElementById("hm-count"), total = (typeof JOBS !== "undefined" ? JOBS.length : jobs.length);
+  if (still) { feed.innerHTML = jobs.slice(0, 4).map(card).join(""); countEl.textContent = total; return; }
+  let i = 0, timer = null, started = false;
+  const push = () => { const j = jobs[i++ % jobs.length]; feed.insertAdjacentHTML("afterbegin", card(j)); const first = feed.firstElementChild; requestAnimationFrame(() => first.classList.add("in")); while (feed.children.length > 4) feed.lastElementChild.remove(); };
+  const count = () => { const t0 = performance.now(), dur = 1200; const step = (now) => { const k = Math.min(1, (now - t0) / dur); countEl.textContent = Math.round(total * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const start = () => { if (started) return; started = true; count(); for (let k = 0; k < 3; k++) push(); timer = setInterval(() => { if (!document.hidden) push(); }, 2200); };
+  const check = () => { const r = sec.getBoundingClientRect(); if (r.top < innerHeight * 0.85 && r.bottom > 0) { start(); removeEventListener("scroll", check); } };
+  addEventListener("scroll", check, { passive: true }); check();
+  addEventListener("pagehide", () => clearInterval(timer));
+}
+document.addEventListener("DOMContentLoaded", () => { if (document.getElementById("hm-live")) setupLiveFeed(); });
 
 function headerShadow() { const h = document.querySelector(".top"); if (h) h.classList.toggle("scrolled", scrollY > 4); }
 addEventListener("scroll", headerShadow, { passive: true });
